@@ -1,0 +1,22 @@
+{
+	"name": "lagan",
+	"type": "project",
+	"description": "Lagan lets you easily create and manage flexible content objects, using Slim, Redbean, Valitron and Twig.",
+	"homepage": "http://www.hoverkraft.nl",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Lútsen Stellingwerff",
+			"email": "lutsenstellingwerff@gmail.com",
+			"homepage": "http://lutsen.land"
+		}
+	],
+	"require": {
+		"slim/slim": "^3.0",
+		"slim/twig-view": "^2.0",
+		"slim/flash": "^0.1",
+		"twig/twig": "^1.0",
+		"tuupola/slim-basic-auth": "^2.0",
+		"vlucas/valitron": "^1.0"
+	}
+}

@@ -1,0 +1,23 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Config file #
+###############
+config.php
+
+# Directory contents #
+######################
+vendor/*
+cache/*
+
+# Composer #
+############
+composer.lock
+composer.phar

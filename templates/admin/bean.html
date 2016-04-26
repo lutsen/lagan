@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Lagan admin: {% if bean %}{{ bean.title }}{% else %}Nieuwe {{ beantype }}{% endif %}</h1>
+	</div>
+	
+	<ol class="breadcrumb">
+		<li><a href="{{ path_for('admin') }}">home</a></li>
+		<li><a href="{{ path_for('listbeans', { 'beantype': beantype }) }}">{{ beantype }}</a></li>
+		<li class="active">{% if bean %}{{ bean.title }}{% else %}new {{ beantype }}{% endif %}</li>
+	</ol>
+		
+	<div class="row">
+		<div class="col-xs-12">
+
+			<form class="form-horizontal" method="post" role="form" enctype="multipart/form-data" action="{% if bean %}{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}{% else %}{{ path_for('postbean', { 'beantype': beantype }) }}{% endif %}">
+				<input type="hidden" name="_METHOD" value="{{ method }}"/>
+{% for property in beanproperties %}
+					{% include "admin/input/"~ property.input ~".html" %}
+{% endfor %}
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary" name="submit" value="save">Save</button>
+						<button type="submit" class="btn btn-default" name="submit" value="saveandclose">Save and close</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+{% endblock content %}

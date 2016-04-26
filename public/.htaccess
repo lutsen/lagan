@@ -1,0 +1,25 @@
+# Allow webfonts from differnet (sub)domains
+# (For example Typekit)
+<FilesMatch "\.(ttf|ttc|otf|eot|woff)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
+
+RewriteEngine On
+
+# Force www
+# - Exclude urls starting with loaclhost
+# - Check whether the Host value is not empty (in case of HTTP/1.0)
+# - Check for 2 dots or not (instead of checking for www, because that would break subdomains)
+# - Checks for HTTPS (%{HTTPS} is either on or off, so %{HTTPS}s is either ons or offs and in case of ons the s is matched)
+# - The substitution part of RewriteRule then just merges the information parts to a full URL
+RewriteCond %{HTTP_HOST} !^localhost
+RewriteCond %{HTTP_HOST} ^(.*)$ [NC]
+RewriteCond %{HTTP_HOST} !^(.*)\.(.*)\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ HTTP%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

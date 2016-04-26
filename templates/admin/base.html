@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="robots" content="noindex, nofollow" />
+	<title>Lagan Admin</title>
+
+{% block head %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+{% endblock head %}
+
+</head>
+<body>
+
+	<div class="container-fluid">
+	
+{% if flash.error or flash.success %}
+		<div class="alert{% if flash.error %} alert-danger{% else %} alert-success{% endif %} alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{% if flash.error %}{{ flash.error[0] }}{% else %}{{ flash.success[0] }}{% endif %}
+		</div>
+{% endif %}
+
+{% block content %}
+{# Content from child template #}
+{% endblock content %}
+
+	</div><!-- .container-fluid end -->
+
+{% block javascripts %}
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+{% endblock javascripts %}
+
+</body>
+</html>
