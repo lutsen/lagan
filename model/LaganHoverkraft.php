@@ -38,14 +38,14 @@ class LaganHoverkraft extends Lagan {
 			]
 		];
 		
-		$this->rules = array(
+		$this->rules = [
 			'required' => [
 				['title', 'picture']
 			],
 			'integer' => [
 				['position']
 			]
-		);
+		];
 	}
 	
 

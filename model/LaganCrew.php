@@ -27,14 +27,14 @@ class LaganCrew extends Lagan {
 			]
 		];
 		
-		$this->rules = array(
+		$this->rules = [
 			'required' => [
 				['title', 'hoverkraft']
 			],
 			'integer' => [
 				['hoverkraft']
 			]
-		);
+		];
 	}
 
 }

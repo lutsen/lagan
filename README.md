@@ -13,41 +13,102 @@ Lagan is built with:
 
 
 
+Requirements
+------------
+
+- PHP 5.5 or newer
+- A database. I use MySQL in this repo for now, but others should work as well. [Check out the RedBean documentation for that](http://redbeanphp.com/index.php?p=/connection).
+- An Apache webserver if you want to use the .htaccess URL rewriting. But other webservers should work as well; [check out the Slim documentation for that](http://www.slimframework.com/docs/start/web-servers.html).
+- [PDO plus driver for your database](http://php.net/manual/en/book.pdo.php) (Usually installed)
+- [Multibyte String Support](http://php.net/manual/en/book.mbstring.php) (Usually installed too)
+
+
+
 Installation
 ------------
 
-Install all-but-one dependencies using Composer.
-Imstall RedBean by downloading it from the Redbean website: http://redbeanphp.com
-Add the Redbean rb.php file to the vendor directory.
+Install all-but-one dependencies using Composer.  
+Install RedBean by downloading it from the RedBean website: http://redbeanphp.com  
+Add the RedBean *rb.php* file to the vendor directory.
 
-Rename config_example.php to config.php and add your database and path info.
+Rename *config_example.php* to *config.php* and add your database and path info.
 
-Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net/projects/slim-basic-auth) to authenticate users for the admin interface. Make sure to change the password in index.php, and use HTTPS to login securely.
+In the project root, create a folder called *cache* for the Twig cache.
+
+Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net/projects/slim-basic-auth) to authenticate users for the admin interface. Make sure to change the password in *index.php*, and use HTTPS to login securely.
 
 
 
 Create a Lagan model
 --------------------
 
-All Lagan model names should start with Lagan. So Lagan[Modelname].php
+The "magic" of Lagan is in the Lagan models. Each type of content has it's own model. I added two example models, *LaganHoverKraft.php* and *LaganCrew.php*.
 
+All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. Optional are the validation rules (also defined in `__construct`), and property methods.
+
+All Lagan model names should start with Lagan. So *Lagan[Modelname].php*
+
+
+### Type ###
+
+`$this->type` is the type of the model. It is the same as the modelname in lowercase, and defines the name of the RedBean beans and the name of the table in the database.
+
+
+### Description ###
+
+`$this->description` is the description of the model. It is displayed in the admin interface. It explains the function of the content model to the user.
+
+
+### Properties ###
+
+`$this->properties` are the properties of the model. They are an array defining the different content data-fields of the model. Each property is an array with at least the following keys:
+
+- *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
+- *description*: The form-field label of the property in the admin interface.
+- *input*: The type of data to input. This defines which input template to use, and in the future which property input type controller/method to use (For now the property type populate methods are located in the *Lagan.php* class). The input type templates are in the *templates/admin/input* folder.
+
+There can be other optional keys, for example the *directory* key for the *image_select* property input type.
+
+
+### Rules: validation ###
+
+`$this->rules` are the rules of the model. They are an array of validation rules. For the validation we use [Valitron](https://github.com/vlucas/valitron), so the available validation rules are the same.
+
+The key of each array in the `$this->rules` array is the name of the validation rule. The values in the value array of each rule are the names of the properties to apply the rule to.
+
+
+### Property methods ###
+
+All properties in a content model can have a *set* and a *delete* method. These can be used for "special" properties, for example properties that have a relation with other properties. In the *LaganHoverkraft.php* the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.
+
+
+
+Lagan project structure
+-----------------------
+
+(Coming soon)
 
 
 To do
 -----
 
+- Extend the documentation
+- Remove admin and setup from index.php
+- Add example templates and route for public part of app
 - Get app URI from app instead of defining them in config.php
-- Move LaganHoverkraft property methods to main Lagan class?
+- Add different types of relations
+- Add populate methods to each property input type class instead of th Lagan.php
 
 
 
-Nice to haves
--------------
+Nice to have
+------------
 
 - Message "There are no [beantype]" in beans.html template if a beantype is empty
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Unit testing
 - Drag-n-drop interface for the position of objects
+- Create seperate repositories for the slug and position controller?
 
 
 
