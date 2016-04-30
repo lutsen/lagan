@@ -15,7 +15,7 @@ R::setup(
 require 'vendor/autoload.php';
 
 // Lagan autoloader
-function myAutoload($class_name) {
+function laganAutoload($class_name) {
 
 	// Load models, controllers and Slim middleware
 	$paths = array(
@@ -31,6 +31,7 @@ function myAutoload($class_name) {
 			return;
 		}
 	}
+
 	// Redbean hack
 	// No exception if file doesn't exist, because it then is probably a class created by Redbean
 	//if ( $class_name !== 'R' && substr($class_name, 0, strlen("Model_")) != "Model_" ) {
@@ -38,7 +39,7 @@ function myAutoload($class_name) {
 		throw new Exception('The class ' . $class_name . ' could not be loaded');
 	}
 }
-spl_autoload_register('myAutoload');
+spl_autoload_register('laganAutoload');
 
 // - Set this for login stuff in combination with Slim
 //session_cache_limiter(false);

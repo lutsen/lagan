@@ -13,7 +13,11 @@ $container = $app->getContainer();
 
 // Register Twig View helper
 $container['view'] = function ($c) {
-	$view = new \Slim\Views\Twig(ROOT_PATH.'/templates', [
+	$view = new \Slim\Views\Twig([
+		ROOT_PATH.'/templates',
+		ROOT_PATH.'/input'
+	],
+	[
 		'cache' => ROOT_PATH.'/cache'
 	]);
 
@@ -97,7 +101,7 @@ $app->group('/admin', function () {
 		// List
 		$this->get('[/]', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
-			
+
 			// Oder by position if exits
 			$add_to_query = '';
 			foreach($c->properties as $property) {
@@ -107,7 +111,7 @@ $app->group('/admin', function () {
 				}
 			}
 			$beans = R::findAll( strtolower( $args['beantype'] ), ' ORDER BY '.$add_to_query.'title ASC ');
-		
+
 			// Show list of items
 			return $this->view->render($response, 'admin/beans.html', [
 				'beantype' => $args['beantype'],
@@ -116,12 +120,12 @@ $app->group('/admin', function () {
 				'flash' => $this->flash->getMessages()
 			]);
 		})->setName('listbeans');
-		
+
 		// Form to add new bean
 		$this->get('/add', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
 			$c->populateProperties();
-			
+
 			// Show populated form
 			return $this->view->render($response, 'admin/bean.html', [
 				'method' => 'post',
@@ -129,7 +133,7 @@ $app->group('/admin', function () {
 				'beanproperties' => $c->properties
 			]);
 		})->setName('addbean');
-		
+
 		// View existing bean
 		$this->get('/{id}', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
@@ -144,7 +148,7 @@ $app->group('/admin', function () {
 				'flash' => $this->flash->getMessages()
 			]);
 		})->setName('getbean');
-		
+
 		// Add
 		$this->post('[/]', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
@@ -164,7 +168,7 @@ $app->group('/admin', function () {
 				);
 			}
 		})->setName('postbean');
-		
+
 		// Update
 		$this->put('/{id}', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );

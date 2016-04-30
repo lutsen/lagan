@@ -24,7 +24,30 @@ class Lagan {
 		return $bean;
 
 	}
-	
+
+	protected function controllerName($input) {
+		 return ucfirst($input) . 'Controller';
+	}
+
+	// Check if file exists, and if do, if method exists
+	protected function inputMethodExists($input, $method) {
+
+		// Load input type controllers
+		$controller = $this->controllerName($input);
+		$file = ROOT_PATH . '/input/' . $input . '/' . $controller . '.php';
+		if (file_exists($file)) {
+			include $file;
+			if ( method_exists( $controller, $method ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
+	}
+
 	// Set values
 	// @param array $data $request->getParsedBody();
 	// @param bean $bean
@@ -36,21 +59,13 @@ class Lagan {
 		// Add all properties to bean
 		foreach ( $this->properties as $property ) {
 		
-			// Check if specific set property method exists
-			$method_name = $this->getMethodName( $property['name'], 'set' );
-			if ( method_exists( $this, $method_name ) ) {
+			// Check if specific set property type method exists
+			if ( $this->inputMethodExists($property['input'], 'set') ) {
 			
-				$bean->{ $property['name'] } = $this->{ $method_name }( $bean, $data[ $property['name'] ] );
+				$controller = $this->controllerName($property['input']);
+				$c = new $controller;
+				$bean->{ $property['name'] } = $c->set( $bean, $property, $data[ $property['name'] ] );
 			
-			} elseif ( $property['input'] === 'relation' ) {
-				
-				// Check and set relation
-				$bean->{ $property['name'] } = R::findOne( $property['name'], ' id = :id ', [ ':id' => $data[ $property['name'] ] ] );
-				if ( !$bean->{ $property['name'] } ) {
-					R::trash( $bean );
-					throw new Exception('The '.$property['name'].' for this '.$this->type.' does not exist.');
-				}
-
 			} else {
 
 				if ( $data[ $property['name'] ] && strlen( $data[ $property['name'] ] ) > 0 ) {
@@ -73,17 +88,17 @@ class Lagan {
 	// ---- //
 
 
-	
+
 	// @param array $data $request->getParsedBody();
 	public function create($data) {
-	
+
 		// Create
 		$bean = $this->universalCreate();
 
 		return $this->set($data, $bean);
-	
+
 	}
-	
+
 	// @param integer $id
 	public function read($id) {
 
@@ -91,12 +106,12 @@ class Lagan {
 		if ( !$bean ) {
 			throw new Exception('This '.$this->type.' does not exist.');
 		}
-		
+
 		return $bean;
-		
+
 	}
 
-	// @param array $user_data
+	// @param array $data
 	// @param integer $id
 	public function update($data, $id) {
 
@@ -104,12 +119,11 @@ class Lagan {
 		if ( !$bean ) {
 			throw new Exception('This '.$this->type.' does not exist.');
 		}
-		
+
 		return $this->set($data, $bean);
-		
+
 	}
 	
-	// @param array $user_data
 	// @param integer $id
 	public function delete($id) {
 
@@ -117,26 +131,28 @@ class Lagan {
 		if ( !$bean ) {
 			throw new Exception('This '.$this->type.' does not exist.');
 		}
-		
-		// Check for property specific delete methods
+
+		// Check for property type specific delete methods
 		foreach ( $this->properties as $property ) {
-		
-			$method_name = $this->getMethodName( $property['name'], 'delete' );
-			if ( method_exists( $this, $method_name ) ) {
-				$this->{ $method_name }( $bean );		
+
+			// Check if specific delete property method exists
+			if ( $this->inputMethodExists($property['input'], 'delete') ) {
+				$controller = $this->controllerName($property['input']);
+				$c = new $controller;
+				$c->delete( $bean, $property );
 			}
 
 		}
-		
+
 		R::trash( $bean );
-		
+
 	}
-	
-	
-	
+
+
+
 	// HELPER METHODS //
 	// -------------- //
-	
+
 	// Validation
 	protected function validate($variables, $rules) {
 
@@ -151,35 +167,28 @@ class Lagan {
 		}
 
 	}
-	
+
 	// If appropriate, query properties for optional values, populate them with them.
 	// This is needed for properties with input relation and file_select.
 	public function populateProperties() {
 		foreach ($this->properties as $key => $property) {
 
-			if ( $property['input'] === 'relation' ) {
+			// Check for the template, else fallback to text template.
+			$file = $property['input'] . '/' . $property['input'] .'_input.html';
+			if ( file_exists(ROOT_PATH . '/input/' . $file) ) {
+				$this->properties[$key]['template'] = $file;
+			} else {
+				$this->properties[$key]['template'] =  'text/text_input.html';;
+			}
 
-				$this->properties[$key]['options'] = R::findAll( $property['name'] );
-
-			} elseif ( $property['input'] === 'image_select' ) {
-			
-				$images = glob( APP_PATH.'/'.$property['directory'].'/' . '#\.(jpe?g|gif|png)$#i');
-				foreach ($images as $image) {
-					$this->properties[$key]['images'][] = $image->getName();
-				}
-
+			// Check for options method in input type controller
+			if ( $this->inputMethodExists($property['input'], 'options') ) {
+				$controller = $this->controllerName($property['input']);
+				$c = new $controller;
+				$this->properties[$key]['options'] = $c->options( $property );
 			}
 
 		}
-	}
-	
-	// Get method name of property
-	// Add $prepend and convert snake_case to camelCase
-	// http://www.phpro.org/examples/Underscore-To-Camel-Case.html
-	protected function getMethodName($property_name, $prepend) {
-		$property_name[0] = strtoupper( $property_name[0] );
-		$func = create_function('$c', 'return strtoupper($c[1]);');
-		return $prepend . preg_replace_callback('/_([a-z])/', $func, $property_name);
 	}
 
 }

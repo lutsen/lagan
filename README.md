@@ -65,7 +65,7 @@ All Lagan model names should start with Lagan. So *Lagan[Modelname].php*
 
 - *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: The form-field label of the property in the admin interface.
-- *input*: The type of data to input. This defines which input template to use, and in the future which property input type controller/method to use (For now the property type populate methods are located in the *Lagan.php* class). The input type templates are in the *templates/admin/input* folder.
+- *input*: The type of data to input. This defines which input type controller and template to use. More information under "Input types".
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
 
@@ -77,9 +77,21 @@ There can be other optional keys, for example the *directory* key for the *image
 The key of each array in the `$this->rules` array is the name of the validation rule. The values in the value array of each rule are the names of the properties to apply the rule to.
 
 
-### Property methods ###
 
-All properties in a content model can have a *set* and a *delete* method. These can be used for "special" properties, for example properties that have a relation with other properties. In the *LaganHoverkraft.php* the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.
+Input types
+-----------
+
+(To do)
+Each property input type has it's own directory in the directory *input*. In this directory can be an input type controller and an input type template.
+
+
+### Input type controller ###
+
+An input type controller can contain a *set*, *delete* and *options* method.  
+The *set* method is executed each time a property with this input type is set.  
+The *delete* method is executed each time a an object with a property with this input type is deleted.  
+In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
+The *options* method returns all possible values for this property.
 
 
 

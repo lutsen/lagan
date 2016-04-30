@@ -2,8 +2,8 @@
 	<label for="{{ property.name }}" class="col-sm-2 control-label">{{ property.description }}</label>
 	<div class="col-sm-10">
 		<select class="form-control select2" id="{{ property.name }}" name="{{ property.name }}">
-{% for image in property.images %}
-			<option value="{{ image }}"{% if bean[property.name] == image %} selected="selected"{% endif %}>{{ image }}</option>
+{% for option in property.options %}
+			<option value="{{ option }}"{% if bean[property.name] == option %} selected="selected"{% endif %}>{{ option }}</option>
 {% endfor %}
 		</select>
 	</div>

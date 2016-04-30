@@ -1,6 +1,19 @@
 <?php
 
-class Slug {
+class SlugController {
+
+	// If $new_value is not set, slug is based on bean title
+	// @param bean $bean
+	// @param array $property
+	public function set($bean, $property, $new_value) {
+		if ( $new_value && strlen($new_value) > 0 ) {
+			return $this->makeSlug($bean, $property['name'], $new_value);
+		} elseif ( $bean->title ) {
+			return $this->makeSlug($bean, $bean->title);
+		} else {
+			return $bean->id;
+		}
+	}
 
 	// from http://www.justin-cook.com/wp/2006/06/27/php-trim-a-string-without-cutting-any-words/
 	// @param string $str string we are operating with
@@ -16,8 +29,8 @@ class Slug {
 		}
 	}
 	
-	private function uniqueSlug($bean, $string) {
-		$other = R::findOne($bean->getMeta('type'), ' slug = ? ', [ $string ] );
+	private function uniqueSlug($bean, $property_name, $string) {
+		$other = R::findOne($bean->getMeta('type'), $property_name . ' = ? ', [ $string ] );
 		if ($other) {
 			if ($other->id == $bean->id) {
 				return true;
@@ -57,24 +70,13 @@ class Slug {
 		return $text;
 	}
 
-	private function makeSlug($bean, $slug_string) {
+	private function makeSlug($bean, $property_name, $slug_string) {
 		$string = $this->neatTrim( $slug_string, 100 ); // Maximaal 100 tekens met hele woorden
 		$slug = $this->slugify( $string );
-		if ( $this->uniqueSlug( $bean, $slug ) ) {
+		if ( $this->uniqueSlug( $bean, $property_name, $slug ) ) {
 			return $slug;
 		} else {
 			return $slug . '-' . $bean->id;
-		}
-	}
-
-	// If $new_value is not set, slug is based on bean title
-	public function setSlug($bean, $new_value) {
-		if ( $new_value && strlen($new_value) > 0 ) {
-			return $this->makeSlug($bean, $new_value);
-		} elseif ( $bean->title ) {
-			return $this->makeSlug($bean, $bean->title);
-		} else {
-			return $bean->id;
 		}
 	}
 

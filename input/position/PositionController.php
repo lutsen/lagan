@@ -1,15 +1,16 @@
 <?php
 
-class Position {
+class PositionController {
 
 	// Does not actually update position of bean, bur "makes room for it" by updating the positions of other beans.
 	// @param bean $bean
+	// @param array $property
 	// @param integer $new_value new position of bean 
-	public function setPosition($bean, $new_value) {
+	public function set($bean, $property, $new_value) {
 	
 		$all = R::findAll( $bean->getMeta('type') );
 		$count_all = R::count( $bean->getMeta('type') );
-		$curr_value = $bean->position;
+		$curr_value = $bean->{ $property['name'] };
 		
 		// New bean
 		if ( empty($curr_value) && $curr_value !== '0' ) {
@@ -31,16 +32,16 @@ class Position {
 			if ( $curr_value !== $count_all && $new_value > $count_all - 1 ) $new_value = $count_all - 1;
 			if ( $new_value < $curr_value ) {
 				foreach ( $all as $b ) {
-					if ($b->position >= $new_value AND $b->position < $curr_value) {
-						$b->position = $b->position + 1;
+					if ($b->{ $property['name'] } >= $new_value AND $b->{ $property['name'] } < $curr_value) {
+						$b->{ $property['name'] } = $b->{ $property['name'] } + 1;
 						$b->modified = R::isoDateTime();
 						R::store($b);
 					}
 				}
 			} else if ( $new_value > $curr_value ) {
 				foreach ( $all as $b ) {
-					if ( $b->position <= $new_value AND $b->position > $curr_value ) {
-						$b->position = $b->position - 1;
+					if ( $b->{ $property['name'] } <= $new_value AND $b->{ $property['name'] } > $curr_value ) {
+						$b->{ $property['name'] } = $b->{ $property['name'] } - 1;
 						$b->modified = R::isoDateTime();
 						R::store($b);
 					}
@@ -53,12 +54,14 @@ class Position {
 
 	}
 	
-	public function deletePosition($bean) {
+	// @param bean $bean
+	// @param array $property
+	public function delete($bean, $property) {
 
-		if ( !empty($bean->position) || $bean->position === 0 || $bean->position === '0' ) {
+		if ( !empty($bean->{ $property['name'] }) || $bean->{ $property['name'] } === 0 || $bean->{ $property['name'] } === '0' ) {
 			$count_all = R::count( $bean->getMeta('type') );
 			$bottom = $count_all - 1;
-			$this->setPosition($bean, $bottom ); // No need to store new position of this bean
+			$this->set($bean, $property['name'], $bottom ); // No need to store new position of this bean
 		}
 
 	}

@@ -23,13 +23,13 @@ class LaganHoverkraft extends Lagan {
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'input' => 'image_select',
-				'directory' => 'files'
+				'input' => 'file_select',
+				'pattern' => APP_PATH.'/files/#\.(jpe?g|gif|png)$#i' // glob pattern
 			],
 			[
 				'name' => 'position',
 				'description' => 'Order',
-				'input' => 'text'
+				'input' => 'position'
 			],
 			[
 				'name' => 'slug',
@@ -46,34 +46,6 @@ class LaganHoverkraft extends Lagan {
 				['position']
 			]
 		];
-	}
-	
-
-
-	// PROPERTY METHODS //
-	// ---------------- //
-	
-	// Property methods are methods to set and delete individual properties of bean types.
-
-	protected function setPosition($bean, $new_value) {
-
-		$position = new Position();
-		return $position->setPosition($bean, $new_value);
-
-	}
-	
-	protected function deletePosition($bean) {
-	
-		$position = new Position();
-		$position->deletePosition($bean);
-
-	}
-	
-	protected function setSlug($bean, $new_value) {
-
-		$slug = new Slug();
-		return $slug->setSlug($bean, $new_value);
-
 	}
 
 }
