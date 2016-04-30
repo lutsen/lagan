@@ -81,7 +81,6 @@ The key of each array in the `$this->rules` array is the name of the validation 
 Input types
 -----------
 
-(To do)
 Each property input type has it's own directory in the directory *input*. In this directory can be an input type controller and an input type template.
 
 
