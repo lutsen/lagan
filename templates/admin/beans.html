@@ -1,9 +1,11 @@
+{%	set title = beantype %}
+
 {% extends "admin/base.html" %}
 
 {% block content %}
 
 	<div class="page-header">
-		<h1>Lagan admin: {{ beantype }}</h1>
+		<h1>{{ beantype }}</h1>
 	</div>
 	
 	<ol class="breadcrumb">
@@ -14,7 +16,8 @@
 	<a href="{{ path_for('addbean', { 'beantype': beantype }) }}" class="btn btn-primary pull-right">Add new {{ beantype }}</a>
 	
 	<p>{{ description }}<br /><br /></p>
-	
+
+{% if beans|length > 0 %}
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
@@ -25,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-{% for bean in beans %}
+{% 	for bean in beans %}
 				<tr>
 					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}">{{ bean.title }}</a></td>
 					<td>
@@ -36,14 +39,18 @@
 					</td>
 					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}" class="btn btn-default">Edit</a></td>
 				</tr>
-{% endfor %}
+{% 	endfor %}
 			</tbody>
 		</table>
 	</div>
+{% else %}
+	<hr>
+	<p class="text-muted text-center">There is no {{ beantype }} yet. You can <a href="{{ path_for('addbean', { 'beantype': beantype }) }}">add</a> one.</p>
+{% endif %}
 
 {% endblock content %}
 
-{% block javascripts %}
+{% block javascript %}
 	{{ parent() }}
 
 	<script type="text/javascript">
@@ -54,4 +61,4 @@
 			}
 		});
 	</script>
-{% endblock javascripts %}
+{% endblock javascript %}

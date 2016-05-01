@@ -7,7 +7,7 @@ class PositionController {
 	// @param array $property
 	// @param integer $new_value new position of bean 
 	public function set($bean, $property, $new_value) {
-	
+
 		$all = R::findAll( $bean->getMeta('type') );
 		$count_all = R::count( $bean->getMeta('type') );
 		$curr_value = $bean->{ $property['name'] };
@@ -28,8 +28,8 @@ class PositionController {
 		} else {
 		
 			if ( $new_value < 0 ) $new_value = 0;
-			if ( $new_value > $count_all ) $new_value = $count_all;
-			if ( $curr_value !== $count_all && $new_value > $count_all - 1 ) $new_value = $count_all - 1;
+			if ( $new_value > $count_all - 1 ) $new_value = $count_all - 1;
+			//if ( $curr_value !== $count_all && $new_value > $count_all - 1 ) $new_value = $count_all - 1;
 			if ( $new_value < $curr_value ) {
 				foreach ( $all as $b ) {
 					if ($b->{ $property['name'] } >= $new_value AND $b->{ $property['name'] } < $curr_value) {
@@ -45,7 +45,7 @@ class PositionController {
 						$b->modified = R::isoDateTime();
 						R::store($b);
 					}
-				}	
+				}
 			}
 		
 			return $new_value;
@@ -58,11 +58,9 @@ class PositionController {
 	// @param array $property
 	public function delete($bean, $property) {
 
-		if ( !empty($bean->{ $property['name'] }) || $bean->{ $property['name'] } === 0 || $bean->{ $property['name'] } === '0' ) {
-			$count_all = R::count( $bean->getMeta('type') );
-			$bottom = $count_all - 1;
-			$this->set($bean, $property['name'], $bottom ); // No need to store new position of this bean
-		}
+		$count_all = R::count( $bean->getMeta('type') );
+		$bottom = $count_all - 1;
+		$this->set($bean, $property, $bottom ); // No need to store new position of this bean
 
 	}
 

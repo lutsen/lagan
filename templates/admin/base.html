@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="robots" content="noindex, nofollow" />
-	<title>Lagan Admin</title>
+	<title>{{ title }} - Lagan Admin</title>
 
 {% block head %}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -27,12 +27,11 @@
 {# Content from child template #}
 {% endblock content %}
 
-	</div><!-- .container-fluid end -->
+	</div>
 
-{% block javascripts %}
+{% block javascript %}
 	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-{% endblock javascripts %}
+{% endblock javascript %}
 
 </body>
 </html>

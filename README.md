@@ -7,9 +7,9 @@ Lagan lets you easily create flexible content objects with a simple class, and m
 It's easy to use, easy to build with and easy to extend:
 - Create content objects with any combination if input types
 - Content objects consist of a simple combination of arrays
-- Built in input validation
+- Built-in input validation
 - It's simple to add new input types
-- It comes with an admin web interface to add and manage your content
+- It comes with an admin web interface to manage your content
 - Create front-end templates to display your content the way you want
 - Database fields can be easily modified during development
 
@@ -50,48 +50,47 @@ Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net
 Lagan project structure
 -----------------------
 
-### cache (directory) ###
+#### cache (directory) ####
 
 You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
 
 
-### input (directory) ###
+#### input (directory) ####
 
-This directory contains all the [input types](#Input-types).
-
-
-### model (directory) ###
-
-Contains the main Lagan model and all the different [Lagan content models](#Create-a-Lagan-model).
+This directory contains all the [input types](#input-types).
 
 
-### public (directory) ###
+#### model (directory) ####
 
-Contains the *index.php* and *.htaccess* file.  
-The *index.php* file contains all the routes for your Lagan project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly.
-
-The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.
+Contains the main Lagan model and all the different [Lagan content models](#create-a-Lagan-model).
 
 
-### templates (directory) ###
+#### public (directory) ####
+
+Contains the *index.php* and *.htaccess* file. The *index.php* file contains the autoloader, includes the route files, and includes some other files and settings.
+
+*The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
+
+
+#### Routes ####
+
+Contains the different route files. Each route file is automaticly loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
+
+
+#### templates (directory) ####
 
 This directory contains the template files. The subdirectory *admin* contains all the template files for the admin environment.  
 Bonus feature: the subdirectory *static* contains the template files for static pages and a 404 page. Static pages display if the route name matches their name, and no other route for this name exists. Convenient!
 
 
-### vendor (directory) ###
+#### vendor (directory) ####
 
 Created by [Composer](https://getcomposer.org/) when installing the project dependencies. Remember to manually add the RedBean rb.php file to it.
 
 
-### config_example.php (file) ###
+#### config_example.php (file) ####
 
 This is an example of the *config.php* file. The *config.php* file is needed for a Lagan project to work. Rename the *config_example.php* to *config.php* and add the necessary details.
-
-
-### init.php (file) ###
-
-This file contains the autoloader and includes some other files and settings.
 
 
 
@@ -144,7 +143,7 @@ Lagan uses RedBean to manimpulate data in the database. Redbean returns data fro
 
 ### Create ###
 
-`create($data)` creates a RedBean beanin the database, based on the corresponding Lagan content model, and returns it. The *$data* variable is an array with at least the required properties. The array can be your HTML form POST data.
+`create($data)` creates a RedBean bean in the database, based on the corresponding Lagan content model, and returns it. The *$data* variable is an array with at least the required properties. The array can be your HTML form POST data.
 
 
 ### Read ###
@@ -182,17 +181,13 @@ The *options* method returns all possible values for this property.
 To do
 -----
 
-- Remove admin and setup from index.php
-- Add example templates and route for public part of app
 - Add different types of relations
-- Add an actual 404 header to the 404 page
 
 
 
 Nice to have
 ------------
 
-- Message "There are no [beantype]" in beans.html template if a beantype is empty
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Unit testing
 - Drag-n-drop interface for the position of objects

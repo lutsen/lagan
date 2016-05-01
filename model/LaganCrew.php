@@ -21,6 +21,12 @@ class LaganCrew extends Lagan {
 				'input' => 'textarea'
 			],
 			[
+				'name' => 'picture',
+				'description' => 'Image',
+				'input' => 'fileselect',
+				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}' // glob pattern
+			],
+			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkraft',
 				'input' => 'relation'

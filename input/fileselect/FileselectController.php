@@ -6,9 +6,12 @@ class FileselectController {
 	public function options($property) {
 
 		$return = [];
-		$files = glob( $property['pattern'] );
+		$files = glob( $property['pattern'], GLOB_BRACE );
 		foreach ($files as $file) {
-			$return[] = $file->getName();
+			$return[] = [
+				'path' => substr( $file, strlen(APP_PATH) ),
+				'name' => basename($file)
+			];
 		}
 		return $return;
 

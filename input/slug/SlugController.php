@@ -9,7 +9,7 @@ class SlugController {
 		if ( $new_value && strlen($new_value) > 0 ) {
 			return $this->makeSlug($bean, $property['name'], $new_value);
 		} elseif ( $bean->title ) {
-			return $this->makeSlug($bean, $bean->title);
+			return $this->makeSlug($bean, $property['name'], $bean->title);
 		} else {
 			return $bean->id;
 		}
@@ -71,7 +71,7 @@ class SlugController {
 	}
 
 	private function makeSlug($bean, $property_name, $slug_string) {
-		$string = $this->neatTrim( $slug_string, 100 ); // Maximaal 100 tekens met hele woorden
+		$string = $this->neatTrim( $slug_string, 100 ); // Maximum of 100 characters with complete words
 		$slug = $this->slugify( $string );
 		if ( $this->uniqueSlug( $bean, $property_name, $slug ) ) {
 			return $slug;

@@ -23,8 +23,8 @@ class LaganHoverkraft extends Lagan {
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'input' => 'file_select',
-				'pattern' => APP_PATH.'/files/#\.(jpe?g|gif|png)$#i' // glob pattern
+				'input' => 'fileselect',
+				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}' // glob pattern
 			],
 			[
 				'name' => 'position',
@@ -34,7 +34,7 @@ class LaganHoverkraft extends Lagan {
 			[
 				'name' => 'slug',
 				'description' => 'Slug',
-				'input' => 'text'
+				'input' => 'slug'
 			]
 		];
 		

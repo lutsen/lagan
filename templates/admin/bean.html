@@ -1,9 +1,15 @@
+{% if bean %}
+{%	set title = bean.title %}
+{% else %}
+{%	set title = 'New ' ~ beantype %}
+{% endif %}
+
 {% extends "admin/base.html" %}
 
 {% block content %}
 
 	<div class="page-header">
-		<h1>Lagan admin: {% if bean %}{{ bean.title }}{% else %}Nieuwe {{ beantype }}{% endif %}</h1>
+		<h1>{% if bean %}{{ bean.title }}{% else %}New {{ beantype }}{% endif %}</h1>
 	</div>
 	
 	<ol class="breadcrumb">
