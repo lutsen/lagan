@@ -182,10 +182,7 @@ The *options* method returns all possible values for this property.
 To do
 -----
 
-- Extend Lagan read method to:
--- Search by any unique property
--- Return related beans
-- Add different types of relations
+- Add many-to-many relations
 
 
 
