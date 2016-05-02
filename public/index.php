@@ -22,15 +22,15 @@ function laganAutoload($class_name) {
 
 	// Load models, controllers and Slim middleware
 	$paths = array(
-		'/model/',
-		'/controller/',
+		'/models/',
+		'/controllers/',
 		'/middleware/'
 	);
 
 	foreach ($paths as $path) {
 		$file = ROOT_PATH.$path.$class_name.'.php';
 		if (file_exists($file)) {
-			require $file;
+			require_once $file;
 			return;
 		}
 	}
@@ -66,7 +66,7 @@ $container = $app->getContainer();
 $container['view'] = function ($c) {
 	$view = new \Slim\Views\Twig([
 		ROOT_PATH.'/templates',
-		ROOT_PATH.'/input'
+		ROOT_PATH.'/properties'
 	],
 	[
 		'cache' => ROOT_PATH.'/cache'
@@ -107,13 +107,13 @@ $routeFiles = glob(ROOT_PATH.'/routes/*.php');
 
 foreach( $routeFiles as $routeFile ) {
 	if ( $routeFile !== ROOT_PATH.'/routes/static.php' ) {
-		require $routeFile;
+		require_once $routeFile;
 	}
 }
 
 // The route for static pages has to come last to work.
 if ( file_exists($static) ) {
-	require $static;
+	require_once $static;
 }
 
 $app->run();

@@ -13,23 +13,23 @@ class LaganCrew extends Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Naam',
-				'input' => 'text'
+				'type' => 'text'
 			],
 			[
 				'name' => 'bio',
 				'description' => 'Biography',
-				'input' => 'textarea'
+				'type' => 'textarea'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'input' => 'fileselect',
+				'type' => 'fileselect',
 				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}' // glob pattern
 			],
 			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkraft',
-				'input' => 'relation'
+				'type' => 'manytoone'
 			]
 		];
 		

@@ -1,0 +1,47 @@
+{%	set title = hoverkraft.title %}
+
+{% extends "public/base.html" %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Hoverkraft: {{ hoverkraft.title }}</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="thumbnail">
+				<img src="{{ app_url }}{{ hoverkraft.picture }}" alt="{{ hoverkraft.title }}">
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<p>{{ hoverkraft.description }}</p>
+		</div>
+	</div>
+
+	<h2>Crew</h2>
+
+{% if hoverkraft.crew|length > 0 %}
+	<div class="row">
+{% 	for member in hoverkraft.crew %}
+		<div class="col-sm-3">
+			<div class="thumbnail">
+				<img src="{{ app_url }}{{ member.picture }}" alt="{{ member.title }}">
+				<div class="caption">
+					<h3>{{ member.title }}</h3>
+					<p>{{ member.bio }}</p>
+				</div>
+			</div>
+		</div>
+{% 		if loop.index % 4 == 0 %}
+	</div>
+	<div class="row">
+{% 		endif %}
+{% 	endfor %}
+	</div>
+{% else %}
+	<hr>
+	<p class="text-muted text-center">Sorry, there is no crew for this Hoverkraft...</p>
+{% endif %}
+
+{% endblock content %}

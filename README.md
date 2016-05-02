@@ -55,14 +55,14 @@ Lagan project structure
 You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
 
 
-#### input (directory) ####
+#### properties (directory) ####
 
-This directory contains all the [input types](#input-types).
+This directory contains all the [property types](#property-types).
 
 
-#### model (directory) ####
+#### models (directory) ####
 
-Contains the main Lagan model and all the different [Lagan content models](#create-a-Lagan-model).
+Contains the main Lagan model and all the different [Lagan content models](#create-a-lagan-model).
 
 
 #### public (directory) ####
@@ -72,7 +72,7 @@ Contains the *index.php* and *.htaccess* file. The *index.php* file contains the
 *The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
 
 
-#### Routes ####
+#### routes (directory) ####
 
 Contains the different route files. Each route file is automaticly loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
 
@@ -120,7 +120,7 @@ All Lagan model names should start with Lagan. So *Lagan[Modelname].php*
 
 - *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: The form-field label of the property in the admin interface.
-- *input*: The type of data to input. This defines which input type controller and template to use. More information under "Input types".
+- *type*: The type of data of the property. This defines which property type controller and template to use. More information under "Property types".
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
 
@@ -162,17 +162,18 @@ Lagan uses RedBean to manimpulate data in the database. Redbean returns data fro
 
 
 
-Input types
------------
+Property types
+--------------
 
-Each property input type has it's own directory in the directory *input*. In this directory can be an input type controller and an input type template.
+Each property type has it's own directory in the directory *properties*. In this directory can be an property type controller and an property type template.
 
 
-### Input type controller ###
+### Property type controller ###
 
-An input type controller can contain a *set*, *delete* and *options* method.  
-The *set* method is executed each time a property with this input type is set.  
-The *delete* method is executed each time a an object with a property with this input type is deleted.  
+An property type controller can contain a *set*, *read*, *delete* and *options* method.  
+The *set* method is executed each time a property with this type is set.
+The *read* method is executed each time a property with this type is read.  
+The *delete* method is executed each time a an object with a property with this type is deleted.  
 In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
 The *options* method returns all possible values for this property.
 
@@ -181,6 +182,9 @@ The *options* method returns all possible values for this property.
 To do
 -----
 
+- Extend Lagan read method to:
+-- Search by any unique property
+-- Return related beans
 - Add different types of relations
 
 
@@ -188,10 +192,11 @@ To do
 Nice to have
 ------------
 
+- Adding search options and/or routes
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Unit testing
 - Drag-n-drop interface for the position of objects
-- Adding search options and/or routes
+- Adding extended user login and rights management stuff
 
 
 

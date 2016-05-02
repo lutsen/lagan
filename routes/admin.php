@@ -30,12 +30,12 @@ $app->group('/admin', function () {
 
 	$this->get('[/]', function ($request, $response, $args) {
 		// Get all Lagan beantypes
-		$beantypes = glob(ROOT_PATH. '/model/Lagan?*.php');
+		$beantypes = glob(ROOT_PATH. '/models/Lagan?*.php');
 		foreach ($beantypes as $key => $value) {
 			$beantypes[$key] = strtolower( substr(
 				$value,
-				strlen(ROOT_PATH. '/model/Lagan'),
-				strlen($value) - strlen(ROOT_PATH. '/model/Lagan') - 4
+				strlen(ROOT_PATH. '/models/Lagan'),
+				strlen($value) - strlen(ROOT_PATH. '/models/Lagan') - 4
 			) );
 		}
 
@@ -50,21 +50,11 @@ $app->group('/admin', function () {
 		$this->get('[/]', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
 
-			// Oder by position if exits
-			$add_to_query = '';
-			foreach($c->properties as $property) {
-				if ( $property['name'] === 'position' ) {
-					$add_to_query = 'position, ';
-					break;
-				}
-			}
-			$beans = R::findAll( strtolower( $args['beantype'] ), ' ORDER BY '.$add_to_query.'title ASC ');
-
 			// Show list of items
 			return $this->view->render($response, 'admin/beans.html', [
 				'beantype' => $args['beantype'],
 				'description' => $c->description,
-				'beans' => $beans,
+				'beans' => $c->read(),
 				'flash' => $this->flash->getMessages()
 			]);
 		})->setName('listbeans');

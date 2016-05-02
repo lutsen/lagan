@@ -1,0 +1,37 @@
+{%	set title = 'Our Hoverkrafts' %}
+
+{% extends "public/base.html" %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Check out our Hoverkrafts!</h1>
+	</div>
+
+	<p>We have a lovely selection of Hoverkrafts. Check them out and meet their crew.</p>
+
+{% if hoverkrafts|length > 0 %}
+	<div class="row">
+{% 	for hoverkraft in hoverkrafts %}
+		<div class="col-sm-4">
+			<div class="thumbnail">
+				<img src="{{ app_url }}{{ hoverkraft.picture }}" alt="{{ hoverkraft.title }}">
+				<div class="caption">
+					<h3>{{ hoverkraft.title }}</h3>
+					<p>{{ hoverkraft.description }}</p>
+					<p><a href="{{ path_for('hoverkraft', { 'slug': hoverkraft.slug }) }}" class="btn btn-primary" role="button">Check out this Hoverkraft</a></p>
+				</div>
+			</div>
+		</div>
+{% 		if loop.index % 3 == 0 %}
+	</div>
+	<div class="row">
+{% 		endif %}
+{% 	endfor %}
+	</div>
+{% else %}
+	<hr>
+	<p class="text-muted text-center">Sorry, we're out of Hoverkrafts right now...</p>
+{% endif %}
+
+{% endblock content %}

@@ -13,28 +13,33 @@ class LaganHoverkraft extends Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Title',
-				'input' => 'text'
+				'type' => 'text'
 			],
 			[
 				'name' => 'description',
 				'description' => 'Describe the kraft',
-				'input' => 'textarea'
+				'type' => 'textarea'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'input' => 'fileselect',
+				'type' => 'fileselect',
 				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}' // glob pattern
 			],
 			[
 				'name' => 'position',
 				'description' => 'Order',
-				'input' => 'position'
+				'type' => 'position'
 			],
 			[
 				'name' => 'slug',
 				'description' => 'Slug',
-				'input' => 'slug'
+				'type' => 'slug'
+			],
+			[
+				'name' => 'crew',
+				'description' => 'Crew',
+				'type' => 'onetomany'
 			]
 		];
 		

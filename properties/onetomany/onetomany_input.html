@@ -1,0 +1,8 @@
+<div class="form-group">
+	<label for="{{ property.name }}" class="col-sm-2 control-label">{{ property.description }}</label>
+	<div class="col-sm-10">
+{% for bean in bean[property.name] %}
+		<p class="form-control-static"><a href="{{ path_for('getbean', { 'beantype': property.name, 'id': bean.id }) }}">{{ bean.title }}</a></p>
+{% endfor %}
+	</div>
+</div>

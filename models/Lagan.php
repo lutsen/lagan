@@ -25,18 +25,20 @@ class Lagan {
 
 	}
 
-	protected function controllerName($input) {
-		 return ucfirst($input) . 'Controller';
+	protected function controllerName($type) {
+		 return ucfirst($type) . 'Controller';
 	}
 
 	// Check if file exists, and if do, if method exists
-	protected function inputMethodExists($input, $method) {
+	// @param string $type The property type
+	// @param string $method The property type method
+	protected function propertyMethodExists($type, $method) {
 
-		// Load input type controllers
-		$controller = $this->controllerName($input);
-		$file = ROOT_PATH . '/input/' . $input . '/' . $controller . '.php';
+		// Load property type controllers
+		$controller = $this->controllerName($type);
+		$file = ROOT_PATH . '/properties/' . $type . '/' . $controller . '.php';
 		if (file_exists($file)) {
-			include $file;
+			require_once $file;
 			if ( method_exists( $controller, $method ) ) {
 				return true;
 			} else {
@@ -60,9 +62,9 @@ class Lagan {
 		foreach ( $this->properties as $property ) {
 		
 			// Check if specific set property type method exists
-			if ( $this->inputMethodExists($property['input'], 'set') ) {
+			if ( $this->propertyMethodExists($property['type'], 'set') ) {
 			
-				$controller = $this->controllerName($property['input']);
+				$controller = $this->controllerName($property['type']);
 				$c = new $controller;
 				$bean->{ $property['name'] } = $c->set( $bean, $property, $data[ $property['name'] ] );
 			
@@ -99,15 +101,47 @@ class Lagan {
 
 	}
 
-	// @param integer $id
-	public function read($id) {
+	// Search bean by an unique property, like an id or a slug.
+	// If $value is not set, it returns all beans of it's type.
+	// @param $value The value of the property
+	// @param string $property The name of the property, defaults to id
+	public function read($value = false, $property_name = 'id') {
 
-		$bean = R::findOne( $this->type, ' id = :id ', [ ':id' => $id ] );
-		if ( !$bean ) {
-			throw new Exception('This '.$this->type.' does not exist.');
+		if ( $value ) {
+
+			// Single bean
+			$bean = R::findOne( $this->type, $property_name.' = :value ', [ ':value' => $value ] );
+			if ( !$bean ) {
+				throw new Exception('This '.$this->type.' does not exist.');
+			}
+
+			// Check for property type specific read methods
+			foreach ( $this->properties as $property ) {
+
+				// Check if specific read property method exists
+				if ( $this->propertyMethodExists($property['type'], 'read') ) {
+					$controller = $this->controllerName($property['type']);
+					$c = new $controller;
+					$bean->{ $property['name'] } = $c->read( $bean, $property );
+				}
+
+			}
+
+			return $bean;
+
+		} else {
+
+			// All beans of this type
+			// Oder by position(s) if exits
+			$add_to_query = '';
+			foreach($this->properties as $property) {
+				if ( $property['type'] === 'position' ) {
+					$add_to_query = $property['name'].' ASC, ';
+				}
+			}
+			return R::findAll( $this->type, ' ORDER BY '.$add_to_query.'title ASC ');
+
 		}
-
-		return $bean;
 
 	}
 
@@ -119,7 +153,6 @@ class Lagan {
 		if ( !$bean ) {
 			throw new Exception('This '.$this->type.' does not exist.');
 		}
-
 		return $this->set($data, $bean);
 
 	}
@@ -136,8 +169,8 @@ class Lagan {
 		foreach ( $this->properties as $property ) {
 
 			// Check if specific delete property method exists
-			if ( $this->inputMethodExists($property['input'], 'delete') ) {
-				$controller = $this->controllerName($property['input']);
+			if ( $this->propertyMethodExists($property['type'], 'delete') ) {
+				$controller = $this->controllerName($property['type']);
 				$c = new $controller;
 				$c->delete( $bean, $property );
 			}
@@ -169,21 +202,21 @@ class Lagan {
 	}
 
 	// If appropriate, query properties for optional values, populate them with them.
-	// This is needed for properties with input relation and file_select.
+	// This is needed for properties with type relation and file_select.
 	public function populateProperties() {
 		foreach ($this->properties as $key => $property) {
 
 			// Check for the template, else fallback to text template.
-			$file = $property['input'] . '/' . $property['input'] .'_input.html';
-			if ( file_exists(ROOT_PATH . '/input/' . $file) ) {
+			$file = $property['type'] . '/' . $property['type'] .'_input.html';
+			if ( file_exists(ROOT_PATH . '/properties/' . $file) ) {
 				$this->properties[$key]['template'] = $file;
 			} else {
 				$this->properties[$key]['template'] =  'text/text_input.html';;
 			}
 
-			// Check for options method in input type controller
-			if ( $this->inputMethodExists($property['input'], 'options') ) {
-				$controller = $this->controllerName($property['input']);
+			// Check for options method in property type controller
+			if ( $this->propertyMethodExists($property['type'], 'options') ) {
+				$controller = $this->controllerName($property['type']);
 				$c = new $controller;
 				$this->properties[$key]['options'] = $c->options( $property );
 			}
