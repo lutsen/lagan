@@ -1,11 +1,12 @@
-Lagan
-=====
+[<img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">](https://github.com/lutsen/lagan)
 
 Lagan lets you easily create flexible content objects with a simple class, and manage them with a web interface.
 
-[<img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100">](https://github.com/lutsen/lagan)
 
-### Why Lagan? ###
+
+Why Lagan?
+==========
+
 It's easy to use, easy to build with and easy to extend:
 - Content objects consist of a simple combination of arrays
 - It comes with an admin web interface to manage your content
