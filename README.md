@@ -3,7 +3,7 @@ Lagan
 
 Lagan lets you easily create flexible content objects with a simple class, and manage them with a web interface.
 
-[<img src="https://raw.github.com/lutsen/lagan/master/logo-lagan.svg" width="100">](https://github.com/lutsen/lagan)
+[<img src="https://raw.github.com/lutsen/lagan/master/lagan-logo.svg" width="100">](https://github.com/lutsen/lagan)
 
 ### Why Lagan? ###
 It's easy to use, easy to build with and easy to extend:
