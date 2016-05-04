@@ -3,15 +3,17 @@ Lagan
 
 Lagan lets you easily create flexible content objects with a simple class, and manage them with a web interface.
 
+[<img src="https://raw.github.com/lutsen/lagan/master/logo-lagan.svg" width="100">](https://github.com/lutsen/lagan)
+
 ### Why Lagan? ###
 It's easy to use, easy to build with and easy to extend:
-- Create content objects with any combination if input types
 - Content objects consist of a simple combination of arrays
-- Built-in input validation
-- It's simple to add new input types
 - It comes with an admin web interface to manage your content
-- Create front-end templates to display your content the way you want
+- Create content objects with any combination if properties
+- It's simple to add new property types
+- Built-in input validation
 - Database fields can be easily modified during development
+- Create front-end templates to display your content the way you want
 
 Lagan is built with my favourite PHP libraries:
 - [Slim framework](http://www.slimframework.com/)
@@ -183,6 +185,8 @@ To do
 -----
 
 - Add many-to-many relations
+- Seperate property controllers and views
+- Turn properties controllers in to "normal" dependencies and seperate repo's
 
 
 
@@ -194,6 +198,8 @@ Nice to have
 - Unit testing
 - Drag-n-drop interface for the position of objects
 - Adding extended user login and rights management stuff
+- JSON API
+- Media upload property type
 
 
 
