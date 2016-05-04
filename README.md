@@ -65,7 +65,12 @@ This directory contains all the [property types](#property-types).
 
 #### models (directory) ####
 
-Contains the main Lagan model and all the different [Lagan content models](#create-a-lagan-model).
+Contains the main Lagan model.
+
+
+#### models/lagan (directory) ####
+
+Contains all the different [Lagan content models](#create-a-lagan-model).
 
 
 #### public (directory) ####
@@ -100,11 +105,9 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 Create a Lagan model
 --------------------
 
-The "magic" of Lagan is in the Lagan models, located in the *model* directory. Each type of content has it's own model. I added two example models, *LaganHoverKraft.php* and *LaganCrew.php*.
+The "magic" of Lagan is in the Lagan models, located in the *models/lagan* directory. Each type of content has it's own model. I added two example models, *HoverKraft.php* and *Crew.php*.
 
 All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. Optional are the validation rules (also defined in `__construct`), and property methods.
-
-All Lagan model names should start with Lagan. So *Lagan[Modelname].php*
 
 
 ### Type ###

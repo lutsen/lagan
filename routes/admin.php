@@ -6,7 +6,7 @@
 
 function setupBeanController($beantype) {
 	// Return controller
-	$controller_name = 'Lagan'.ucfirst($beantype);
+	$controller_name = ucfirst($beantype);
 	return new $controller_name();
 }
 
@@ -30,12 +30,12 @@ $app->group('/admin', function () {
 
 	$this->get('[/]', function ($request, $response, $args) {
 		// Get all Lagan beantypes
-		$beantypes = glob(ROOT_PATH. '/models/Lagan?*.php');
+		$beantypes = glob(ROOT_PATH. '/models/lagan/*.php');
 		foreach ($beantypes as $key => $value) {
 			$beantypes[$key] = strtolower( substr(
 				$value,
-				strlen(ROOT_PATH. '/models/Lagan'),
-				strlen($value) - strlen(ROOT_PATH. '/models/Lagan') - 4
+				strlen(ROOT_PATH. '/models/lagan/'),
+				strlen($value) - strlen(ROOT_PATH. '/models/lagan/') - 4
 			) );
 		}
 

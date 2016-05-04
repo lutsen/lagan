@@ -20,11 +20,11 @@ require ROOT_PATH.'/vendor/autoload.php';
 // Lagan autoloader
 function laganAutoload($class_name) {
 
-	// Load models, controllers and Slim middleware
+	// Load models, controllers
 	$paths = array(
 		'/models/',
-		'/controllers/',
-		'/middleware/'
+		'/models/lagan/',
+		'/controllers/'
 	);
 
 	foreach ($paths as $path) {

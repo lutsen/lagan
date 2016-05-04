@@ -1,6 +1,6 @@
 <?php
 
-class LaganHoverkraft extends Lagan {
+class Hoverkraft extends Lagan {
 
 	function __construct() {
 		$this->type = 'hoverkraft';

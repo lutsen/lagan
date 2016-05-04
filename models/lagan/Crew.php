@@ -1,6 +1,6 @@
 <?php
 
-class LaganCrew extends Lagan {
+class Crew extends Lagan {
 
 	function __construct() {
 		$this->type = 'crew';

@@ -2,7 +2,7 @@
 
 /*
 
-Lagan base model for all Lagan models
+ Lagan base model for all Lagan models
 
 */
 
