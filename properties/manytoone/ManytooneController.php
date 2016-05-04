@@ -10,6 +10,8 @@
 
 */
 
+ namespace Lagan\Property;
+
 class ManytooneController {
 
 	// @param bean $bean
@@ -17,7 +19,7 @@ class ManytooneController {
 	public function set($bean, $property, $new_value) {
 
 		// Check and set relation
-		$relation = R::findOne( $property['name'], ' id = :id ', [ ':id' => $new_value ] );
+		$relation = \R::findOne( $property['name'], ' id = :id ', [ ':id' => $new_value ] );
 		if ( !$relation ) {
 			throw new Exception('This '.$property['name'].' does not exist.');
 		} else {
@@ -28,7 +30,7 @@ class ManytooneController {
 
 	// @param array $property
 	public function options($property) {
-		return R::findAll( $property['name'] );
+		return \R::findAll( $property['name'] );
 	}
 
 }

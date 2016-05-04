@@ -1,6 +1,8 @@
 <?php
 
-class Hoverkraft extends Lagan {
+namespace Lagan\Model;
+
+class Hoverkraft extends \Lagan {
 
 	function __construct() {
 		$this->type = 'hoverkraft';

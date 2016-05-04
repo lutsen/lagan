@@ -1,6 +1,8 @@
 <?php
 
-class Crew extends Lagan {
+namespace Lagan\Model;
+
+class Crew extends \Lagan {
 
 	function __construct() {
 		$this->type = 'crew';

@@ -1,5 +1,7 @@
 <?php
 
+namespace Lagan\Property;
+
 class PositionController {
 
 	// Does not actually update position of bean, bur "makes room for it" by updating the positions of other beans.
@@ -8,8 +10,8 @@ class PositionController {
 	// @param integer $new_value new position of bean 
 	public function set($bean, $property, $new_value) {
 
-		$all = R::findAll( $bean->getMeta('type') );
-		$count_all = R::count( $bean->getMeta('type') );
+		$all = \R::findAll( $bean->getMeta('type') );
+		$count_all = \R::count( $bean->getMeta('type') );
 		$curr_value = $bean->{ $property['name'] };
 		
 		// New bean
@@ -34,16 +36,16 @@ class PositionController {
 				foreach ( $all as $b ) {
 					if ($b->{ $property['name'] } >= $new_value AND $b->{ $property['name'] } < $curr_value) {
 						$b->{ $property['name'] } = $b->{ $property['name'] } + 1;
-						$b->modified = R::isoDateTime();
-						R::store($b);
+						$b->modified = \R::isoDateTime();
+						\R::store($b);
 					}
 				}
 			} else if ( $new_value > $curr_value ) {
 				foreach ( $all as $b ) {
 					if ( $b->{ $property['name'] } <= $new_value AND $b->{ $property['name'] } > $curr_value ) {
 						$b->{ $property['name'] } = $b->{ $property['name'] } - 1;
-						$b->modified = R::isoDateTime();
-						R::store($b);
+						$b->modified = \R::isoDateTime();
+						\R::store($b);
 					}
 				}
 			}
@@ -58,7 +60,7 @@ class PositionController {
 	// @param array $property
 	public function delete($bean, $property) {
 
-		$count_all = R::count( $bean->getMeta('type') );
+		$count_all = \R::count( $bean->getMeta('type') );
 		$bottom = $count_all - 1;
 		$this->set($bean, $property, $bottom ); // No need to store new position of this bean
 

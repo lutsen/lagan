@@ -1,5 +1,7 @@
 <?php
 
+namespace Lagan\Property;
+
 class SlugController {
 
 	// If $new_value is not set, slug is based on bean title
@@ -30,7 +32,7 @@ class SlugController {
 	}
 	
 	private function uniqueSlug($bean, $property_name, $string) {
-		$other = R::findOne($bean->getMeta('type'), $property_name . ' = ? ', [ $string ] );
+		$other = \R::findOne($bean->getMeta('type'), $property_name . ' = ? ', [ $string ] );
 		if ($other) {
 			if ($other->id == $bean->id) {
 				return true;

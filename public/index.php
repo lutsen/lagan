@@ -28,7 +28,12 @@ function laganAutoload($class_name) {
 	);
 
 	foreach ($paths as $path) {
-		$file = ROOT_PATH.$path.$class_name.'.php';
+		// Handle backslashes in namespaces
+		if ( strpos( $class_name, '\\' ) ) {
+			$file = ROOT_PATH.$path.substr( $class_name, strrpos( $class_name, '\\' )+1 ).'.php';
+		} else {
+			$file = ROOT_PATH.$path.$class_name.'.php';
+		}
 		if (file_exists($file)) {
 			require_once $file;
 			return;
@@ -37,7 +42,7 @@ function laganAutoload($class_name) {
 
 	// Redbean fix
 	if ( substr($class_name, 0, strlen("Model_")) != "Model_" ) {
-		throw new Exception('The class ' . $class_name . ' could not be loaded');
+		throw new Exception('The class ' . $class_name . ' ('.$file.') could not be loaded');
 	}
 }
 spl_autoload_register('laganAutoload');
@@ -74,7 +79,7 @@ $container['view'] = function ($c) {
 
 	// Instantiate and add Slim specific extension
 	$basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
-	$view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
+	$view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
 
 	// General variables to render views
 	$view->offsetSet('app_url', APP_URL);

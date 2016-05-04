@@ -26,7 +26,7 @@ class Lagan {
 	}
 
 	protected function controllerName($type) {
-		 return ucfirst($type) . 'Controller';
+		 return '\Lagan\Property\\' . ucfirst($type) . 'Controller';
 	}
 
 	// Check if file exists, and if do, if method exists
@@ -36,7 +36,7 @@ class Lagan {
 
 		// Load property type controllers
 		$controller = $this->controllerName($type);
-		$file = ROOT_PATH . '/properties/' . $type . '/' . $controller . '.php';
+		$file = ROOT_PATH . '/properties/' . $type . '/' . ucfirst($type) . 'Controller' . '.php';
 		if (file_exists($file)) {
 			require_once $file;
 			if ( method_exists( $controller, $method ) ) {
@@ -189,7 +189,7 @@ class Lagan {
 	// Validation
 	protected function validate($variables, $rules) {
 
-		$v = new Valitron\Validator($variables);
+		$v = new \Valitron\Validator($variables);
 		$v->rules($rules);
 		if( !$v->validate() ) {
 			$exception = 'Validation error.';

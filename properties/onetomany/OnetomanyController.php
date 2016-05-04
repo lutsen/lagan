@@ -9,6 +9,8 @@
 
 */
 
+ namespace Lagan\Property;
+
 class OnetomanyController {
 
 	// @param bean $bean
@@ -22,7 +24,7 @@ class OnetomanyController {
 
 	// @param array $property
 	public function options($property) {
-		return R::findAll( $property['name'] );
+		return \R::findAll( $property['name'] );
 	}
 
 }

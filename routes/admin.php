@@ -6,7 +6,7 @@
 
 function setupBeanController($beantype) {
 	// Return controller
-	$controller_name = ucfirst($beantype);
+	$controller_name = '\Lagan\Model\\' . ucfirst($beantype);
 	return new $controller_name();
 }
 

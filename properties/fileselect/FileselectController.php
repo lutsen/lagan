@@ -1,5 +1,7 @@
 <?php
 
+namespace Lagan\Property;
+
 class FileselectController {
 
 	// @param array $property
