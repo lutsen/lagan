@@ -185,13 +185,6 @@ The *options* method returns all possible values for this property.
 
 
 
-Bugs
-----
-
-- Adding new object that doesn't valiate doesn't give flash error message
-
-
-
 To do
 -----
 

@@ -64,11 +64,12 @@ $app->group('/admin', function () {
 			$c = setupBeanController( $args['beantype'] );
 			$c->populateProperties();
 
-			// Show populated form
+			// Show form
 			return $this->view->render($response, 'admin/bean.html', [
 				'method' => 'post',
 				'beantype' => $args['beantype'],
-				'beanproperties' => $c->properties
+				'beanproperties' => $c->properties,
+				'flash' => $this->flash->getMessages()
 			]);
 		})->setName('addbean');
 
