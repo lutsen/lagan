@@ -206,14 +206,6 @@ class Lagan {
 	public function populateProperties() {
 		foreach ($this->properties as $key => $property) {
 
-			// Check for the template, else fallback to text template.
-			$file = $property['type'] . '/' . $property['type'] .'_input.html';
-			if ( file_exists(ROOT_PATH . '/properties/' . $file) ) {
-				$this->properties[$key]['template'] = $file;
-			} else {
-				$this->properties[$key]['template'] =  'text/text_input.html';;
-			}
-
 			// Check for options method in property type controller
 			if ( $this->propertyMethodExists($property['type'], 'options') ) {
 				$controller = $this->controllerName($property['type']);

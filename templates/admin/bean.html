@@ -24,7 +24,7 @@
 			<form class="form-horizontal" method="post" role="form" enctype="multipart/form-data" action="{% if bean %}{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}{% else %}{{ path_for('postbean', { 'beantype': beantype }) }}{% endif %}">
 				<input type="hidden" name="_METHOD" value="{{ method }}"/>
 {% for property in beanproperties %}
-					{% include property.template %}
+					{% include property.input %}
 {% endfor %}
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
