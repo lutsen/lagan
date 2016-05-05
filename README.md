@@ -8,7 +8,7 @@ Why Lagan?
 ==========
 
 - Lagan tries to be as simple as possible (but not simpler)
-- Configuration and editing are seperated
+- Configuration and editing are separated
 - All configuration is done by code
 - Content can be edited with a web interface
 - Lagan is built on proven open-source PHP libraries
@@ -110,7 +110,7 @@ Methods of a Lagan model
 
 All Lagan content models extend the *Lagan* main model. Doing so they inherit it's methods.  
 Lagan offers the CRUD methods: *Create*, *Read*, *Update* and *Delete*.  
-Lagan uses RedBean to manimpulate data in the database. Redbean returns data from the database as objects called beans.
+Lagan uses RedBean to manipulate data in the database. Redbean returns data from the database as objects called beans.
 
 
 ### Create ###
@@ -193,7 +193,7 @@ To edit a property in the backend web interface it needs a template. These are l
 
 #### routes (directory) ####
 
-Contains the different route files. Each route file is automaticly loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
+Contains the different route files. Each route file is automatically loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
 
 
 #### templates (directory) ####
@@ -216,7 +216,7 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Turn properties controllers in to "normal" dependencies and seperate repo's
+- Turn properties controllers in to "normal" dependencies and separate repo's
 - Add proper PHPDocumentor inline code documentation
 - Add many-to-many relations
 
