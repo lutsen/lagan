@@ -1,17 +1,20 @@
 [<img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">](https://github.com/lutsen/lagan)
 
-Lagan lets you easily create flexible content objects with a simple class, and manage them with a web interface.
+Lagan lets you create flexible content objects with a simple class, and manage them with a web interface.
 
 
 
 Why Lagan?
 ==========
 
-It's easy to use, easy to build with and easy to extend:
+- Lagan tries to be as simple as possible (but not simpler)
+- Configuration and editing are seperated
+- All configuration is done by code
+- Content can be edited with a web interface
+- Lagan is built on proven open-source PHP libraries
 - Content objects consist of a simple combination of arrays
-- It comes with an admin web interface to manage your content
-- Create content objects with any combination if properties
-- It's simple to add new property types
+- Content objects can be any combination of properties
+- It is easy to add new property types
 - Built-in input validation
 - Database fields can be easily modified during development
 - Create front-end templates to display your content the way you want
@@ -35,8 +38,8 @@ Requirements
 
 
 
-Installation
-------------
+Install Lagan
+-------------
 
 Install all-but-one dependencies using [Composer](https://getcomposer.org/).  
 Install RedBean by downloading it from the RedBean website: http://redbeanphp.com  
@@ -50,62 +53,24 @@ Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net
 
 
 
-Lagan project structure
------------------------
+Use Lagan
+---------
 
-#### cache (directory) ####
-
-You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
+(To do)
 
 
-#### properties (directory) ####
 
-This directory contains all the [property types](#property-types).
+Extend Lagan
+------------
 
-
-#### models (directory) ####
-
-Contains the main Lagan model.
-
-
-#### models/lagan (directory) ####
-
-Contains all the different [Lagan content models](#create-a-lagan-model).
-
-
-#### public (directory) ####
-
-Contains the *index.php* and *.htaccess* file. The *index.php* file contains the autoloader, includes the route files, and includes some other files and settings.
-
-*The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
-
-
-#### routes (directory) ####
-
-Contains the different route files. Each route file is automaticly loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
-
-
-#### templates (directory) ####
-
-This directory contains the template files. The subdirectory *admin* contains all the template files for the admin environment.  
-Bonus feature: the subdirectory *static* contains the template files for static pages and a 404 page. Static pages display if the route name matches their name, and no other route for this name exists. Convenient!
-
-
-#### vendor (directory) ####
-
-Created by [Composer](https://getcomposer.org/) when installing the project dependencies. Remember to manually add the RedBean rb.php file to it.
-
-
-#### config_example.php (file) ####
-
-This is an example of the *config.php* file. The *config.php* file is needed for a Lagan project to work. Rename the *config_example.php* to *config.php* and add the necessary details.
+(To do)
 
 
 
 Create a Lagan model
 --------------------
 
-The "magic" of Lagan is in the Lagan models, located in the *models/lagan* directory. Each type of content has it's own model. I added two example models, *HoverKraft.php* and *Crew.php*.
+The "magic" of Lagan is in the Lagan models, located in the *models/lagan* directory. Each type of content has it's own model. I added two example models, *Hoverkraft.php* and *Crew.php*.
 
 All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. Optional are the validation rules (also defined in `__construct`), and property methods.
 
@@ -126,7 +91,8 @@ All content models extend the *Lagan.php* class. Each model has a type, descript
 
 - *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: The form-field label of the property in the admin interface.
-- *type*: The type of data of the property. This defines which property type controller and template to use. More information under "Property types".
+- *type*: The type of data of the property. This defines which property type controller to use. More information under "Property types".
+- *input*: The template to use in the admin interface. Templates are located in the *public/properties* directory.
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
 
@@ -171,7 +137,7 @@ Lagan uses RedBean to manimpulate data in the database. Redbean returns data fro
 Property types
 --------------
 
-Each property type has it's own directory in the directory *properties*. In this directory can be an property type controller and an property type template.
+Each property type has it's own directory in the directory *properties*. In this directory can be an property type controller.
 
 
 ### Property type controller ###
@@ -184,13 +150,75 @@ In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition*
 The *options* method returns all possible values for this property.
 
 
+### Property input template ###
+
+To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
+
+
+
+Lagan project structure
+-----------------------
+
+#### cache (directory) ####
+
+You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
+
+
+#### properties (directory) ####
+
+This directory contains all the [property types](#property-types).
+
+
+#### models (directory) ####
+
+Contains the main Lagan model.
+
+
+#### models/lagan (directory) ####
+
+Contains all the different [Lagan content models](#create-a-lagan-model).
+
+
+#### public (directory) ####
+
+Contains the *index.php* and *.htaccess* file. The *index.php* file contains the autoloader, includes the route files, and includes some other files and settings.
+
+*The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
+
+
+#### public/properties (directory) ####
+
+To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
+
+
+#### routes (directory) ####
+
+Contains the different route files. Each route file is automaticly loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
+
+
+#### templates (directory) ####
+
+This directory contains the template files. The subdirectory *admin* contains all the template files for the admin environment.  
+Bonus feature: the subdirectory *static* contains the template files for static pages and a 404 page. Static pages display if the route name matches their name, and no other route for this name exists. Convenient!
+
+
+#### vendor (directory) ####
+
+Created by [Composer](https://getcomposer.org/) when installing the project dependencies. Remember to manually add the RedBean rb.php file to it.
+
+
+#### config_example.php (file) ####
+
+This is an example of the *config.php* file. The *config.php* file is needed for a Lagan project to work. Rename the *config_example.php* to *config.php* and add the necessary details.
+
+
 
 To do
 -----
 
-- Add many-to-many relations
-- Seperate property controllers and views
 - Turn properties controllers in to "normal" dependencies and seperate repo's
+- Add proper PHPDocumentor inline code documentation
+- Add many-to-many relations
 
 
 
@@ -198,12 +226,12 @@ Nice to have
 ------------
 
 - Adding search options and/or routes
-- Add a logger: https://github.com/Flynsarmy/Slim-Monolog
-- Unit testing
-- Drag-n-drop interface for the position of objects
-- Adding extended user login and rights management stuff
 - JSON API
+- Unit testing
 - Media upload property type
+- Adding extended user login and rights management stuff
+- Drag-n-drop interface for the position of objects
+- Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 
 
 
