@@ -25,30 +25,7 @@ class Lagan {
 
 	}
 
-	protected function controllerName($type) {
-		 return '\Lagan\Property\\' . ucfirst($type) . 'Controller';
-	}
 
-	// Check if file exists, and if do, if method exists
-	// @param string $type The property type
-	// @param string $method The property type method
-	protected function propertyMethodExists($type, $method) {
-
-		// Load property type controllers
-		$controller = $this->controllerName($type);
-		$file = ROOT_PATH . '/properties/' . $type . '/' . ucfirst($type) . 'Controller' . '.php';
-		if (file_exists($file)) {
-			require_once $file;
-			if ( method_exists( $controller, $method ) ) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-
-	}
 
 	// Set values
 	// @param array $data $request->getParsedBody();
@@ -62,18 +39,13 @@ class Lagan {
 		foreach ( $this->properties as $property ) {
 		
 			// Check if specific set property type method exists
-			if ( $this->propertyMethodExists($property['type'], 'set') ) {
-			
-				$controller = $this->controllerName($property['type']);
-				$c = new $controller;
+			$c = new $property['type'];
+			if ( method_exists( $c, 'set' ) ) {
 				$bean->{ $property['name'] } = $c->set( $bean, $property, $data[ $property['name'] ] );
-			
 			} else {
-
 				if ( $data[ $property['name'] ] && strlen( $data[ $property['name'] ] ) > 0 ) {
 					$bean->{ $property['name'] } = $data[ $property['name'] ];
 				}
-
 			}
 	
 		}
@@ -119,9 +91,8 @@ class Lagan {
 			foreach ( $this->properties as $property ) {
 
 				// Check if specific read property method exists
-				if ( $this->propertyMethodExists($property['type'], 'read') ) {
-					$controller = $this->controllerName($property['type']);
-					$c = new $controller;
+				$c = new $property['type'];
+				if ( method_exists( $c, 'read' ) ) {
 					$bean->{ $property['name'] } = $c->read( $bean, $property );
 				}
 
@@ -169,9 +140,8 @@ class Lagan {
 		foreach ( $this->properties as $property ) {
 
 			// Check if specific delete property method exists
-			if ( $this->propertyMethodExists($property['type'], 'delete') ) {
-				$controller = $this->controllerName($property['type']);
-				$c = new $controller;
+			$c = new $property['type'];
+			if ( method_exists( $c, 'delete' ) ) {
 				$c->delete( $bean, $property );
 			}
 
@@ -207,9 +177,8 @@ class Lagan {
 		foreach ($this->properties as $key => $property) {
 
 			// Check for options method in property type controller
-			if ( $this->propertyMethodExists($property['type'], 'options') ) {
-				$controller = $this->controllerName($property['type']);
-				$c = new $controller;
+			$c = new $property['type'];
+			if ( method_exists( $c, 'options' ) ) {
 				$this->properties[$key]['options'] = $c->options( $property );
 			}
 

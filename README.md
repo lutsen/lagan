@@ -72,7 +72,7 @@ Create a Lagan model
 
 The "magic" of Lagan is in the Lagan models, located in the *models/lagan* directory. Each type of content has it's own model. I added two example models, *Hoverkraft.php* and *Crew.php*.
 
-All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. Optional are the validation rules (also defined in `__construct`), and property methods.
+All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. The validation rules are optional (also defined in `__construct`).
 
 
 ### Type ###
@@ -137,15 +137,23 @@ Lagan uses RedBean to manipulate data in the database. Redbean returns data from
 Property types
 --------------
 
-Each property type has it's own directory in the directory *properties*. In this directory can be an property type controller.
+Each property type controller is a dependency, added wth Composer. This way new property types can be developed seperate from the Lagan project code. These property types are now installed by Composer when installing Lagan:
+
+- fileselect
+- manytoone
+- onetomany
+- position
+- slug
+- string
 
 
 ### Property type controller ###
 
-An property type controller can contain a *set*, *read*, *delete* and *options* method.  
+A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
 The *set* method is executed each time a property with this type is set.
 The *read* method is executed each time a property with this type is read.  
-The *delete* method is executed each time a an object with a property with this type is deleted.  
+The *delete* method is executed each time a an object with a property with this type is deleted.
+The *options* method returns all the optional values this property can have.
 In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
 The *options* method returns all possible values for this property.
 
@@ -153,6 +161,15 @@ The *options* method returns all possible values for this property.
 ### Property input template ###
 
 To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
+
+Currently these templates are avasilable:
+
+- fileselect
+- manytoone
+- onetomany
+- static
+- text
+- textarea
 
 
 
@@ -216,10 +233,8 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Turn properties controllers in to "normal" dependencies and separate repo's
+- Turn property templates in to separate dependencies (but how to install them outside the vendor directory?)
 - Add proper PHPDocumentor inline code documentation
-- Add many-to-many relations
-
 
 
 Nice to have
@@ -227,8 +242,11 @@ Nice to have
 
 - Adding search options and/or routes
 - JSON API
+- Project homepage
 - Unit testing
 - Media upload property type
+- Design the editor
+- Add many-to-many relations
 - Adding extended user login and rights management stuff
 - Drag-n-drop interface for the position of objects
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog

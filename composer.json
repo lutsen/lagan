@@ -1,22 +1,31 @@
 {
-	"name": "lagan",
+	"name": "lagan/lagan",
 	"type": "project",
-	"description": "Lagan lets you easily create and manage flexible content objects, using Slim, Redbean, Valitron and Twig.",
-	"homepage": "http://www.hoverkraft.nl",
+	"description": "Lagan lets you create flexible content objects with a simple class, and manage them with a web interface.",
+	"keywords": ["cms","content", "backend","slim","redbean","twig","validation"],
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Lútsen Stellingwerff",
 			"email": "lutsenstellingwerff@gmail.com",
-			"homepage": "http://lutsen.land"
+			"homepage": "http://www.hoverkraft.nl",
+			"role": "Developer"
 		}
 	],
 	"require": {
+		"php": ">=5.5.0",
 		"slim/slim": "^3.0",
 		"slim/twig-view": "^2.0",
 		"slim/flash": "^0.1",
 		"twig/twig": "^1.0",
 		"tuupola/slim-basic-auth": "^2.0",
-		"vlucas/valitron": "^1.0"
+		"vlucas/valitron": "^1.0",
+
+		"lagan/fileselect-property-controller":	"dev-master",
+		"lagan/manytoone-property-controller":	"dev-master",
+		"lagan/onetomany-property-controller":	"dev-master",
+		"lagan/position-property-controller":	"dev-master",
+		"lagan/slug-property-controller":		"dev-master",
+		"lagan/string-property-controller":		"dev-master"
 	}
 }

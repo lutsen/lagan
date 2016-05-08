@@ -15,38 +15,38 @@ class Hoverkraft extends \Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Title',
-				'type' => 'text',
+				'type' => '\Lagan\Property\Str',
 				'input' => 'text.html'
 			],
 			[
 				'name' => 'description',
 				'description' => 'Describe the kraft',
-				'type' => 'text',
+				'type' => '\Lagan\Property\Str',
 				'input' => 'textarea.html'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'type' => 'fileselect',
+				'type' => '\Lagan\Property\Fileselect',
 				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}', // glob pattern
 				'input' => 'fileselect.html'
 			],
 			[
 				'name' => 'position',
 				'description' => 'Order',
-				'type' => 'position',
+				'type' => '\Lagan\Property\Position',
 				'input' => 'text.html'
 			],
 			[
 				'name' => 'slug',
 				'description' => 'Slug',
-				'type' => 'slug',
+				'type' => '\Lagan\Property\Slug',
 				'input' => 'text.html'
 			],
 			[
 				'name' => 'crew',
 				'description' => 'Crew',
-				'type' => 'onetomany',
+				'type' => '\Lagan\Property\Onetomany',
 				'input' => 'onetomany.html'
 			]
 		];
