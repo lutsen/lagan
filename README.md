@@ -162,7 +162,7 @@ The *options* method returns all possible values for this property.
 
 To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
 
-Currently these templates are avasilable:
+Currently these templates are available:
 
 - fileselect
 - manytoone
@@ -233,7 +233,7 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Turn property templates in to separate dependencies (but how to install them outside the vendor directory?)
+- Turn property templates in to separate dependencies (But how to install them outside the vendor directory? With a custom installer? https://getcomposer.org/doc/articles/custom-installers.md)
 - Add proper PHPDocumentor inline code documentation
 
 
