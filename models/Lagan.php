@@ -2,16 +2,30 @@
 
 /**
  * Lagan base model for all Lagan models.
+ * Each type of content has it's own model that extends this model.
+ * Each model has a type, description and properties.
+ * The validation rules are optional.
 */
 
 class Lagan {
 
+	/** @var string $type The type of the model. It is the same as the modelname in lowercase, and defines the name of the RedBean beans and the name of the table in the database. */
 	protected $type;
-	// Properties for a model
+
+	/** @var string $description The description of the model displayed in the admin interface. */
+	public $description;
+
+	/** @var array $properties An array defining the different content data-fields of the model. Each property is an array with at least the following keys: name, description, type, input. There can be other optional keys. */
 	public $properties;
-	// Validation rules
+
+	/** @var array $rules An array of validation rules, based on the Valitron library. */
 	public $rules;
 
+	/**
+	 * Dispenses a Redbean bean ans sets it's creation date.
+	 *
+	 * @return bean
+	 */
 	protected function universalCreate() {
 	
 		$bean = R::dispense($this->type);
@@ -22,10 +36,16 @@ class Lagan {
 	}
 
 
-
-	// Set values
-	// @param array $data $request->getParsedBody();
-	// @param bean $bean
+	/**
+	 * Set values for a bean. Used by Create and Update.
+	 * Checks for each property if a "set" method exists for it's type.
+	 * If so, it executes it.
+	 *
+	 * @param array	$data	The raw data, usually from the Slim $request->getParsedBody()
+	 * @param bean	$bean
+	 *
+	 * @return bean	Bean with values based on $data.
+	 */
 	public function set($data, $bean) {
 
 		// Validate
@@ -53,13 +73,18 @@ class Lagan {
 	}
 
 
-	
-	// CRUD //
-	// ---- //
+	/*
+	 * CRUD:
+	 * Create, Read, Update and Delete methods
+	 */
 
-
-
-	// @param array $data $request->getParsedBody();
+	/**
+	 * Create.
+	 *
+	 * @param array	$data	The raw data to create the Redbeean bean.
+	 *
+	 * @return bean	New bean with values based on $data.
+	 */
 	public function create($data) {
 
 		// Create
@@ -69,10 +94,16 @@ class Lagan {
 
 	}
 
-	// Search bean by an unique property, like an id or a slug.
-	// If $value is not set, it returns all beans of it's type.
-	// @param $value The value of the property
-	// @param string $property The name of the property, defaults to id
+	/**
+	 * Read.
+	 * Search bean by an unique property, like an id or a slug.
+	 * If $value is not set, it returns all beans of it's type.
+	 *
+	 * @param mixed		$value		The value of the property
+	 * @param string	$property	The name of the property, defaults to id
+	 *
+	 * @return mixed	Can return single bean or array of beans if $value is not set.
+	 */
 	public function read($value = false, $property_name = 'id') {
 
 		if ( $value ) {
@@ -112,8 +143,15 @@ class Lagan {
 
 	}
 
-	// @param array $data
-	// @param integer $id
+	/**
+	 * Update.
+	 * Update the data of the bean.
+	 *
+	 * @param array		$data The raw data to create the Redbeean bean.
+	 * @param integer	$id
+	 *
+	 * @return bean		Bean with updated values based on $data.
+	 */
 	public function update($data, $id) {
 
 		$bean = R::findOne( $this->type, ' id = :id ', [ ':id' => $id ] );
@@ -124,7 +162,12 @@ class Lagan {
 
 	}
 	
-	// @param integer $id
+	/**
+	 * Delete.
+	 * Delete the bean.
+	 *
+	 * @param integer	$id
+	 */
 	public function delete($id) {
 
 		$bean = R::findOne( $this->type, ' id = :id ', [ ':id' => $id ] );
@@ -149,10 +192,16 @@ class Lagan {
 
 
 
-	// HELPER METHODS //
-	// -------------- //
+	// HELPER METHODS
 
-	// Validation
+	/**
+	 * Validation.
+	 * Validate properties with the Valitron library.
+	 * Throws an error if validation fails.
+	 *
+	 * @param array	$variables
+	 * @param array	$rules
+	 */
 	protected function validate($variables, $rules) {
 
 		$v = new \Valitron\Validator($variables);
@@ -167,8 +216,10 @@ class Lagan {
 
 	}
 
-	// If appropriate, query properties for optional values, populate them with them.
-	// This is needed for properties with type relation and file_select.
+	/**
+	 * If appropriate, query properties for optional values, populate them with them.
+	 * This is needed for properties with types like for example relation and file_select.
+	 */
 	public function populateProperties() {
 		foreach ($this->properties as $key => $property) {
 

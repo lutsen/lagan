@@ -2,6 +2,10 @@
 
 namespace Lagan\Model;
 
+/**
+ * Example Lagan content model
+ */
+
 class Hoverkraft extends \Lagan {
 
 	function __construct() {
