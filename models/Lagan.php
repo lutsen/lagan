@@ -102,7 +102,7 @@ class Lagan {
 			// Oder by position(s) if exits
 			$add_to_query = '';
 			foreach($this->properties as $property) {
-				if ( $property['type'] === 'position' ) {
+				if ( $property['type'] === '\\Lagan\\Property\\Position' ) {
 					$add_to_query = $property['name'].' ASC, ';
 				}
 			}
