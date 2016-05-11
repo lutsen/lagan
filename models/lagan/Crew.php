@@ -16,26 +16,26 @@ class Crew extends \Lagan {
 				'name' => 'title',
 				'description' => 'Naam',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'text.html'
+				'input' => 'text'
 			],
 			[
 				'name' => 'bio',
 				'description' => 'Biography',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea.html'
+				'input' => 'textarea'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
 				'type' => '\Lagan\Property\Fileselect',
 				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}', // glob pattern
-				'input' => 'fileselect.html'
+				'input' => 'fileselect'
 			],
 			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkraft',
 				'type' => '\Lagan\Property\Manytoone',
-				'input' => 'manytoone.html'
+				'input' => 'manytoone'
 			]
 		];
 		

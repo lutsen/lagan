@@ -71,7 +71,7 @@ $container = $app->getContainer();
 $container['view'] = function ($c) {
 	$view = new \Slim\Views\Twig([
 		ROOT_PATH.'/templates',
-		APP_PATH.'/properties'
+		APP_PATH.'/property-templates'
 	],
 	[
 		'cache' => ROOT_PATH.'/cache'

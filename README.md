@@ -66,6 +66,16 @@ Extend Lagan
 (To do)
 
 
+### Create a property controller ###
+
+(To do)
+
+
+### Create a property input template ###
+
+(To do)
+
+
 
 Create a Lagan model
 --------------------
@@ -137,7 +147,7 @@ Lagan uses RedBean to manipulate data in the database. Redbean returns data from
 Property types
 --------------
 
-Each property type controller is a dependency, added wth Composer. This way new property types can be developed seperate from the Lagan project code. These property types are now installed by Composer when installing Lagan:
+Each property type controller is a dependency, added wth Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
 - fileselect
 - manytoone
@@ -160,7 +170,7 @@ The *options* method returns all possible values for this property.
 
 ### Property input template ###
 
-To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
+To edit a property in the backend web interface it needs a template. Each property template is also a dependency, added wth Composer. They are put in the *public/property-templates* directory.
 
 Currently these templates are available:
 
@@ -181,10 +191,6 @@ Lagan project structure
 You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
 
 
-#### properties (directory) ####
-
-This directory contains all the [property types](#property-types).
-
 
 #### models (directory) ####
 
@@ -203,9 +209,9 @@ Contains the *index.php* and *.htaccess* file. The *index.php* file contains the
 *The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
 
 
-#### public/properties (directory) ####
+#### public/property-templates (directory) ####
 
-To edit a property in the backend web interface it needs a template. These are located in the *public/properties* directory.
+Created by [Composer](https://getcomposer.org/). Here Composer will add all the templates needed to edit a property in the backend web interface.
 
 
 #### routes (directory) ####
@@ -215,7 +221,7 @@ Contains the different route files. Each route file is automatically loaded, and
 
 #### templates (directory) ####
 
-This directory contains the template files. The subdirectory *admin* contains all the template files for the admin environment.  
+This directory contains the template files (except the property templates). The subdirectory *admin* contains all the template files for the admin environment.  
 Bonus feature: the subdirectory *static* contains the template files for static pages and a 404 page. Static pages display if the route name matches their name, and no other route for this name exists. Convenient!
 
 
@@ -233,8 +239,8 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Turn property templates in to separate dependencies (But how to install them outside the vendor directory? With a custom installer? https://getcomposer.org/doc/articles/custom-installers.md)
 - Add proper PHPDocumentor inline code documentation
+
 
 
 Nice to have

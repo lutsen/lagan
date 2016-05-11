@@ -21,11 +21,17 @@
 		"tuupola/slim-basic-auth": "^2.0",
 		"vlucas/valitron": "^1.0",
 
-		"lagan/fileselect-property-controller":	"dev-master",
-		"lagan/manytoone-property-controller":	"dev-master",
-		"lagan/onetomany-property-controller":	"dev-master",
-		"lagan/position-property-controller":	"dev-master",
-		"lagan/slug-property-controller":		"dev-master",
-		"lagan/string-property-controller":		"dev-master"
+		"lagan/property-fileselect":	"dev-master",
+		"lagan/property-manytoone":		"dev-master",
+		"lagan/property-onetomany":		"dev-master",
+		"lagan/property-position":		"dev-master",
+		"lagan/property-slug":			"dev-master",
+		"lagan/property-string":		"dev-master",
+
+		"lagan/template-fileselect":	"dev-master",
+		"lagan/template-manytoone":		"dev-master",
+		"lagan/template-onetomany":		"dev-master",
+		"lagan/template-text":			"dev-master",
+		"lagan/template-textarea":		"dev-master"
 	}
 }

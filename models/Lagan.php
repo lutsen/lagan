@@ -1,18 +1,14 @@
 <?php
 
-/*
-
- Lagan base model for all Lagan models
-
+/**
+ * Lagan base model for all Lagan models.
 */
 
 class Lagan {
 
 	protected $type;
-	// Allowed properties for an object,
-	// that can or need to be directly written to the DB
+	// Properties for a model
 	public $properties;
-	
 	// Validation rules
 	public $rules;
 
