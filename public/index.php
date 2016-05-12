@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This is the general configuragtion file for your Lagan app.
+ *
+ * The index.php file contains the configuration for Slim, RedBean and Twig,
+ * the error configuration serttings and the autoloader for Lagan models.
+ * It also includes the route files.
+ */
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -17,14 +25,19 @@ R::setup(
 // Composer autoloader
 require ROOT_PATH.'/vendor/autoload.php';
 
-// Lagan autoloader
+/**
+ * Lagan autoloader
+ *
+ * Loads the Lagan models.
+ *
+ * @param string $class_name The name of the class to load.
+ */
 function laganAutoload($class_name) {
 
 	// Load models, controllers
 	$paths = array(
 		'/models/',
-		'/models/lagan/',
-		'/controllers/'
+		'/models/lagan/'
 	);
 
 	foreach ($paths as $path) {

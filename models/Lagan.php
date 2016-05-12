@@ -73,13 +73,11 @@ class Lagan {
 	}
 
 
-	/*
-	 * CRUD:
-	 * Create, Read, Update and Delete methods
-	 */
+	// CRUD:
+	// Create, Read, Update and Delete methods
 
 	/**
-	 * Create.
+	 * Create
 	 *
 	 * @param array	$data	The raw data to create the Redbeean bean.
 	 *
@@ -95,7 +93,8 @@ class Lagan {
 	}
 
 	/**
-	 * Read.
+	 * Read
+	 *
 	 * Search bean by an unique property, like an id or a slug.
 	 * If $value is not set, it returns all beans of it's type.
 	 *
@@ -144,7 +143,8 @@ class Lagan {
 	}
 
 	/**
-	 * Update.
+	 * Update
+	 *
 	 * Update the data of the bean.
 	 *
 	 * @param array		$data The raw data to create the Redbeean bean.
@@ -163,7 +163,8 @@ class Lagan {
 	}
 	
 	/**
-	 * Delete.
+	 * Delete
+	 *
 	 * Delete the bean.
 	 *
 	 * @param integer	$id
@@ -195,7 +196,8 @@ class Lagan {
 	// HELPER METHODS
 
 	/**
-	 * Validation.
+	 * Validation
+	 *
 	 * Validate properties with the Valitron library.
 	 * Throws an error if validation fails.
 	 *
@@ -217,8 +219,10 @@ class Lagan {
 	}
 
 	/**
-	 * If appropriate, query properties for optional values, populate them with them.
-	 * This is needed for properties with types like for example relation and file_select.
+	 * Populate properties
+	 *
+	 * Properties can have optional values, for example relation and file_select.
+	 * This method, if appropriate, queries properties for optional values, and populates them with them.
 	 */
 	public function populateProperties() {
 		foreach ($this->properties as $key => $property) {
