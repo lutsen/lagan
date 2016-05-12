@@ -102,7 +102,7 @@ All content models extend the *Lagan.php* class. Each model has a type, descript
 - *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: The form-field label of the property in the admin interface.
 - *type*: The type of data of the property. This defines which property type controller to use. More information under "Property types".
-- *input*: The template to use in the admin interface. Templates are located in the *public/properties* directory.
+- *input*: The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
 
@@ -147,7 +147,7 @@ Lagan uses RedBean to manipulate data in the database. Redbean returns data from
 Property types
 --------------
 
-Each property type controller is a dependency, added wth Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
+Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
 - fileselect
 - manytoone
@@ -257,6 +257,11 @@ Nice to have
 - Drag-n-drop interface for the position of objects
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 
+
+Editor:
+
+- Objects in left side menu: Go to object overview or add new one
+- Home: latest edited objects
 
 
 Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).
