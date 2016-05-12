@@ -1,8 +1,11 @@
 <?php
 
-// Public pages
-// ------------
-// The public routes
+/**
+ * The public routes.
+ *
+ * You can put the routes to your public pages usign your own Twig templates here.
+ * Put your templates in the templates/piblic directory.
+ */
 
 $app->get('/', function ($request, $response, $args) {
 	$hoverkraft = new \Lagan\Model\Hoverkraft;

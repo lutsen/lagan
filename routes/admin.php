@@ -1,16 +1,33 @@
 <?php
 
-// Admin pages
-// -----------
-// The admin routes
+/**
+ * The admin routes.
+ */
 
+/**
+ * Set up a controller for a bean type.
+ *
+ * @var string $beantype The type of bean.
+ *
+ * @return string The name of the controller.
+ */
 function setupBeanController($beantype) {
 	// Return controller
 	$controller_name = '\Lagan\Model\\' . ucfirst($beantype);
 	return new $controller_name();
 }
 
-// DRY
+/**
+ * Redirtect to the right page after saving a bean.
+ *
+ * @var object $container Slim container
+ * @var object $bean RedBean bean
+ * @var array $data Post data
+ * @var obejct $response Slim response object
+ * @var string[] $args Array with arguments from the Slim route
+ *
+ * @return object Slim response
+ */
 function redirectAfterSave($container, $bean, $data, $response, $args) {
 	if ( $data['submit'] == 'saveandclose' ) {
 		return $response->withStatus(302)->withHeader(
