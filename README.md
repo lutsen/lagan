@@ -39,7 +39,7 @@ Requirements
 
 
 Install Lagan
--------------
+=============
 
 Install all-but-one dependencies using [Composer](https://getcomposer.org/).  
 Install RedBean by downloading it from the RedBean website: http://redbeanphp.com  
@@ -54,52 +54,38 @@ Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net
 
 
 Use Lagan
----------
+=========
 
 
-### Content models ###
+Content models
+--------------
 
 After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 2 example models, *Hoverkraft.php* and *Crew.php*. If you open them you will see they have a type, a description, an aray with different content properties and an array with validation rules.
 
-You can add your own content models by just adding class files like this to the *models/lagan* directory. Lagan will automatically create and update database tables for them. Nice!
+You can add your own content models by just adding class files like this to the *models/lagan* directory. Lagan will automatically create and update database tables for them. Nice!  
+[> More about the content model structure](#structure-of-a-lagan-model)
 
-[More about the content model structure](#structure-of-a-lagan-model)
 
 
-### Routes ###
+Routes
+------
 
 In the directory *routes* you can add your public routes to the *public.php* file. You can add your own route files as well. The routes are automatically included in your Lagan app.
 
-In the routes you can use the Lagan model CRUD methods to read and manipulate your data.
-[More about the content model methods](#methods-of-a-lagan-model)
+In the routes you can use the Lagan model CRUD methods to read and manipulate your data.  
+[> More about the content model methods](#methods-of-a-lagan-model)
 
 
-### Templates ###
+
+Templates
+---------
 
 Lagan uses [Twig](http://twig.sensiolabs.org/) as its template engine. You can add your templates to the *templates/public* directory and add them to your routes to use them in your app.
 
 
 
-
-Extend Lagan
-------------
-
-You can extend Lagan by adding your own property types to it. All Lagan property controllers are separate dependencies. You can include them to your Lagan app with Composer. To edit properties in the Lagan web interface you need a property template. You can add new property templates to Lagan with Composer too.
-
-
-### Create a property controller ###
-
-(To do)
-
-
-### Create a property input template ###
-
-(To do)
-
-
-
 Structure of a Lagan model
----------------------------
+==========================
 
 All Lagan content models extend the *Lagan* main model. They contain a type, a description, an aray with different content properties and an (optional) array with validation rules.
 
@@ -134,7 +120,7 @@ The key of each array in the `$this->rules` array is the name of the validation 
 
 
 Methods of a Lagan model
-------------------------
+========================
 
 All Lagan content models extend the *Lagan* main model. Doing so they inherit it's methods.  
 Lagan offers the CRUD methods: *Create*, *Read*, *Update* and *Delete*.  
@@ -162,8 +148,15 @@ Lagan uses RedBean to manipulate data in the database. Redbean returns data from
 
 
 
-Property types
---------------
+Extend Lagan
+============
+
+You can extend Lagan by adding your own property types to it. All Lagan property controllers are separate dependencies. You can include them to your Lagan app with Composer. To edit properties in the Lagan web interface you need a property template. You can add new property templates to Lagan with Composer too. Check out the *composer.json* file to see which properties and templates are included.
+
+
+
+Property type controllers
+-------------------------
 
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
@@ -175,7 +168,7 @@ Each property type controller is a dependency, added with Composer. This way new
 - string
 
 
-### Property type controller ###
+### Property type controller methods ###
 
 A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
 The *set* method is executed each time a property with this type is set.
@@ -186,7 +179,8 @@ In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition*
 The *options* method returns all possible values for this property.
 
 
-### Property input template ###
+Property input templates
+------------------------
 
 To edit a property in the backend web interface it needs a template. Each property template is also a dependency, added wth Composer. They are put in the *public/property-templates* directory.
 
@@ -199,10 +193,16 @@ Currently these templates are available:
 - text
 - textarea
 
+The properties of the property and the content bean are available in the template. To get the property name for example, use this Twig syntax: `{{ property.name }}`. To get the content of the specific property, use `{{ bean[property.name] }}`.
+
 
 
 Lagan project structure
------------------------
+=======================
+
+All the directories of a Lagan app and their contents.
+
+
 
 #### cache (directory) ####
 
@@ -258,7 +258,6 @@ To do
 -----
 
 - Check types in PHPDocumentor inline code documentation
-- Add missing parts to Readme file
 - Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install docuemntation
 
 
