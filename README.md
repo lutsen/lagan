@@ -15,9 +15,9 @@ Why Lagan?
 - Content objects consist of a simple combination of arrays
 - Content objects can be any combination of properties
 - It is easy to add new property types
-- Built-in input validation
+- Lagan has built-in input validation
 - Database fields can be easily modified during development
-- Create front-end templates to display your content the way you want
+- Create Twig front-end templates to display your content the way you want
 
 Lagan is built with my favourite PHP libraries:
 - [Slim framework](http://www.slimframework.com/)
@@ -56,14 +56,35 @@ Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net
 Use Lagan
 ---------
 
-(To do)
+
+### Content models ###
+
+After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 2 example models, *Hoverkraft.php* and *Crew.php*. If you open them you will see they have a type, a description, an aray with different content properties and an array with validation rules.
+
+You can add your own content models by just adding class files like this to the *models/lagan* directory. Lagan will automatically create and update database tables for them. Nice!
+
+[More about the content model structure](#structure-of-a-lagan-model)
+
+
+### Routes ###
+
+In the directory *routes* you can add your public routes to the *public.php* file. You can add your own route files as well. The routes are automatically included in your Lagan app.
+
+In the routes you can use the Lagan model CRUD methods to read and manipulate your data.
+[More about the content model methods](#methods-of-a-lagan-model)
+
+
+### Templates ###
+
+Lagan uses [Twig](http://twig.sensiolabs.org/) as its template engine. You can add your templates to the *templates/public* directory and add them to your routes to use them in your app.
+
 
 
 
 Extend Lagan
 ------------
 
-(To do)
+You can extend Lagan by adding your own property types to it. All Lagan property controllers are separate dependencies. You can include them to your Lagan app with Composer. To edit properties in the Lagan web interface you need a property template. You can add new property templates to Lagan with Composer too.
 
 
 ### Create a property controller ###
@@ -77,13 +98,10 @@ Extend Lagan
 
 
 
-Create a Lagan model
---------------------
+Structure of a Lagan model
+---------------------------
 
-The "magic" of Lagan is in the Lagan models, located in the *models/lagan* directory. Each type of content has it's own model. I added two example models, *Hoverkraft.php* and *Crew.php*.
-
-All content models extend the *Lagan.php* class. Each model has a type, description and properties. These are defined in the `__construct` function of the model. The validation rules are optional (also defined in `__construct`).
-
+All Lagan content models extend the *Lagan* main model. They contain a type, a description, an aray with different content properties and an (optional) array with validation rules.
 
 ### Type ###
 
@@ -199,7 +217,7 @@ Contains the main Lagan model.
 
 #### models/lagan (directory) ####
 
-Contains all the different [Lagan content models](#create-a-lagan-model).
+Contains all the different Lagan content models.
 
 
 #### public (directory) ####
@@ -239,19 +257,21 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Add proper PHPDocumentor inline code documentation
+- Check types in PHPDocumentor inline code documentation
+- Add missing parts to Readme file
+- Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install docuemntation
 
 
 
 Nice to have
 ------------
 
-- Adding search options and/or routes
-- JSON API
 - Project homepage
 - Unit testing
-- Media upload property type
 - Design the editor
+- Adding search options and/or routes
+- JSON API
+- Media upload property type
 - Add many-to-many relations
 - Adding extended user login and rights management stuff
 - Drag-n-drop interface for the position of objects
