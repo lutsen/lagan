@@ -230,7 +230,7 @@ class Lagan {
 			// Check for options method in property type controller
 			$c = new $property['type'];
 			if ( method_exists( $c, 'options' ) ) {
-				$this->properties[$key]['options'] = $c->options( $property );
+				$this->properties[$key]['options'] = $c->options( $bean, $property );
 			}
 
 		}
