@@ -175,7 +175,7 @@ The *set* method is executed each time a property with this type is set.
 The *read* method is executed each time a property with this type is read.  
 The *delete* method is executed each time a an object with a property with this type is deleted.
 The *options* method returns all the optional values this property can have.
-In the *LaganHoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
+In *Hoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
 The *options* method returns all possible values for this property.
 
 
@@ -200,14 +200,12 @@ The properties of the property and the content bean are available in the templat
 Lagan project structure
 =======================
 
-All the directories of a Lagan app and their contents.
-
+An overview of the directories of a Lagan app and their contents.
 
 
 #### cache (directory) ####
 
 You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
-
 
 
 #### models (directory) ####
