@@ -57,7 +57,10 @@ class Lagan {
 			// Check if specific set property type method exists
 			$c = new $property['type'];
 			if ( method_exists( $c, 'set' ) ) {
-				$bean->{ $property['name'] } = $c->set( $bean, $property, $data[ $property['name'] ] );
+				$value = $c->set( $bean, $property, $data[ $property['name'] ] );
+				if ( $value  ) {
+					$bean->{ $property['name'] } = $value;
+				}
 			} else {
 				if ( $data[ $property['name'] ] && strlen( $data[ $property['name'] ] ) > 0 ) {
 					$bean->{ $property['name'] } = $data[ $property['name'] ];
@@ -223,8 +226,25 @@ class Lagan {
 	 *
 	 * Properties can have optional values, for example relation and file_select.
 	 * This method, if appropriate, queries properties for optional values, and populates them with them.
+	 * Searches bean by an unique property, like an id or a slug.
+	 * If $value is not set, nu bean is supplied to the property options method.
+	 *
+	 * @param mixed		$value		The value of the property
+	 * @param string	$property	The name of the property, defaults to id
 	 */
-	public function populateProperties() {
+	public function populateProperties($value = false, $property_name = 'id') {
+
+		if ( $value ) {
+
+			$bean = R::findOne( $this->type, $property_name.' = :value ', [ ':value' => $value ] );
+			if ( !$bean ) {
+				throw new Exception('This '.$this->type.' does not exist.');
+			}
+
+		} else {
+			$bean = false;
+		}
+
 		foreach ($this->properties as $key => $property) {
 
 			// Check for options method in property type controller
