@@ -93,7 +93,7 @@ $app->group('/admin', function () {
 		// View existing bean
 		$this->get('/{id}', function ($request, $response, $args) {
 			$c = setupBeanController( $args['beantype'] );
-			$c->populateProperties();
+			$c->populateProperties( $args['id'] );
 
 			// Show populated form
 			return $this->view->render($response, 'admin/bean.html', [
