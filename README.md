@@ -2,6 +2,7 @@
 
 **Any content,  
 with a backend**
+
 Lagan lets you create flexible content objects with a simple class, and manage them with a web interface.
 
 
