@@ -22,6 +22,7 @@
 		"vlucas/valitron": "^1.0",
 
 		"lagan/property-fileselect":	"dev-master",
+		"lagan/property-manytomany":	"dev-master",
 		"lagan/property-manytoone":		"dev-master",
 		"lagan/property-onetomany":		"dev-master",
 		"lagan/property-position":		"dev-master",

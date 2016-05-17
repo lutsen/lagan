@@ -49,8 +49,14 @@ class Hoverkraft extends \Lagan {
 			],
 			[
 				'name' => 'crew',
-				'description' => 'Crew',
+				'description' => 'Crewmembers for this Hoverkraft',
 				'type' => '\Lagan\Property\Onetomany',
+				'input' => 'onetomany'
+			],
+			[
+				'name' => 'feature',
+				'description' => 'Features this Hoverkraft has',
+				'type' => '\Lagan\Property\Manytomany',
 				'input' => 'onetomany'
 			]
 		];

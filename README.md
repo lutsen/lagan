@@ -1,5 +1,7 @@
 [<img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">](https://github.com/lutsen/lagan)
 
+**Any content,  
+with a backend**
 Lagan lets you create flexible content objects with a simple class, and manage them with a web interface.
 
 
@@ -9,14 +11,14 @@ Why Lagan?
 
 - Lagan tries to be as simple as possible (but not simpler)
 - Configuration and editing are separated
-- All configuration is done by code
-- Content can be edited with a web interface
+- All configuration is done by code, so developers are in control there
+- Content can be edited with a web interface, so editors can do their thing
 - Lagan is built on proven open-source PHP libraries
-- Content objects consist of a simple combination of arrays
-- Content objects can be any combination of properties
+- Content models consist of a simple combination of arrays
+- Content models can be any combination of properties
 - It is easy to add new property types
 - Lagan has built-in input validation
-- Database fields can be easily modified during development
+- Thanks to RedBean, content models can be easily modified during development and even production
 - Create Twig front-end templates to display your content the way you want
 
 Lagan is built with my favourite PHP libraries:
@@ -161,6 +163,7 @@ Property type controllers
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
 - fileselect
+- manytomany
 - manytoone
 - onetomany
 - position
@@ -173,9 +176,9 @@ Each property type controller is a dependency, added with Composer. This way new
 A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
 The *set* method is executed each time a property with this type is set.
 The *read* method is executed each time a property with this type is read.  
-The *delete* method is executed each time a an object with a property with this type is deleted.
+The *delete* method is executed each time a an entry with a property with this type is deleted.
 The *options* method returns all the optional values this property can have.
-In *Hoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft objects if the position of one hoverkraft update is changed.  
+In *Hoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft entries if the position of one hoverkraft update is changed.  
 The *options* method returns all possible values for this property.
 
 
@@ -256,7 +259,7 @@ To do
 -----
 
 - Check types in PHPDocumentor inline code documentation
-- Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install docuemntation
+- Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation
 
 
 
@@ -269,16 +272,16 @@ Nice to have
 - Adding search options and/or routes
 - JSON API
 - Media upload property type
-- Add many-to-many relations
 - Adding extended user login and rights management stuff
-- Drag-n-drop interface for the position of objects
+- Drag-n-drop interface for the position of entries
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
+- Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 
 
 Editor:
 
-- Objects in left side menu: Go to object overview or add new one
-- Home: latest edited objects
+- Models in left side menu: Go to entries overview or add new one
+- Home: latest edited entries
 
 
 Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).
