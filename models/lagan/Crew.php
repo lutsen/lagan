@@ -18,7 +18,7 @@ class Crew extends \Lagan {
 			// Allways have a title
 			[
 				'name' => 'title',
-				'description' => 'Naam',
+				'description' => 'Name',
 				'type' => '\Lagan\Property\Str',
 				'input' => 'text'
 			],
