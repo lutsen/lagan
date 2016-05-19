@@ -32,7 +32,8 @@ class Hoverkraft extends \Lagan {
 				'name' => 'picture',
 				'description' => 'Image',
 				'type' => '\Lagan\Property\Fileselect',
-				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}', // glob pattern
+				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
+				'directory' => APP_PATH.'/files', // Directory (no trailing slash)
 				'input' => 'fileselect'
 			],
 			[
