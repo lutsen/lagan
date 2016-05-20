@@ -15,7 +15,7 @@ class Feature extends \Lagan {
 		$this->description = 'Feastures the Hoverkrafts can have. Like a turbo, or a coffee machine.';
 
 		$this->properties = [
-			// Allways have a title
+			// Allways have a name
 			[
 				'name' => 'title',
 				'description' => 'Name',

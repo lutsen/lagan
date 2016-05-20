@@ -133,6 +133,7 @@ class Lagan {
 
 			// All beans of this type
 			// Oder by position(s) if exits
+			// NOTE: We're not executing the read method for each bean. Before I implement this I want to check potential performance issues.
 			$add_to_query = '';
 			foreach($this->properties as $property) {
 				if ( $property['type'] === '\\Lagan\\Property\\Position' ) {
