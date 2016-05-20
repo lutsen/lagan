@@ -177,6 +177,7 @@ Each property type controller is a dependency, added with Composer. This way new
 A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
 The *set* method is executed each time a property with this type is set.
 The *read* method is executed each time a property with this type is read.  
+Note: For performance reasons, the read method is only executed for reading a single bean. Because of this, only use it when it is really necessary. Otherwise, try to store the value to be returned when reading the bean directly in the database whenever possible.  
 The *delete* method is executed each time a an entry with a property with this type is deleted.
 The *options* method returns all the optional values this property can have.
 In *Hoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft entries if the position of one hoverkraft update is changed.  
@@ -272,7 +273,7 @@ Nice to have
 - Design the editor
 - Adding search options and/or routes
 - JSON API
-- Media upload property type
+- File upload property type, use https://github.com/siriusphp/upload (Fix bug in docs: array)
 - Adding extended user login and rights management stuff
 - Drag-n-drop interface for the position of entries
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
