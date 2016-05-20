@@ -15,7 +15,7 @@ class Hoverkraft extends \Lagan {
 		$this->description = 'A hoverkraft is a very special vessel (and a great design angency).';
 
 		$this->properties = [
-			// Allways have a title
+			// Allways have a name
 			[
 				'name' => 'title',
 				'description' => 'Title',
@@ -33,7 +33,7 @@ class Hoverkraft extends \Lagan {
 				'description' => 'Image',
 				'type' => '\Lagan\Property\Fileselect',
 				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
-				'directory' => APP_PATH.'/files', // Directory (no trailing slash)
+				'directory' => '/files', // Directory relative to APP_PATH (no trailing slash)
 				'input' => 'fileselect'
 			],
 			[
