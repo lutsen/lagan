@@ -17,6 +17,7 @@ config.php
 vendor/*
 cache/*
 public/property-templates/*
+public/uploads/*
 
 # Composer #
 ############

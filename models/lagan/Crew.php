@@ -15,7 +15,7 @@ class Crew extends \Lagan {
 		$this->description = 'Crewmembers to man the Hoverkraft.';
 
 		$this->properties = [
-			// Allways have a title
+			// Allways have a name
 			[
 				'name' => 'title',
 				'description' => 'Name',
@@ -31,9 +31,11 @@ class Crew extends \Lagan {
 			[
 				'name' => 'picture',
 				'description' => 'Image',
-				'type' => '\Lagan\Property\Fileselect',
-				'pattern' => APP_PATH.'/files/*.{jpeg,jpg,gif,png}', // glob pattern
-				'input' => 'fileselect'
+				'type' => '\Lagan\Property\Upload',
+				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
+				'max' => '2M', // Maximum filesize
+				'directory' => '/uploads', // Directory relative to APP_PATH (no trailing slash)
+				'input' => 'upload'
 			],
 			[
 				'name' => 'hoverkraft',

@@ -28,11 +28,13 @@
 		"lagan/property-position":		"dev-master",
 		"lagan/property-slug":			"dev-master",
 		"lagan/property-string":		"dev-master",
+		"lagan/property-upload":		"dev-master",
 
 		"lagan/template-fileselect":	"dev-master",
 		"lagan/template-manytoone":		"dev-master",
 		"lagan/template-onetomany":		"dev-master",
 		"lagan/template-text":			"dev-master",
-		"lagan/template-textarea":		"dev-master"
+		"lagan/template-textarea":		"dev-master",
+		"lagan/template-upload":		"dev-master"
 	}
 }

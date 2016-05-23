@@ -170,6 +170,7 @@ Each property type controller is a dependency, added with Composer. This way new
 - position
 - slug
 - string
+- upload
 
 
 ### Property type controller methods ###
@@ -197,6 +198,7 @@ Currently these templates are available:
 - static
 - text
 - textarea
+- upload
 
 The properties of the property and the content bean are available in the template. To get the property name for example, use this Twig syntax: `{{ property.name }}`. To get the content of the specific property, use `{{ bean[property.name] }}`.
 
@@ -262,6 +264,7 @@ To do
 
 - Check types in PHPDocumentor inline code documentation
 - Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation
+- Add Hoverkraft features example to public templates
 
 
 
@@ -272,8 +275,8 @@ Nice to have
 - Unit testing
 - Design the editor
 - Adding search options and/or routes
+- Allow properties to be submitted independently. Now, the Lagan set method checks all the properties. It would be more flexible if it only checked the properties that are submitted.
 - JSON API
-- File upload property type, use https://github.com/siriusphp/upload (Fix bug in docs: array)
 - Adding extended user login and rights management stuff
 - Drag-n-drop interface for the position of entries
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
@@ -284,6 +287,20 @@ Editor:
 
 - Models in left side menu: Go to entries overview or add new one
 - Home: latest edited entries
+
+
+Submit properties independently:
+
+- Required properties should only be checked on creation of the entry
+- Only validate properties that are submitted :-p
+
+
+
+Food for thought
+----------------
+
+"Fancy" features in the backend (like a file upload progress indicator) should never affect other elements of the form, because they can have their own "fancy" features. So to make those features possible, each entry property should be able to be submitted individually. How can this be combined with validation required properties in an entry?
+A more advanced solution would be to allways submit forms via Javascript, and have each property "hook in" to this submit function.
 
 
 Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).
