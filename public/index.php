@@ -52,11 +52,6 @@ function laganAutoload($class_name) {
 			return;
 		}
 	}
-
-	// Redbean fix
-	if ( substr($class_name, 0, strlen("Model_")) != "Model_" ) {
-		throw new Exception('The class ' . $class_name . ' ('.$file.') could not be loaded');
-	}
 }
 spl_autoload_register('laganAutoload');
 
