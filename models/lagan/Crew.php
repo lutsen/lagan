@@ -20,7 +20,9 @@ class Crew extends \Lagan {
 				'name' => 'title',
 				'description' => 'Name',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'text'
+				'input' => 'text',
+				'required' => true,
+				'validate' => 'minlength(3)'
 			],
 			[
 				'name' => 'bio',
@@ -29,28 +31,26 @@ class Crew extends \Lagan {
 				'input' => 'textarea'
 			],
 			[
+				'name' => 'email',
+				'description' => 'Email address',
+				'type' => '\Lagan\Property\Str',
+				'input' => 'textarea',
+				'validate' => 'emaildomain'
+			],
+			[
 				'name' => 'picture',
 				'description' => 'Image',
 				'type' => '\Lagan\Property\Upload',
-				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
-				'max' => '2M', // Maximum filesize
 				'directory' => '/uploads', // Directory relative to APP_PATH (no trailing slash)
-				'input' => 'upload'
+				'input' => 'upload',
+				'validate' => [ ['extension', 'allowed=jpeg,jpg,gif,png'], ['size', 'size=1M'] ]
 			],
 			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkraft',
 				'type' => '\Lagan\Property\Manytoone',
-				'input' => 'manytoone'
-			]
-		];
-		
-		$this->rules = [
-			'required' => [
-				['title', 'hoverkraft']
-			],
-			'integer' => [
-				['hoverkraft']
+				'input' => 'manytoone',
+				'required' => true
 			]
 		];
 	}

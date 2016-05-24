@@ -18,7 +18,6 @@ Why Lagan?
 - Content models consist of a simple combination of arrays
 - Content models can be any combination of properties
 - It is easy to add new property types
-- Lagan has built-in input validation
 - Thanks to RedBean, content models can be easily modified during development and even production
 - Create Twig front-end templates to display your content the way you want
 
@@ -26,7 +25,6 @@ Lagan is built with my favourite PHP libraries:
 - [Slim framework](http://www.slimframework.com/)
 - [RedBean ORM](http://redbeanphp.com/)
 - [Twig template engine](http://twig.sensiolabs.org/)
-- [Valitron validation library](https://github.com/vlucas/valitron)
 
 
 
@@ -63,7 +61,7 @@ Use Lagan
 Content models
 --------------
 
-After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 2 example models, *Hoverkraft.php* and *Crew.php*. If you open them you will see they have a type, a description, an aray with different content properties and an array with validation rules.
+After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 2 example models, *Hoverkraft.php* and *Crew.php*. If you open them you will see they have a type, a description and an aray with different content properties.
 
 You can add your own content models by just adding class files like this to the *models/lagan* directory. Lagan will automatically create and update database tables for them. Nice!  
 [> More about the content model structure](#structure-of-a-lagan-model)
@@ -90,7 +88,7 @@ Lagan uses [Twig](http://twig.sensiolabs.org/) as its template engine. You can a
 Structure of a Lagan model
 ==========================
 
-All Lagan content models extend the *Lagan* main model. They contain a type, a description, an aray with different content properties and an (optional) array with validation rules.
+All Lagan content models extend the *Lagan* main model. They contain a type, a description and an aray with different content properties.
 
 ### Type ###
 
@@ -112,13 +110,6 @@ All Lagan content models extend the *Lagan* main model. They contain a type, a d
 - *input*: The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
-
-
-### Rules: validation ###
-
-`$this->rules` are the rules of the model. They are an array of validation rules. For the validation we use [Valitron](https://github.com/vlucas/valitron), so the available validation rules are the same.
-
-The key of each array in the `$this->rules` array is the name of the validation rule. The values in the value array of each rule are the names of the properties to apply the rule to.
 
 
 
@@ -259,12 +250,22 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 
 
 
+Bugs
+----
+
+- Position can't be 0
+- Upload is broken
+
+
+
 To do
 -----
 
+- Update validation documentation for upload and string property
 - Check types in PHPDocumentor inline code documentation
 - Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation
 - Add Hoverkraft features example to public templates
+- Check is length vlidation has error in Siriusphp
 
 
 
@@ -299,8 +300,7 @@ Submit properties independently:
 Food for thought
 ----------------
 
-"Fancy" features in the backend (like a file upload progress indicator) should never affect other elements of the form, because they can have their own "fancy" features. So to make those features possible, each entry property should be able to be submitted individually. How can this be combined with validation required properties in an entry?
-A more advanced solution would be to allways submit forms via Javascript, and have each property "hook in" to this submit function.
+"Fancy" features in the backend (like a file upload progress indicator) should never affect other elements of the form, because they can have their own "fancy" features. So to make those features possible, each entry property should be able to be submitted individually. How can this be combined with required properties in an entry? On creation of an entry, if a property is required, it is submitted "unfancy", together with other possible required properties. After that, it can be submitted individually and "fancy".
 
 
 Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).

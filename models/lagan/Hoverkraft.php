@@ -20,7 +20,8 @@ class Hoverkraft extends \Lagan {
 				'name' => 'title',
 				'description' => 'Title',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'text'
+				'input' => 'text',
+				'required' => true
 			],
 			[
 				'name' => 'description',
@@ -34,7 +35,8 @@ class Hoverkraft extends \Lagan {
 				'type' => '\Lagan\Property\Fileselect',
 				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
 				'directory' => '/files', // Directory relative to APP_PATH (no trailing slash)
-				'input' => 'fileselect'
+				'input' => 'fileselect',
+				'required' => true
 			],
 			[
 				'name' => 'position',
@@ -59,15 +61,6 @@ class Hoverkraft extends \Lagan {
 				'description' => 'Features this Hoverkraft has',
 				'type' => '\Lagan\Property\Manytomany',
 				'input' => 'onetomany'
-			]
-		];
-		
-		$this->rules = [
-			'required' => [
-				['title', 'picture']
-			],
-			'integer' => [
-				['position']
 			]
 		];
 	}
