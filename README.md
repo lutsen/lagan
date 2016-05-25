@@ -250,20 +250,11 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 
 
 
-Bugs
-----
-
-- Position can't be 0
-
-
 To do
 -----
 
-- Rename onetomany input to "tomany"
 - Update validation documentation for upload and string property
 - Check types in PHPDocumentor inline code documentation
-- Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation
-- Add Hoverkraft features example to public templates
 - Check is length validation has error in Siriusphp
 
 
@@ -275,24 +266,18 @@ Nice to have
 - Unit testing
 - Design the editor
 - Adding search options and/or routes
-- Allow properties to be submitted independently. Now, the Lagan set method checks all the properties. It would be more flexible if it only checked the properties that are submitted.
 - JSON API
 - Adding extended user login and rights management stuff
 - Drag-n-drop interface for the position of entries
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
+- Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
 
 
 Editor:
 
 - Models in left side menu: Go to entries overview or add new one
 - Home: latest edited entries
-
-
-Submit properties independently:
-
-- Required properties should only be checked on creation of the entry
-- Only validate properties that are submitted :-p
 
 
 

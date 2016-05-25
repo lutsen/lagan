@@ -31,9 +31,9 @@
 
 		"lagan/template-fileselect":	"dev-master",
 		"lagan/template-manytoone":		"dev-master",
-		"lagan/template-onetomany":		"dev-master",
 		"lagan/template-text":			"dev-master",
 		"lagan/template-textarea":		"dev-master",
+		"lagan/template-tomany":		"dev-master",
 		"lagan/template-upload":		"dev-master"
 	}
 }

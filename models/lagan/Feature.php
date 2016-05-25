@@ -33,7 +33,7 @@ class Feature extends \Lagan {
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkrafts with this feature',
 				'type' => '\Lagan\Property\Manytomany',
-				'input' => 'onetomany',
+				'input' => 'tomany',
 				'required' => true
 			]
 		];
