@@ -43,7 +43,8 @@ class Crew extends \Lagan {
 				'type' => '\Lagan\Property\Upload',
 				'directory' => '/uploads', // Directory relative to APP_PATH (no trailing slash)
 				'input' => 'upload',
-				'validate' => [ ['extension', 'allowed=jpeg,jpg,gif,png'], ['size', 'size=1M'] ]
+				'validate' => [ ['extension', 'allowed=jpeg,jpg,gif,png'], ['size', 'size=1M'] ],
+				'required' => true
 			],
 			[
 				'name' => 'hoverkraft',

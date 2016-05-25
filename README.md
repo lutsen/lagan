@@ -254,18 +254,17 @@ Bugs
 ----
 
 - Position can't be 0
-- Upload is broken
-
 
 
 To do
 -----
 
+- Rename onetomany input to "tomany"
 - Update validation documentation for upload and string property
 - Check types in PHPDocumentor inline code documentation
 - Test and then add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation
 - Add Hoverkraft features example to public templates
-- Check is length vlidation has error in Siriusphp
+- Check is length validation has error in Siriusphp
 
 
 

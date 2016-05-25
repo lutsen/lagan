@@ -48,38 +48,36 @@ class Lagan {
 	 */
 	public function set($data, $bean) {
 
-		$modified = false;
-
 		// Add all properties to bean
 		foreach ( $this->properties as $property ) {
 
-			if ( $property['required'] && strlen( $data[ $property['name'] ] ) === 0 ) {
+			// Check if specific set property type method exists
+			$c = new $property['type'];
+			if ( method_exists( $c, 'set' ) ) {
 
-				throw new Exception('Validation error. '.$property['name'].' is required.');
+				$value = $c->set( $bean, $property, $data[ $property['name'] ] );
 
-			} else if ( strlen( $data[ $property['name'] ] ) !== 0 && $data[ $property['name'] ] !== $bean->{ $property['name'] } ) {
+			} else {
 
-				$modified = true;
-
-				// Check if specific set property type method exists
-				$c = new $property['type'];
-				if ( method_exists( $c, 'set' ) ) {
-					$value = $c->set( $bean, $property, $data[ $property['name'] ] );
-					if ( $value !== false ) {
-						$bean->{ $property['name'] } = $value;
-					}
-				} else {
-					$bean->{ $property['name'] } = $data[ $property['name'] ];
-				}
+				$value = $data[ $property['name'] ];
 
 			}
 
+			// Check if proerty is required
+			if ( $property['required'] && !$value ) {
+				throw new Exception('Validation error. '.$property['name'].' is required.');
+			}
+
+			// Results from methods that return boolean values are not stored.
+			// Many-to-many relations for example are stored in a seperate table.
+			if ( !is_bool($value) ) {
+				$bean->{ $property['name'] } = $value;
+			}
+
 		}
-		
-		if ($modified) {
-			$bean->modified = R::isoDateTime();
-			R::store($bean);
-		}
+
+		$bean->modified = R::isoDateTime();
+		R::store($bean);
 
 		return $bean;
 
