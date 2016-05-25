@@ -44,4 +44,20 @@
 	<p class="text-muted text-center">Sorry, there is no crew for this Hoverkraft...</p>
 {% endif %}
 
+	<h2>Features</h2>
+
+{% if hoverkraft.feature|length > 0 %}
+	<div class="row">
+		<div class="col-sm-12">
+{% 	for feature in hoverkraft.feature %}
+		<h4>{{ feature.title }}</h4>
+		<p>{{ feature.description }}</p>
+{% 	endfor %}
+		</div>
+	</div>
+{% else %}
+	<hr>
+	<p class="text-muted text-center">Sorry, this Hoverkraft has no features...</p>
+{% endif %}
+
 {% endblock content %}
