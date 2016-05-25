@@ -51,20 +51,51 @@ class Lagan {
 		// Add all properties to bean
 		foreach ( $this->properties as $property ) {
 
-			// Check if specific set property type method exists
+			$value = false; // We need to clear possible previous $value
+
+			// Define property controller
 			$c = new $property['type'];
-			if ( method_exists( $c, 'set' ) ) {
 
-				$value = $c->set( $bean, $property, $data[ $property['name'] ] );
+			// New input fot the property
+			if ( isset( $data[ $property['name'] ] ) || $_FILES[ $property['name'] ]['size'] > 0 ) {
 
+				// Check if specific set property type method exists
+				if ( method_exists( $c, 'set' ) ) {
+
+					$value = $c->set( $bean, $property, $data[ $property['name'] ] );
+
+				} else {
+
+					$value = $data[ $property['name'] ];
+
+				}
+
+				if ($value) {
+					$hasvalue = true;
+				} else {
+					$hasvalue = false;
+				}
+
+			// No new input for the property
 			} else {
 
-				$value = $data[ $property['name'] ];
+				// Check if property already has value for required validation
+				if ( $property['required'] ) {
+
+					if ( method_exists( $c, 'read' ) && $c->read( $bean, $property ) ) {
+						$hasvalue = true;
+					} else if ( $bean->{ $property['name'] } ) {
+						$hasvalue = true;
+					} else {
+						$hasvalue = false;
+					}
+
+				}
 
 			}
 
 			// Check if proerty is required
-			if ( $property['required'] && !$value ) {
+			if ( $property['required'] && !$hasvalue ) {
 				throw new Exception('Validation error. '.$property['name'].' is required.');
 			}
 
