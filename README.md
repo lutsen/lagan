@@ -264,7 +264,6 @@ Nice to have
 
 - Project homepage
 - Unit testing
-- Design the editor
 - Adding search options and/or routes
 - JSON API
 - Adding extended user login and rights management stuff
@@ -272,12 +271,7 @@ Nice to have
 - Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
-
-
-Editor:
-
-- Models in left side menu: Go to entries overview or add new one
-- Home: latest edited entries
+- Admin/editor homepage
 
 
 

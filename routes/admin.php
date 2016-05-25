@@ -42,6 +42,24 @@ function redirectAfterSave($container, $bean, $data, $response, $args) {
 	}
 }
 
+/**
+ * Get all bean types from the models/lagan directory
+ *
+ * @return string[] Array with names of all bean types
+ */
+function getBeantypes () {
+	$beantypes = glob(ROOT_PATH. '/models/lagan/*.php');
+	foreach ($beantypes as $key => $value) {
+		$beantypes[$key] = strtolower( substr(
+			$value,
+			strlen(ROOT_PATH. '/models/lagan/'),
+			strlen($value) - strlen(ROOT_PATH. '/models/lagan/') - 4
+		) );
+	}
+
+	return $beantypes;
+}
+
 // Users need to authenticate with HTTP Basic Authentication middleware
 $app->group('/admin', function () {
 
@@ -56,7 +74,7 @@ $app->group('/admin', function () {
 			) );
 		}
 
-		return $this->view->render($response, 'admin/index.html', ['beantypes' => $beantypes]);
+		return $this->view->render( $response, 'admin/index.html', [ 'beantypes' => getBeantypes() ] );
 	})->setName('admin');
 
 
@@ -72,7 +90,8 @@ $app->group('/admin', function () {
 				'beantype' => $args['beantype'],
 				'description' => $c->description,
 				'beans' => $c->read(),
-				'flash' => $this->flash->getMessages()
+				'flash' => $this->flash->getMessages(),
+				'beantypes' => getBeantypes()
 			]);
 		})->setName('listbeans');
 
@@ -86,7 +105,8 @@ $app->group('/admin', function () {
 				'method' => 'post',
 				'beantype' => $args['beantype'],
 				'beanproperties' => $c->properties,
-				'flash' => $this->flash->getMessages()
+				'flash' => $this->flash->getMessages(),
+				'beantypes' => getBeantypes()
 			]);
 		})->setName('addbean');
 
@@ -101,7 +121,8 @@ $app->group('/admin', function () {
 				'beantype' => $args['beantype'],
 				'beanproperties' => $c->properties,
 				'bean' => $c->read( $args['id'] ),
-				'flash' => $this->flash->getMessages()
+				'flash' => $this->flash->getMessages(),
+				'beantypes' => getBeantypes()
 			]);
 		})->setName('getbean');
 

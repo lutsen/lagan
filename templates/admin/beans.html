@@ -4,14 +4,7 @@
 
 {% block content %}
 
-	<div class="page-header">
-		<h1>{{ beantype }}</h1>
-	</div>
-	
-	<ol class="breadcrumb">
-		<li><a href="{{ path_for('admin') }}">home</a></li>
-		<li class="active">{{ beantype }}</li>
-	</ol>
+	<h1 class="page-header">{{ beantype }}</h1>
 
 	<a href="{{ path_for('addbean', { 'beantype': beantype }) }}" class="btn btn-primary pull-right">Add new {{ beantype }}</a>
 	
