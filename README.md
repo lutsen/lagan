@@ -1,11 +1,8 @@
-[<img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">](https://github.com/lutsen/lagan)
-
-**Any content,  
-with a backend**
-
-Lagan lets you create flexible content objects with a simple class, and manage them with a web interface.
-
-
+<p align="center">
+  <img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">
+</p>
+<p align="center"><b>Any content, with a backend</b></p>
+<p align="center">Lagan lets you create flexible content objects with a simple class,<br />and manage them with a web interface.</p>
 
 Why Lagan?
 ==========
@@ -255,7 +252,6 @@ To do
 
 - Update validation documentation for upload and string property
 - Check types in PHPDocumentor inline code documentation
-- Check is length validation has error in Siriusphp
 
 
 
@@ -267,11 +263,10 @@ Nice to have
 - Adding search options and/or routes
 - JSON API
 - Adding extended user login and rights management stuff
-- Drag-n-drop interface for the position of entries
-- Add a logger: https://github.com/Flynsarmy/Slim-Monolog
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
-- Admin/editor homepage
+- Admin/editor landing/homepage content that makes more sense
+- Check is length validation has error in Siriusphp
 
 
 
