@@ -63,18 +63,8 @@ function getBeantypes () {
 // Users need to authenticate with HTTP Basic Authentication middleware
 $app->group('/admin', function () {
 
-	$this->get('[/]', function ($request, $response, $args) {
-		// Get all Lagan beantypes
-		$beantypes = glob(ROOT_PATH. '/models/lagan/*.php');
-		foreach ($beantypes as $key => $value) {
-			$beantypes[$key] = strtolower( substr(
-				$value,
-				strlen(ROOT_PATH. '/models/lagan/'),
-				strlen($value) - strlen(ROOT_PATH. '/models/lagan/') - 4
-			) );
-		}
-
 		return $this->view->render( $response, 'admin/index.html', [ 'beantypes' => getBeantypes() ] );
+
 	})->setName('admin');
 
 
