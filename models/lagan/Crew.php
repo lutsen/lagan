@@ -22,20 +22,23 @@ class Crew extends \Lagan {
 				'type' => '\Lagan\Property\Str',
 				'input' => 'text',
 				'required' => true,
-				'validate' => 'minlength(3)'
+				'validate' => 'minlength(3)',
+				'searchable' => true
 			],
 			[
 				'name' => 'bio',
 				'description' => 'Biography',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea'
+				'input' => 'textarea',
+				'searchable' => true
 			],
 			[
 				'name' => 'email',
 				'description' => 'Email address',
 				'type' => '\Lagan\Property\Str',
 				'input' => 'textarea',
-				'validate' => 'emaildomain'
+				'validate' => 'emaildomain',
+				'searchable' => true
 			],
 			[
 				'name' => 'picture',

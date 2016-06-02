@@ -8,6 +8,15 @@
 		<h1>Check out our Hoverkrafts!</h1>
 	</div>
 
+	<form class="form-inline" method="get" action="{{ app_url }}/hoverkraft/search">
+		<div class="form-group">
+			<input type="text" class="form-control" name="*has" placeholder="Search">
+		</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+
+	<hr>
+
 	<p>We have a lovely selection of Hoverkrafts. Check them out and meet their crew.</p>
 
 {% if hoverkrafts|length > 0 %}

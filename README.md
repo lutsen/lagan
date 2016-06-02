@@ -251,6 +251,7 @@ To do
 -----
 
 - Update validation documentation for upload and string property
+- Add search to documentation
 - Check types in PHPDocumentor inline code documentation
 
 
@@ -259,14 +260,14 @@ Nice to have
 ------------
 
 - Project homepage
-- Unit testing
-- Adding search options and/or routes
 - JSON API
-- Adding extended user login and rights management stuff
+- Unit testing
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
 - Admin/editor landing/homepage content that makes more sense
 - Check is length validation has error in Siriusphp
+- Search result pagination
+- Adding extended user login and rights management stuff
 
 
 

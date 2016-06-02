@@ -37,7 +37,8 @@ function laganAutoload($class_name) {
 	// Load models, controllers
 	$paths = array(
 		'/models/',
-		'/models/lagan/'
+		'/models/lagan/',
+		'/controllers/'
 	);
 
 	foreach ($paths as $path) {

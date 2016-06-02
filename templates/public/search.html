@@ -1,0 +1,41 @@
+{%	set title = 'Search results for "' ~ query ~ '"' %}
+
+{% extends "public/base.html" %}
+
+{% block content %}
+
+	<div class="page-header">
+		<h1>Search results for "{{ query }}"</h1>
+	</div>
+
+	<form class="form-inline" method="get" action="{{ app_url }}/hoverkraft/search">
+		<div class="form-group">
+			<input type="text" class="form-control" name="*has" placeholder="Search">
+		</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+
+	<hr>
+
+{% if hoverkrafts|length > 0 %}
+{% 	for hoverkraft in hoverkrafts %}
+	<div class="media">
+		<div class="media-left">
+			<a href="{{ path_for('hoverkraft', { 'slug': hoverkraft.slug }) }}">
+				<img class="media-object" src="{{ app_url }}{{ hoverkraft.picture }}" alt="{{ hoverkraft.title }}" width="64">
+			</a>
+		</div>
+		<div class="media-body">
+			<a href="{{ path_for('hoverkraft', { 'slug': hoverkraft.slug }) }}">
+				<h4 class="media-heading">{{ hoverkraft.title }}</h4>
+			</a>
+			{{ hoverkraft.description }}
+		</div>
+	</div>
+{% 	endfor %}
+{% else %}
+	<hr>
+	<p class="text-muted text-center">Sorry, your query doesn't match any results...</p>
+{% endif %}
+
+{% endblock content %}

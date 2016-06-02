@@ -21,13 +21,15 @@ class Hoverkraft extends \Lagan {
 				'description' => 'Title',
 				'type' => '\Lagan\Property\Str',
 				'input' => 'text',
-				'required' => true
+				'required' => true,
+				'searchable' => true
 			],
 			[
 				'name' => 'description',
 				'description' => 'Describe the kraft',
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea'
+				'input' => 'textarea',
+				'searchable' => true
 			],
 			[
 				'name' => 'picture',
