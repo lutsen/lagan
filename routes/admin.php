@@ -11,10 +11,10 @@
  *
  * @return string The name of the controller.
  */
-function setupBeanController($beantype) {
-	// Return controller
-	$controller_name = '\Lagan\Model\\' . ucfirst($beantype);
-	return new $controller_name();
+function setupBeanModel($beantype) {
+	// Return model
+	$model_name = '\Lagan\Model\\' . ucfirst($beantype);
+	return new $model_name();
 }
 
 /**
@@ -83,7 +83,7 @@ $app->group('/admin', function () {
 	
 		// List
 		$this->get('[/]', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 
 			// Show list of items
 			return $this->view->render($response, 'admin/beans.html', [
@@ -97,7 +97,7 @@ $app->group('/admin', function () {
 
 		// Form to add new bean
 		$this->get('/add', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 			$c->populateProperties();
 
 			// Show form
@@ -112,7 +112,7 @@ $app->group('/admin', function () {
 
 		// View existing bean
 		$this->get('/{id}', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 			$c->populateProperties( $args['id'] );
 
 			// Show populated form
@@ -128,7 +128,7 @@ $app->group('/admin', function () {
 
 		// Add
 		$this->post('[/]', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 			$data = $request->getParsedBody();
 
 			try {
@@ -148,7 +148,7 @@ $app->group('/admin', function () {
 
 		// Update
 		$this->put('/{id}', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 			$data = $request->getParsedBody();
 
 			try {
@@ -168,7 +168,7 @@ $app->group('/admin', function () {
 
 		// Delete
 		$this->delete('/{id}', function ($request, $response, $args) {
-			$c = setupBeanController( $args['beantype'] );
+			$c = setupBeanModel( $args['beantype'] );
 			
 			try {
 				$c->delete( $args['id'] );
