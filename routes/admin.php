@@ -63,8 +63,8 @@ function getBeantypes () {
 // Users need to authenticate with HTTP Basic Authentication middleware
 $app->group('/admin', function () {
 
+	$this->get('[/]', function ($request, $response, $args) {
 		return $this->view->render( $response, 'admin/index.html', [ 'beantypes' => getBeantypes() ] );
-
 	})->setName('admin');
 
 
