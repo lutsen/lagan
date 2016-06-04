@@ -268,13 +268,8 @@ Nice to have
 - Check is length validation has error in Siriusphp
 - Search result pagination
 - Adding extended user login and rights management stuff
+- Combine code in API and admin routes somehow
 
-
-
-Food for thought
-----------------
-
-"Fancy" features in the backend (like a file upload progress indicator) should never affect other elements of the form, because they can have their own "fancy" features. So to make those features possible, each entry property should be able to be submitted individually. How can this be combined with required properties in an entry? On creation of an entry, if a property is required, it is submitted "unfancy", together with other possible required properties. After that, it can be submitted individually and "fancy".
 
 
 Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).

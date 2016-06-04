@@ -103,7 +103,7 @@ $container['flash'] = function () {
 
 // Add HTTP Basic Authentication middleware
 $app->add(new \Slim\Middleware\HttpBasicAuthentication([
-	'path' => '/admin',
+	'path' => ['/admin', '/api/write'],
 	'secure' => true,
 	'relaxed' => ['localhost'],
 	'users' => [
