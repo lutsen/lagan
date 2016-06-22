@@ -181,28 +181,28 @@ Property type controllers
 
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
-- *File select*: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)*  
+- *File select*: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)  
   Lets the user select a file from a directory
 
-- *Many to many*: [\Lagan\Property\Manytomany](https://packagist.org/packages/lagan/property-manytomany)  
+- **Many to many**: [\Lagan\Property\Manytomany](https://packagist.org/packages/lagan/property-manytomany)  
   Define a many-to-many relation between two content entries
 
-- *Many to one*: [\Lagan\Property\Manytoone](https://packagist.org/packages/lagan/property-manytoone)  
+- **Many to one**: [\Lagan\Property\Manytoone](https://packagist.org/packages/lagan/property-manytoone)  
   Define a may-to-one relation between two content objects
 
-- *One to many*: [\Lagan\Property\Onetomany](https://packagist.org/packages/lagan/property-onetomany)  
+- **One to many**: [\Lagan\Property\Onetomany](https://packagist.org/packages/lagan/property-onetomany)  
   Define a one-to-many relation between two content objects
 
-- *Position*: [\Lagan\Property\Position](https://packagist.org/packages/lagan/property-position)  
+- **Position**: [\Lagan\Property\Position](https://packagist.org/packages/lagan/property-position)  
   Define the order of content objects of the same type.
 
-- *Slug*: [\Lagan\Property\Slug](https://packagist.org/packages/lagan/property-slug)  
+- **Slug**: [\Lagan\Property\Slug](https://packagist.org/packages/lagan/property-slug)  
   Creates a slug from a string, and checks if it's unique
 
-- *String*: [\Lagan\Property\Str](https://packagist.org/packages/lagan/property-string)  
+- **String**: [\Lagan\Property\Str](https://packagist.org/packages/lagan/property-string)  
   Input and validate a string
 
-- *Upload*: [\Lagan\Property\Upload](https://packagist.org/packages/lagan/property-upload)*  
+- **Upload**: [\Lagan\Property\Upload](https://packagist.org/packages/lagan/property-upload)  
   Lets the user upload a file
 
 
@@ -223,22 +223,22 @@ To edit a property in the backend web interface it needs a template. Each proper
 
 Currently these templates are available:
 
-- *[fileselect](https://packagist.org/packages/lagan/template-fileselect)*  
+- **[fileselect](https://packagist.org/packages/lagan/template-fileselect)**  
   Template to edit Lagan fileselect properties.
 
-- *[manytoone](https://packagist.org/packages/lagan/template-manytoone)*  
+- **[manytoone](https://packagist.org/packages/lagan/template-manytoone)**  
   Template to edit Lagan many-to-one properties.
 
-- *[tomany](https://packagist.org/packages/lagan/template-tomany)*  
+- **[tomany](https://packagist.org/packages/lagan/template-tomany)**  
   Template to edit Lagan one-to-many and many-to-many properties.
 
-- *[text](https://packagist.org/packages/lagan/template-text)*  
+- **[text](https://packagist.org/packages/lagan/template-text)**  
   Template for Lagan properties that require text input
 
-- *[textarea](https://packagist.org/packages/lagan/template-textarea)*  
+- **[textarea](https://packagist.org/packages/lagan/template-textarea)**  
   Textarea template for Lagan properties that require multiple lines of text input.
 
-- *[upload](https://packagist.org/packages/lagan/template-upload)*  
+- **[upload](https://packagist.org/packages/lagan/template-upload)**  
   Template for Lagan upload properties.
 
 
