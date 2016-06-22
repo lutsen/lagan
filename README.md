@@ -14,7 +14,7 @@ Why Lagan?
 - All configuration is done by code, so developers are in control there
 - Content can be edited with a web interface, so editors can do their thing
 - Lagan is built on proven open-source PHP libraries
-- It is easy to add new property types
+- It is easy to extend with new content property types
 - Create Twig front-end templates to display your content the way you want
 
 Lagan is built with my favourite PHP libraries:
@@ -38,11 +38,15 @@ Requirements
 Install Lagan
 =============
 
-Install all-but-one dependencies using [Composer](https://getcomposer.org/).  
-Install RedBean by downloading it from the RedBean website: http://redbeanphp.com  
+Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lutsen/lagan [project-name]`  
+(Replace [project-name] with the desired directory name for your new project)  
+Install RedBean by [downloading](http://redbeanphp.com/downloadredbean.php) it from the RedBean website: http://redbeanphp.com  
 Add the RedBean *rb.php* file to the vendor directory.
 
-Rename *config_example.php* to *config.php* and add your database and path info and admin users and their passwords.
+Rename *config_example.php* to *config.php* and add:
+- your database settings
+- your server paths
+- the admin user(s) and their password(s)
 
 In the project root, create a folder called *cache* for the Twig cache.
 
@@ -312,7 +316,6 @@ This is an example of the *config.php* file. The *config.php* file is needed for
 To do
 -----
 
-- Update validation documentation for upload and string property
 - Add search to admin
 - Search result pagination
 - Search query error handling
@@ -324,10 +327,8 @@ Nice to have
 
 - Project homepage
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
-- Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
-- Combine code in API and admin routes somehow
 
 
 
