@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the settings for your databas, error reporting
+ * This file contains the settings for your database, error reporting
  * and different paths and URL to your Lagan app.
  * Add your database and path info and rename it to config.php for your app to work.
  */
@@ -14,6 +14,13 @@ $db_config = array(
 	'username'		=> '',
 	'password'		=> '',
 	'database'		=> ''
+);
+
+/**
+ * @var string[] An array with admin usernames (key) and their passwords (value).
+ */
+$users = array(
+	'admin'	=> 'password'
 );
 
 /**
