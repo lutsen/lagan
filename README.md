@@ -5,17 +5,16 @@
 <p align="center">Lagan lets you create flexible content objects with a simple class,<br />and manage them with a web interface.</p>
 
 Why Lagan?
-==========
+----------
 
-- Lagan tries to be as simple as possible (but not simpler)
+- Content models are easily created and modified
+- Content models consist of a simple combination of arrays
+- Content models can be any combination of properties
 - Configuration and editing are separated
 - All configuration is done by code, so developers are in control there
 - Content can be edited with a web interface, so editors can do their thing
 - Lagan is built on proven open-source PHP libraries
-- Content models consist of a simple combination of arrays
-- Content models can be any combination of properties
 - It is easy to add new property types
-- Thanks to RedBean, content models can be easily modified during development and even production
 - Create Twig front-end templates to display your content the way you want
 
 Lagan is built with my favourite PHP libraries:
@@ -43,11 +42,11 @@ Install all-but-one dependencies using [Composer](https://getcomposer.org/).
 Install RedBean by downloading it from the RedBean website: http://redbeanphp.com  
 Add the RedBean *rb.php* file to the vendor directory.
 
-Rename *config_example.php* to *config.php* and add your database and path info.
+Rename *config_example.php* to *config.php* and add your database and path info and admin users and their passwords.
 
 In the project root, create a folder called *cache* for the Twig cache.
 
-Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net/projects/slim-basic-auth) to authenticate users for the admin interface. Make sure to change the password in *index.php*, and use HTTPS to login securely.
+Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net/projects/slim-basic-auth) to authenticate users for the admin interface. Make sure to change the password in *config.php*, and use HTTPS to login securely.
 
 
 
@@ -58,7 +57,7 @@ Use Lagan
 Content models
 --------------
 
-After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 2 example models, *Hoverkraft.php* and *Crew.php*. If you open them you will see they have a type, a description and an aray with different content properties.
+After installing Lagan, you can begin adding your content models. This is where the "magic" of Lagan happens. Each type of content has it's own model. I added 3 example models, *Crew.php*, *Feature.php* and *Hoverkraft.php*. If you open them you will see they have a type, a description and an aray with different content properties.
 
 You can add your own content models by just adding class files like this to the *models/lagan* directory. Lagan will automatically create and update database tables for them. Nice!  
 [> More about the content model structure](#structure-of-a-lagan-model)
@@ -83,7 +82,7 @@ Lagan uses [Twig](http://twig.sensiolabs.org/) as its template engine. You can a
 
 
 Structure of a Lagan model
-==========================
+--------------------------
 
 All Lagan content models extend the *Lagan* main model. They contain a type, a description and an aray with different content properties.
 
@@ -103,6 +102,8 @@ All Lagan content models extend the *Lagan* main model. They contain a type, a d
 
 - *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: The form-field label of the property in the admin interface.
+- *required*: Optional. Set to true if the property is required.
+- *searchable*: Optional. Set to true if the property has to be searchable with the Search controller.
 - *type*: The type of data of the property. This defines which property type controller to use. More information under "Property types".
 - *input*: The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
 
@@ -111,11 +112,12 @@ There can be other optional keys, for example the *directory* key for the *image
 
 
 Methods of a Lagan model
-========================
+------------------------
 
 All Lagan content models extend the *Lagan* main model. Doing so they inherit it's methods.  
-Lagan offers the CRUD methods: *Create*, *Read*, *Update* and *Delete*.  
-Lagan uses RedBean to manipulate data in the database. Redbean returns data from the database as objects called beans.
+Lagan offers the CRUD methods: *Create*, *Read*, *Update* and *Delete*.
+
+Lagan uses [RedBean](http://redbeanphp.com/) to manipulate data in the database. Redbean returns data from the database as objects called [beans](http://redbeanphp.com/crud/).
 
 
 ### Create ###
@@ -139,6 +141,34 @@ Lagan uses RedBean to manipulate data in the database. Redbean returns data from
 
 
 
+Searching objects of a Lagan model
+----------------------------------
+
+Each Lagan content model can be searched using the Search controller. 
+Start by setting up the search controller in a route like this: `$search = new Search('hoverkraft');`  
+The search model now can use the GET request parameters to perform a search: `$search->find( $request->getParams() )`  
+It can only search properties that are set to be [searchable](#properties).
+
+Search has the following options:
+
+- From: *min
+- To: *max
+- Contains: *has
+- Equal to: *is
+- Sort: sort by property. `asc` sorts ascending and `desc` sorts descending
+
+Some query structure examples:
+`path/to/search?*has=[search string]`: Searches all searchable properties of a model  
+`path/to/search?[property]*has=[search string]`: Searches single [property] of a model  
+`path/to/search?[property]*min=[number]`: Searches all model with a minimum [number] value of [property]  
+`path/to/search?[property]*has=[search string]&sort=[property]*asc`:  Searches single [property] of a model and sorts the result ascending  
+
+
+That's it! Now you know everything you need to know to start using Lagan.  
+Want to extend Lagan? Read on!
+
+
+
 Extend Lagan
 ============
 
@@ -151,14 +181,29 @@ Property type controllers
 
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
-- fileselect
-- manytomany
-- manytoone
-- onetomany
-- position
-- slug
-- string
-- upload
+- *File select*: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)*  
+  Lets the user select a file from a directory
+
+- *Many to many*: [\Lagan\Property\Manytomany](https://packagist.org/packages/lagan/property-manytomany)  
+  Define a many-to-many relation between two content entries
+
+- *Many to one*: [\Lagan\Property\Manytoone](https://packagist.org/packages/lagan/property-manytoone)  
+  Define a may-to-one relation between two content objects
+
+- *One to many*: [\Lagan\Property\Onetomany](https://packagist.org/packages/lagan/property-onetomany)  
+  Define a one-to-many relation between two content objects
+
+- *Position*: [\Lagan\Property\Position](https://packagist.org/packages/lagan/property-position)  
+  Define the order of content objects of the same type.
+
+- *Slug*: [\Lagan\Property\Slug](https://packagist.org/packages/lagan/property-slug)  
+  Creates a slug from a string, and checks if it's unique
+
+- *String*: [\Lagan\Property\Str](https://packagist.org/packages/lagan/property-string)  
+  Input and validate a string
+
+- *Upload*: [\Lagan\Property\Upload](https://packagist.org/packages/lagan/property-upload)*  
+  Lets the user upload a file
 
 
 ### Property type controller methods ###
@@ -166,29 +211,45 @@ Each property type controller is a dependency, added with Composer. This way new
 A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
 The *set* method is executed each time a property with this type is set.
 The *read* method is executed each time a property with this type is read.  
-Note: For performance reasons, the read method is only executed for reading a single bean. Because of this, only use it when it is really necessary. Otherwise, try to store the value to be returned when reading the bean directly in the database whenever possible.  
-The *delete* method is executed each time a an entry with a property with this type is deleted.
-The *options* method returns all the optional values this property can have.
-In *Hoverkraft.php* for example, the *setPosition* and *deletePosition* method are used to check and update the position of other hoverkraft entries if the position of one hoverkraft update is changed.  
+Note: For performance reasons, the read method is only executed for reading a single bean. Related beans are not returned.  
+The *delete* method is executed each time a an entry with a property with this type is deleted. 
 The *options* method returns all possible values for this property.
 
 
 Property input templates
 ------------------------
 
-To edit a property in the backend web interface it needs a template. Each property template is also a dependency, added wth Composer. They are put in the *public/property-templates* directory.
+To edit a property in the backend web interface it needs a template. Each property template is also a dependency, added with Composer. They are put in the *public/property-templates* directory, so outside the vendor directory. This is done using a [Composer plugin](https://packagist.org/packages/lagan/template-installer-plugin). By placing them outside the Vendor directory they can contain stuff like Javascript or images.
 
 Currently these templates are available:
 
-- fileselect
-- manytoone
-- onetomany
-- static
-- text
-- textarea
-- upload
+- *[fileselect](https://packagist.org/packages/lagan/template-fileselect)*  
+  Template to edit Lagan fileselect properties.
+
+- *[manytoone](https://packagist.org/packages/lagan/template-manytoone)*  
+  Template to edit Lagan many-to-one properties.
+
+- *[tomany](https://packagist.org/packages/lagan/template-tomany)*  
+  Template to edit Lagan one-to-many and many-to-many properties.
+
+- *[text](https://packagist.org/packages/lagan/template-text)*  
+  Template for Lagan properties that require text input
+
+- *[textarea](https://packagist.org/packages/lagan/template-textarea)*  
+  Textarea template for Lagan properties that require multiple lines of text input.
+
+- *[upload](https://packagist.org/packages/lagan/template-upload)*  
+  Template for Lagan upload properties.
+
 
 The properties of the property and the content bean are available in the template. To get the property name for example, use this Twig syntax: `{{ property.name }}`. To get the content of the specific property, use `{{ bean[property.name] }}`.
+
+
+JSON API
+--------
+
+The [Lagan JSON API route repository](https://github.com/lutsen/Lagan-JSON-API-route) contains a route file to add a JSON API to your Lagan project. To install, add the *api.php* file to the *routes* directory. To protect the */api/write* route, add it to the Slim HTTP Basic Authentication middleware setup in the index.php file:
+`'path' => ['/admin', '/api/write']`.
 
 
 
@@ -217,7 +278,7 @@ Contains all the different Lagan content models.
 
 Contains the *index.php* and *.htaccess* file. The *index.php* file contains the autoloader, includes the route files, and includes some other files and settings.
 
-*The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the public directory in this public directory on your webserver.*
+*The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the "public" directory in this public directory on your webserver.*
 
 
 #### public/property-templates (directory) ####
@@ -227,7 +288,8 @@ Created by [Composer](https://getcomposer.org/). Here Composer will add all the 
 
 #### routes (directory) ####
 
-Contains the different route files. Each route file is automatically loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.
+Contains the different route files. Each route file is automatically loaded, and contains the routes for your project. Routes are built with [Slim](http://www.slimframework.com/). Data is retrieved using Lagan models, or by using [RedBean](http://redbeanphp.com/) directly. You can add your own route files here, or add them to an existing route file.  
+This directory also contains *functions.php* which contains some route helper functions used in multiple route files.
 
 
 #### templates (directory) ####
@@ -251,22 +313,19 @@ To do
 -----
 
 - Update validation documentation for upload and string property
-- Add search to documentation
-- Check types in PHPDocumentor inline code documentation
-
+- Add search to admin
+- Search result pagination
+- Search query error handling
+- Unit testing
 
 
 Nice to have
 ------------
 
 - Project homepage
-- JSON API
-- Unit testing
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Add "$ php composer.phar create-project lutsen/lagan [my-app-name]" to install documentation after releasing on packagist.
 - Admin/editor landing/homepage content that makes more sense
-- Check is length validation has error in Siriusphp
-- Search result pagination
 - Adding extended user login and rights management stuff
 - Combine code in API and admin routes somehow
 
