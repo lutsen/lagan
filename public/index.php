@@ -12,7 +12,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 // Create your config.php file based on config_example.php
-require '../config.php';
+require '../config.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Redbean datbase ORM setup
 require ROOT_PATH.'/vendor/rb.php';
