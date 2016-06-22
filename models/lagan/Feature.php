@@ -19,9 +19,9 @@ class Feature extends \Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Name',
+				'required' => true,
 				'type' => '\Lagan\Property\Str',
-				'input' => 'text',
-				'required' => true
+				'input' => 'text'
 			],
 			[
 				'name' => 'description',
@@ -32,9 +32,9 @@ class Feature extends \Lagan {
 			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkrafts with this feature',
+				'required' => true,
 				'type' => '\Lagan\Property\Manytomany',
-				'input' => 'tomany',
-				'required' => true
+				'input' => 'tomany'
 			]
 		];
 	}

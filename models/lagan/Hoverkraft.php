@@ -19,26 +19,26 @@ class Hoverkraft extends \Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Title',
-				'type' => '\Lagan\Property\Str',
-				'input' => 'text',
 				'required' => true,
-				'searchable' => true
+				'searchable' => true,
+				'type' => '\Lagan\Property\Str',
+				'input' => 'text'
 			],
 			[
 				'name' => 'description',
 				'description' => 'Describe the kraft',
+				'searchable' => true,
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea',
-				'searchable' => true
+				'input' => 'textarea'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
+				'required' => true,
 				'type' => '\Lagan\Property\Fileselect',
 				'extensions' => 'jpeg,jpg,gif,png', // Allowed extensions
 				'directory' => '/files', // Directory relative to APP_PATH (no trailing slash)
-				'input' => 'fileselect',
-				'required' => true
+				'input' => 'fileselect'
 			],
 			[
 				'name' => 'position',

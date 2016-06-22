@@ -19,42 +19,42 @@ class Crew extends \Lagan {
 			[
 				'name' => 'title',
 				'description' => 'Name',
+				'required' => true,
+				'searchable' => true,
 				'type' => '\Lagan\Property\Str',
 				'input' => 'text',
-				'required' => true,
-				'validate' => 'minlength(3)',
-				'searchable' => true
+				'validate' => 'minlength(3)'
 			],
 			[
 				'name' => 'bio',
 				'description' => 'Biography',
+				'searchable' => true,
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea',
-				'searchable' => true
+				'input' => 'textarea'
 			],
 			[
 				'name' => 'email',
 				'description' => 'Email address',
+				'searchable' => true,
 				'type' => '\Lagan\Property\Str',
 				'input' => 'textarea',
-				'validate' => 'emaildomain',
-				'searchable' => true
+				'validate' => 'emaildomain'
 			],
 			[
 				'name' => 'picture',
 				'description' => 'Image',
+				'required' => true,
 				'type' => '\Lagan\Property\Upload',
 				'directory' => '/uploads', // Directory relative to APP_PATH (no trailing slash)
 				'input' => 'upload',
-				'validate' => [ ['extension', 'allowed=jpeg,jpg,gif,png'], ['size', 'size=1M'] ],
-				'required' => true
+				'validate' => [ ['extension', 'allowed=jpeg,jpg,gif,png'], ['size', 'size=1M'] ]
 			],
 			[
 				'name' => 'hoverkraft',
 				'description' => 'Hoverkraft',
+				'required' => true,
 				'type' => '\Lagan\Property\Manytoone',
-				'input' => 'manytoone',
-				'required' => true
+				'input' => 'manytoone'
 			]
 		];
 	}
