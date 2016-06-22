@@ -181,7 +181,7 @@ Property type controllers
 
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
-- *File select*: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)  
+- **File select**: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)  
   Lets the user select a file from a directory
 
 - **Many to many**: [\Lagan\Property\Manytomany](https://packagist.org/packages/lagan/property-manytomany)  
