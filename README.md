@@ -38,7 +38,7 @@ Requirements
 Install Lagan
 =============
 
-Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lutsen/lagan [project-name]`  
+Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.5`  
 (Replace [project-name] with the desired directory name for your new project)  
 Install RedBean by [downloading](http://redbeanphp.com/downloadredbean.php) it from the RedBean website: http://redbeanphp.com  
 Add the RedBean *rb.php* file to the vendor directory.
@@ -161,7 +161,7 @@ Search has the following options:
 - Equal to: *is
 - Sort: sort by property. `asc` sorts ascending and `desc` sorts descending
 
-Some query structure examples:
+Some query structure examples:  
 `path/to/search?*has=[search string]`: Searches all searchable properties of a model  
 `path/to/search?[property]*has=[search string]`: Searches single [property] of a model  
 `path/to/search?[property]*min=[number]`: Searches all model with a minimum [number] value of [property]  
@@ -213,11 +213,12 @@ Each property type controller is a dependency, added with Composer. This way new
 ### Property type controller methods ###
 
 A property type controller can contain a *set*, *read*, *delete* and *options* method. All methods are optional.
-The *set* method is executed each time a property with this type is set.
-The *read* method is executed each time a property with this type is read.  
-Note: For performance reasons, the read method is only executed for reading a single bean. Related beans are not returned.  
-The *delete* method is executed each time a an entry with a property with this type is deleted. 
-The *options* method returns all possible values for this property.
+
+- The **set** method is executed each time a property with this type is set.
+- The **read** method is executed each time a property with this type is read.  
+  Note: For performance reasons, the read method is only executed for reading a single bean. Related beans are not returned.  
+- The **delete** method is executed each time a an entry with a property with this type is deleted. 
+- The **options** method returns all possible values for this property.
 
 
 Property input templates
@@ -325,10 +326,11 @@ To do
 Nice to have
 ------------
 
-- Project homepage
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
+- A smarter way to update an existing Lagan project
+- An installer script that sets the config file and adds RedBean by downloading it from Github and then assembling it - or - maybe switch to another ORM like Eloquent, since the database schema is already sort of defined in the content model
 
 
 
