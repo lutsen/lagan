@@ -15,7 +15,7 @@ class Crew extends \Lagan {
 		$this->description = 'Crewmembers to man the Hoverkraft.';
 
 		$this->properties = [
-			// Allways have a name
+			// Allways have a title
 			[
 				'name' => 'title',
 				'description' => 'Name',
