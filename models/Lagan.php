@@ -96,7 +96,7 @@ class Lagan {
 
 			// Check if proerty is required
 			if ( $property['required'] && !$hasvalue ) {
-				throw new Exception('Validation error. '.$property['name'].' is required.');
+				throw new Exception('Validation error. '.$property['description'].' is required.');
 			}
 
 			// Results from methods that return boolean values are not stored.
@@ -130,7 +130,14 @@ class Lagan {
 		// Create
 		$bean = $this->universalCreate();
 
-		return $this->set($data, $bean);
+		// Catch exception, because bean might already have been created by property method.
+		try {
+			return $this->set($data, $bean);
+		} catch (Exception $e) {
+			// Delete bean
+			$this->delete($bean->id);
+			throw new Exception( $e->getMessage() );
+		}
 
 	}
 
