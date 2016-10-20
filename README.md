@@ -313,6 +313,12 @@ Created by [Composer](https://getcomposer.org/) when installing the project depe
 This is an example of the *config.php* file. The *config.php* file is needed for a Lagan project to work. Rename the *config_example.php* to *config.php* and add the necessary details.
 
 
+Where does the name Lagan come from, and how do you pronounce it?
+-----------------------------------------------------------------
+
+[River Lagan](https://en.wikipedia.org/wiki/River_Lagan) is a river that runs through [Belfast](https://en.wikipedia.org/wiki/Belfast). I lived in Belfast when I created Lagan.  
+Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" and /=/ as in the schwah or neutral "e" sound in English. (Eg "letter" = /'let=(r)/.)
+
 
 To do
 -----
