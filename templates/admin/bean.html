@@ -17,10 +17,30 @@
 {% endfor %}
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary" name="submit" value="save">Save</button>
+				<button type="submit" class="btn btn-default delete">Delete</button>
 				<button type="submit" class="btn btn-default" name="submit" value="saveandclose">Save and close</button>
+				<button type="submit" class="btn btn-primary" name="submit" value="save">Save</button>
 			</div>
 		</div>
 	</form>
 
 {% endblock content %}
+
+{% block javascript %}
+	{{ parent() }}
+
+	<!-- Delete button -->
+	<script type="text/javascript">
+		$( '.delete' ).on( 'click', function(e) {
+			e.preventDefault();
+			if( confirm( 'Are you sure you want to delete "{{ bean.title }}"?' ) ) {
+				var f = document.createElement('form');
+				$(this).after($(f).attr({
+					method: 'post',
+					action: $(this).attr('href')
+				}).append('<input type="hidden" name="_METHOD" value="delete"/>'));
+				$(f).submit();
+			}
+		});
+	</script>
+{% endblock javascript %}
