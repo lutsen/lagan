@@ -6,7 +6,7 @@ namespace Lagan\Model;
  * Example Lagan content model
  */
 
-class Crew extends \Lagan {
+class Crew extends \Lagan\Lagan {
 
 	function __construct() {
 		$this->type = 'crew';

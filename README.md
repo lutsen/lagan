@@ -88,7 +88,8 @@ Lagan uses [Twig](http://twig.sensiolabs.org/) as its template engine. You can a
 Structure of a Lagan model
 --------------------------
 
-All Lagan content models extend the *Lagan* main model. They contain a type, a description and an aray with different content properties.
+All Lagan content models extend the *Lagan* main model. They contain a type, a description and an aray with different content properties.  
+The *Lagan* main model is part of the [Lagan Core](https://packagist.org/packages/lagan/core) repository.
 
 ### Type ###
 
@@ -148,8 +149,8 @@ Lagan uses [RedBean](http://redbeanphp.com/) to manipulate data in the database.
 Searching objects of a Lagan model
 ----------------------------------
 
-Each Lagan content model can be searched using the Search controller. 
-Start by setting up the search controller in a route like this: `$search = new Search('hoverkraft');`  
+Each Lagan content model can be searched using the Search controller. The search controller is part of the [Lagan Core](https://packagist.org/packages/lagan/core) repository.  
+Start by setting up the search controller in a route like this: `$search = new \Lagan\Search('hoverkraft');`  
 The search model now can use the GET request parameters to perform a search: `$search->find( $request->getParams() )`  
 It can only search properties that are set to be [searchable](#properties).
 
@@ -269,14 +270,9 @@ An overview of the directories of a Lagan app and their contents.
 You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
 
 
-#### models (directory) ####
-
-Contains the main Lagan model.
-
-
 #### models/lagan (directory) ####
 
-Contains all the different Lagan content models.
+Contains all the different Lagan content models. They are in a seperate *lagan* directory so you can add your own models to the main *model* directory.
 
 
 #### public (directory) ####
@@ -332,11 +328,9 @@ To do
 Nice to have
 ------------
 
-- Delete button on admin bean page
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
-- A smarter way to update an existing Lagan project
 - An installer script that sets the config file and adds RedBean by downloading it from Github and then assembling it - or - maybe switch to another ORM like Eloquent, since the database schema is already sort of defined in the content model
 
 

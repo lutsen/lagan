@@ -19,7 +19,7 @@ $app->get('/', function ($request, $response, $args) {
 
 // Search
 $app->get('/hoverkraft/search', function ($request, $response, $args) {
-	$search = new Search('hoverkraft');
+	$search = new \Lagan\Search('hoverkraft');
 	
 	return $this->view->render(
 		$response, 

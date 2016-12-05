@@ -20,6 +20,8 @@
 		"twig/twig": "^1.0",
 		"tuupola/slim-basic-auth": "^2.0",
 
+		"lagan/core":					"dev-master",
+
 		"lagan/property-fileselect":	"dev-master",
 		"lagan/property-manytomany":	"dev-master",
 		"lagan/property-manytoone":		"dev-master",
