@@ -39,18 +39,37 @@ $app->group('/admin', function () {
 	// Route of a certain type of bean
 	$this->group('/{beantype}', function () {
 	
-		// List
+		// List or Search
 		$this->get('[/]', function ($request, $response, $args) {
-			$c = setupBeanModel( $args['beantype'] );
+
+			try {
+
+				$c = setupBeanModel( $args['beantype'] );
+
+				$data = [
+					'beantype' => $args['beantype'],
+					'description' => $c->description,
+					'beantypes' => getBeantypes()
+				];
+
+				if ( count( $request->getParams() ) > 0 ) {
+					// Search
+					$data['query'] = $request->getParam('*has');
+					$search = new \Lagan\Search( $args['beantype'] );
+					$data['beans'] = $search->find( $request->getParams() );
+				} else {
+					// List all
+					$data['beans'] = $c->read();
+				}
+
+			} catch (Exception $e) {
+				$this->flash->addMessage( 'error', $e->getMessage() );
+			}
 
 			// Show list of items
-			return $this->view->render($response, 'admin/beans.html', [
-				'beantype' => $args['beantype'],
-				'description' => $c->description,
-				'beans' => $c->read(),
-				'flash' => $this->flash->getMessages(),
-				'beantypes' => getBeantypes()
-			]);
+			$data['flash'] = $this->flash->getMessages();
+			return $this->view->render($response, 'admin/beans.html', $data);
+
 		})->setName('listbeans');
 
 		// Form to add new bean

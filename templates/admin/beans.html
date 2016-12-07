@@ -1,14 +1,29 @@
+{% if query|length > 0 %}
+{%	set title = beantype ~ ': search results for "' ~ query ~ '"' %}
+{% else %}
 {%	set title = beantype %}
+{% endif %}
 
 {% extends "admin/base.html" %}
 
 {% block content %}
 
-	<h1 class="page-header">{{ beantype }}</h1>
+	<h1 class="page-header">{{ beantype }}{% if query|length > 0 %}: search results for "{{ query }}"{% endif %}</h1>
 
 	<a href="{{ path_for('addbean', { 'beantype': beantype }) }}" class="btn btn-primary pull-right">Add new {{ beantype }}</a>
 	
 	<p>{{ description }}<br /><br /></p>
+
+	<hr>
+
+	<form class="form-inline" method="get" action="{{ page_url }}">
+		<div class="form-group">
+			<input type="text" class="form-control" name="*has" placeholder="Search">
+		</div>
+		<button type="submit" class="btn btn-primary">Search</button>
+	</form>
+
+	<hr>
 
 {% if beans|length > 0 %}
 	<div class="table-responsive">
@@ -38,7 +53,11 @@
 	</div>
 {% else %}
 	<hr>
+{%	if query|length > 0 %}
+	<p class="text-muted text-center">There is no {{ beantype }} matching your search.</p>
+{%	else %}
 	<p class="text-muted text-center">There is no {{ beantype }} yet. You can <a href="{{ path_for('addbean', { 'beantype': beantype }) }}">add</a> one.</p>
+{%	endif %}
 {% endif %}
 
 {% endblock content %}

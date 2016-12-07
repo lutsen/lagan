@@ -319,15 +319,16 @@ Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" an
 To do
 -----
 
-- Add search to admin
 - Search result pagination
 - Search query error handling
+- Search result should be empty on models with no searchable properties
 - Unit testing
 
 
 Nice to have
 ------------
 
+- Finetune search in admin
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
