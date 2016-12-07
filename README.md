@@ -328,6 +328,7 @@ To do
 Nice to have
 ------------
 
+- A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
