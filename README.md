@@ -38,7 +38,7 @@ Requirements
 Install Lagan
 =============
 
-Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.5`  
+Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.6`  
 (Replace [project-name] with the desired directory name for your new project)  
 Install RedBean by [downloading](http://redbeanphp.com/downloadredbean.php) it from the RedBean website: http://redbeanphp.com  
 Add the RedBean *rb.php* file to the vendor directory.
