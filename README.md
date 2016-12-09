@@ -38,17 +38,15 @@ Requirements
 Install Lagan
 =============
 
-Install Lagan and all-but-one dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.6`  
-(Replace [project-name] with the desired directory name for your new project)  
-Install RedBean by [downloading](http://redbeanphp.com/downloadredbean.php) it from the RedBean website: http://redbeanphp.com  
-Add the RedBean *rb.php* file to the vendor directory.
+Install Lagan and its dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.6`  
+(Replace [project-name] with the desired directory name for your new project)
 
-Rename *config_example.php* to *config.php* and add:
+The Composer script creates the *cache* directory, *config.php* file and RedBean *rb.php* file for you.
+
+Update *config.php* with:
 - your database settings
 - your server paths
 - the admin user(s) and their password(s)
-
-In the project root, create a folder called *cache* for the Twig cache.
 
 Lagan uses [Slim HTTP Basic Authentication middleware](http://www.appelsiini.net/projects/slim-basic-auth) to authenticate users for the admin interface. Make sure to change the password in *config.php*, and use HTTPS to login securely.
 
@@ -333,7 +331,6 @@ Nice to have
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
-- An installer script that sets the config file and adds RedBean by downloading it from Github and then assembling it - or - maybe switch to another ORM like Eloquent, since the database schema is already sort of defined in the content model
 
 
 

@@ -37,5 +37,20 @@
 		"lagan/template-textarea":		"dev-master",
 		"lagan/template-tomany":		"dev-master",
 		"lagan/template-upload":		"dev-master"
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"php -r \"// Create RedBean rb.php file\"",
+			"php -r \"chdir('vendor/gabordemooij/redbean'); require('replica2.php');\""
+		],
+		"post-create-project-cmd": [
+			"php -r \"// Create cache directory\"",
+			"php -r \"mkdir('cache', 0755);\"",
+			"php -r \"// Rename config file\"",
+			"php -r \"rename('config_example.php', 'config.php');\"",
+			"php -r \"// Setting ROOT_PATH in config file\"",
+			"php -r \"file_put_contents('config.php', str_replace('define(\\'ROOT_PATH\\', \\'\\')', 'define(\\'ROOT_PATH\\', \\''.__DIR__.'\\')', file_get_contents('config.php') ) );\"",
+			"php -r \"echo PHP_EOL . ' Thank you for installing Lagan! ' . PHP_EOL . PHP_EOL;\""
+		]
 	}
 }

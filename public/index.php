@@ -15,7 +15,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../config.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Redbean datbase ORM setup
-require ROOT_PATH.'/vendor/rb.php';
+require ROOT_PATH.'/vendor/gabordemooij/redbean/rb.php'; // rb.php file is created bij the replica2.php script executed by composer
 R::setup(
 	'mysql:host='.$db_config['servername'].';dbname='.$db_config['database'],
 	$db_config['username'],
