@@ -38,7 +38,7 @@ Requirements
 Install Lagan
 =============
 
-Install Lagan and its dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.6`  
+Install Lagan and its dependencies with [Composer](https://getcomposer.org/) with this command: `$ php composer.phar create-project lagan/lagan [project-name] 0.7`  
 (Replace [project-name] with the desired directory name for your new project)
 
 The Composer script creates the *cache* directory, *config.php* file and RedBean *rb.php* file for you.
@@ -331,6 +331,7 @@ Nice to have
 - Replace "object" with "entry" in cases where entry is clearer (in property repo's)
 - Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
+- Full featured install script to create working config file
 
 
 
