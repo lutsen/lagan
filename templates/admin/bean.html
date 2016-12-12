@@ -10,6 +10,14 @@
 
 	<h1 class="page-header">{% if bean %}{{ bean.title }}{% else %}New {{ beantype }}{% endif %}</h1>
 
+{% if bean %}
+	<div class="row">
+		<div class="col-sm-offset-2 col-sm-10">
+			<p class="small"><i>Created on {{ bean.created }}, last modified on {{ bean.modified }}.</i></p>
+		</div>
+	</div>
+{% endif %}
+
 	<form class="form-horizontal" method="post" role="form" enctype="multipart/form-data" action="{% if bean %}{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}{% else %}{{ path_for('postbean', { 'beantype': beantype }) }}{% endif %}">
 		<input type="hidden" name="_METHOD" value="{{ method }}"/>
 {% for property in beanproperties %}
