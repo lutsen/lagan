@@ -144,7 +144,7 @@ Lagan uses [RedBean](http://redbeanphp.com/) to manipulate data in the database.
 
 
 
-Searching objects of a Lagan model
+Searching entries of a Lagan model
 ----------------------------------
 
 Each Lagan content model can be searched using the Search controller. The search controller is part of the [Lagan Core](https://packagist.org/packages/lagan/core) repository.  
@@ -329,8 +329,6 @@ Nice to have
 
 - Finetune search in admin
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
-- Replace "object" with "entry" in cases where entry is clearer (in property repo's)
-- Admin/editor landing/homepage content that makes more sense
 - Adding extended user login and rights management stuff
 - Full featured install script to create working config file
 

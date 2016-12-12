@@ -33,7 +33,22 @@ function redirectAfterSave($container, $bean, $data, $response, $args) {
 $app->group('/admin', function () {
 
 	$this->get('[/]', function ($request, $response, $args) {
-		return $this->view->render( $response, 'admin/index.html', [ 'beantypes' => getBeantypes() ] );
+		$beantypes = getBeantypes();
+
+		foreach ($beantypes as $beantype) {
+			$dashboard[$beantype]['name'] = $beantype;
+			$dashboard[$beantype]['total'] = \R::count( $beantype );
+			$dashboard[$beantype]['created'] = \R::findOne( $beantype, ' ORDER BY created DESC ' );
+			$dashboard[$beantype]['modified'] = \R::findOne( $beantype, ' ORDER BY modified DESC ' );
+
+			$c = setupBeanModel( $beantype );
+			$dashboard[$beantype]['description'] = $c->description;
+		}
+
+		return $this->view->render( $response, 'admin/index.html', [
+			'dashboard' => $dashboard,
+			'beantypes' => getBeantypes()
+		] );
 	})->setName('admin');
 
 	// Route of a certain type of bean
@@ -41,31 +56,29 @@ $app->group('/admin', function () {
 	
 		// List
 		$this->get('[/]', function ($request, $response, $args) {
+			$data['flash'] = $this->flash->getMessages();
 
 			try {
 
 				$c = setupBeanModel( $args['beantype'] );
 
-				$data = [
-					'beantype' => $args['beantype'],
-					'description' => $c->description,
-					'beantypes' => getBeantypes()
-				];
+				$data['beantype'] = $args['beantype'];
+				$data['description'] = $c->description;
+				$data['beantypes'] = getBeantypes();
 
 				// Search
 				$search = new \Lagan\Search( $args['beantype'] );
 				$data['search'] = $search->find( $request->getParams() );
 
 				if ( $request->getParam('*has') ) {
-					$data['query'] = $request->getParam('*has'); // Output in title, needs work
+					$data['query'] = $request->getParam('*has'); // Output in title, needs work to work with all kinds of search queries
 				}
 
 			} catch (Exception $e) {
-				$this->flash->addMessage( 'error', $e->getMessage() );
+				$data['flash']['error'][] = $e->getMessage();
 			}
 
 			// Show list of items
-			$data['flash'] = $this->flash->getMessages();
 			return $this->view->render($response, 'admin/beans.html', $data);
 
 		})->setName('listbeans');

@@ -6,10 +6,50 @@
 
 	<h1 class="page-header">Lagan admin</h1>
 
-	<div class="list-group">
-{% for beantype in beantypes %}
-		<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}?sort=title*asc&limit=50" class="list-group-item">{{ beantype }}</a>
+	<div class="row">
+
+{% for beantype in dashboard %}
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">
+						<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?sort=title*asc&limit=50">{{ beantype.name }}</a>
+					</h2>
+				</div>
+
+				<div class="panel-body">{{ beantype.description }}</div>
+
+				<ul class="list-group">
+					<li class="list-group-item small">
+						Total entries: <b>{{ beantype.total }}</b>
+					</li>
+{% if beantype.modified %}
+					<li class="list-group-item small">
+						Latest update: <b><a href="{{ path_for('getbean', { 'beantype': beantype.name, 'id': beantype.modified.id }) }}">{{ beantype.modified.title }}</a></b> on <b>{{ beantype.modified.modified }}</b>
+					</li>
+{% endif %}
+{% if beantype.created %}
+					<li class="list-group-item small">
+						Newest entry: <b><a href="{{ path_for('getbean', { 'beantype': beantype.name, 'id': beantype.created.id }) }}">{{ beantype.created.title }}</a></b> on <b>{{ beantype.created.created }}</b>
+					</li>
+{% endif %}
+				</ul>
+
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-sm-6">
+							<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?sort=title*asc&limit=50" class="btn btn-default btn-block btn-sm">View all</a>
+						</div>
+						<div class="col-sm-6">
+							<a href="{{ path_for('addbean', { 'beantype': beantype.name }) }}" class="btn btn-primary btn-block btn-sm">Add new</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 {% endfor %}
+
 	</div>
 
 {% endblock content %}
