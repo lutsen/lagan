@@ -25,7 +25,7 @@ $app->get('/hoverkraft/search', function ($request, $response, $args) {
 		$response, 
 		'public/search.html', 
 		[
-			'hoverkrafts' => $search->find( $request->getParams() ),
+			'search' => $search->find( $request->getParams() ),
 			'query' => $request->getParam('*has')
 		]
 	);

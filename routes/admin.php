@@ -52,14 +52,12 @@ $app->group('/admin', function () {
 					'beantypes' => getBeantypes()
 				];
 
+				// Search
+				$search = new \Lagan\Search( $args['beantype'] );
+				$data['search'] = $search->find( $request->getParams() );
+
 				if ( count( $request->getParams() ) > 0 ) {
-					// Search
-					$data['query'] = $request->getParam('*has');
-					$search = new \Lagan\Search( $args['beantype'] );
-					$data['beans'] = $search->find( $request->getParams() );
-				} else {
-					// List all
-					$data['beans'] = $c->read();
+					$data['query'] = $request->getParam('*has'); // Output in title, needs work
 				}
 
 			} catch (Exception $e) {

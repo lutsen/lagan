@@ -25,7 +25,7 @@
 
 	<hr>
 
-{% if beans|length > 0 %}
+{% if search.result|length > 0 %}
 	<div class="table-responsive">
 		<table class="table table-hover">
 			<thead>
@@ -36,7 +36,7 @@
 				</tr>
 			</thead>
 			<tbody>
-{% 	for bean in beans %}
+{% 	for bean in search.result %}
 				<tr>
 					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}">{{ bean.title }}</a></td>
 					<td>
@@ -53,11 +53,21 @@
 	</div>
 {% else %}
 	<hr>
-{%	if query|length > 0 %}
+{%	if search.query %}
 	<p class="text-muted text-center">There is no {{ beantype }} matching your search.</p>
 {%	else %}
 	<p class="text-muted text-center">There is no {{ beantype }} yet. You can <a href="{{ path_for('addbean', { 'beantype': beantype }) }}">add</a> one.</p>
 {%	endif %}
+{% endif %}
+
+{% if search.pages and search.pages > 1 %}
+	<ul class="pagination">
+{% 	for page in 1..search.pages %}
+	<li {% if search.page == page-1 %}class="active"{% endif %}>
+		<a href="{{ page_url }}{% if search.query %}?{{ search.query }}&{% else %}?{% endif %}limit={{ search.limit }}&offset={{ (page - 1) * search.limit }}">{{ page }}</a>
+	</li>
+{% 	endfor %}
+	</ul>
 {% endif %}
 
 {% endblock content %}

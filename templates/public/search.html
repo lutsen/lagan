@@ -11,14 +11,15 @@
 	<form class="form-inline" method="get" action="{{ app_url }}/hoverkraft/search">
 		<div class="form-group">
 			<input type="text" class="form-control" name="*has" placeholder="Search">
+			<input type="hidden" name="sort" value="title*asc">
 		</div>
 		<button type="submit" class="btn btn-primary">Search</button>
 	</form>
 
 	<hr>
 
-{% if hoverkrafts|length > 0 %}
-{% 	for hoverkraft in hoverkrafts %}
+{% if search.result|length > 0 %}
+{% 	for hoverkraft in search.result %}
 	<div class="media">
 		<div class="media-left">
 			<a href="{{ path_for('hoverkraft', { 'slug': hoverkraft.slug }) }}">
@@ -36,6 +37,16 @@
 {% else %}
 	<hr>
 	<p class="text-muted text-center">Sorry, your query doesn't match any results...</p>
+{% endif %}
+
+{% if search.pages and search.pages > 1 %}
+	<ul class="pagination">
+{% 	for page in 1..search.pages %}
+	<li {% if search.page == page-1 %}class="active"{% endif %}>
+		<a href="{{ page_url }}{% if search.query %}?{{ search.query }}&{% else %}?{% endif %}limit={{ search.limit }}&offset={{ (page - 1) * search.limit }}">{{ page }}</a>
+	</li>
+{% 	endfor %}
+	</ul>
 {% endif %}
 
 {% endblock content %}

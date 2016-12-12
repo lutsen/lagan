@@ -8,7 +8,7 @@
 
 	<div class="list-group">
 {% for beantype in beantypes %}
-		<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}" class="list-group-item">{{ beantype }}</a>
+		<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}?sort=title*asc&limit=50" class="list-group-item">{{ beantype }}</a>
 {% endfor %}
 	</div>
 

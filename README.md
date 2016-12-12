@@ -159,6 +159,10 @@ Search has the following options:
 - Contains: *has
 - Equal to: *is
 - Sort: sort by property. `asc` sorts ascending and `desc` sorts descending
+- Limit: limit number of results
+- Offset: where to start returning results
+
+Offset only works if limit is defined too.
 
 Some query structure examples:  
 `path/to/search?*has=[search string]`: Searches all searchable properties of a model  
@@ -265,7 +269,7 @@ An overview of the directories of a Lagan app and their contents.
 
 #### cache (directory) ####
 
-You need to create this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
+The Composer script creates this directory in the project root to hold the Twig template engine cache files. If updates in your templates are not showing; remember to clear the cache directory.
 
 
 #### models/lagan (directory) ####
@@ -302,9 +306,9 @@ Bonus feature: the subdirectory *static* contains the template files for static 
 Created by [Composer](https://getcomposer.org/) when installing the project dependencies. Remember to manually add the RedBean rb.php file to it.
 
 
-#### config_example.php (file) ####
+#### config.php (file) ####
 
-This is an example of the *config.php* file. The *config.php* file is needed for a Lagan project to work. Rename the *config_example.php* to *config.php* and add the necessary details.
+The Composer script renames the *config_example.php* file to *config.php*. The *config.php* file is needed for a Lagan project to work. Remember to add the necessary details.
 
 
 Where does the name Lagan come from, and how do you pronounce it?
@@ -317,9 +321,6 @@ Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" an
 To do
 -----
 
-- Search result pagination
-- Search query error handling
-- Search result should be empty on models with no searchable properties
 - Unit testing
 
 

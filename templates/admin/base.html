@@ -165,7 +165,7 @@
 				<ul class="nav nav-sidebar">
 {% for beantype in beantypes %}
 					<li>
-						<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}">{{ beantype }}</a>
+						<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}?sort=title*asc&limit=50">{{ beantype }}</a>
 						<a href="{{ path_for('addbean', { 'beantype': beantype }) }}" class="addbean">+</a>
 					</li>
 {% endfor %}
