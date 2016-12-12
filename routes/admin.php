@@ -39,7 +39,7 @@ $app->group('/admin', function () {
 	// Route of a certain type of bean
 	$this->group('/{beantype}', function () {
 	
-		// List or Search
+		// List
 		$this->get('[/]', function ($request, $response, $args) {
 
 			try {
@@ -56,7 +56,7 @@ $app->group('/admin', function () {
 				$search = new \Lagan\Search( $args['beantype'] );
 				$data['search'] = $search->find( $request->getParams() );
 
-				if ( count( $request->getParams() ) > 0 ) {
+				if ( $request->getParam('*has') ) {
 					$data['query'] = $request->getParam('*has'); // Output in title, needs work
 				}
 
