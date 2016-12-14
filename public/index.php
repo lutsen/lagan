@@ -1,63 +1,17 @@
 <?php
 
 /**
- * This is the general configuragtion file for your Lagan app.
+ * This is the index file for your Lagan app.
  *
- * The index.php file contains the configuration for Slim, RedBean and Twig,
- * the error configuration serttings and the autoloader for Lagan models.
- * It also includes the route files.
+ * The index.php file contains the configuration for Slim and Twig,
+ * the error configuration serttings and the route files.
  */
-
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
 
 // Create your config.php file based on config_example.php
 require '../config.php'; // Note: change this path if your Lagan project is in a subdirectory
 
-// Redbean datbase ORM setup
-require ROOT_PATH.'/vendor/gabordemooij/redbean/rb.php'; // rb.php file is created bij the replica2.php script executed by composer
-R::setup(
-	'mysql:host='.$db_config['servername'].';dbname='.$db_config['database'],
-	$db_config['username'],
-	$db_config['password']
-);
-
-// Composer autoloader
-require ROOT_PATH.'/vendor/autoload.php';
-
-/**
- * Lagan autoloader
- *
- * Loads the Lagan models.
- *
- * @param string $class_name The name of the class to load.
- */
-function laganAutoload($class_name) {
-
-	// Load models, controllers
-	$paths = array(
-		'/models/',
-		'/models/lagan/',
-		'/controllers/'
-	);
-
-	foreach ($paths as $path) {
-		// Handle backslashes in namespaces
-		if ( strpos( $class_name, '\\' ) ) {
-			$file = ROOT_PATH.$path.substr( $class_name, strrpos( $class_name, '\\' )+1 ).'.php';
-		} else {
-			$file = ROOT_PATH.$path.$class_name.'.php';
-		}
-		if (file_exists($file)) {
-			require_once $file;
-			return;
-		}
-	}
-}
-spl_autoload_register('laganAutoload');
-
-// Required for flash messages in Slim: start a new session 
-session_start();
+// Include the configuration for RedBean and autoloaders.
+require '../setup.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Error reporting
 if (ERROR_REPORTING) {
@@ -66,9 +20,12 @@ if (ERROR_REPORTING) {
 	ini_set('html_errors', '1');
 }
 
-
-
 // ### SLIM SETUP ### //
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+// Required for flash messages in Slim: start a new session 
+session_start();
 
 $app = new \Slim\App(["settings" => [
 	'displayErrorDetails' => ERROR_REPORTING
