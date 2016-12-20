@@ -23,6 +23,7 @@ function createContent( $object ) {
 	$data = [];
 
 	foreach ( $object->properties as $property ) {
+		unset($val); // Reset each loop
 
 		// Loop through all properties
 		switch ( $property['type'] ) {
@@ -40,17 +41,23 @@ function createContent( $object ) {
 
 			// Value: An array with id's of the objects the object with this property has a many-to-many relation with.
 			case '\Lagan\Property\Manytomany':
-				$val = [1];
+				$bean = R::findOne( $property['name'] );
+				if ($bean)
+					$val = [ $bean->id ];
 				break;
 
 			// Value: The id of the object the object with this property has a many-to-one relation with.
 			case '\Lagan\Property\Manytoone':
-				$val = 1;
+				$bean = R::findOne( $property['name'] );
+				if ($bean)
+					$val = $bean->id;
 				break;
 
 			// Value: An array with id's of the objects the object with this property has a one-to-many relation with.
 			case '\Lagan\Property\Onetomany':	
-				$val = [1];
+				$bean = R::findOne( $property['name'] );
+				if ($bean)
+					$val = [$bean->id];
 				break;
 
 			// Value: The input position of the object with this property.
@@ -172,6 +179,8 @@ function createContent( $object ) {
 
 			// Value: No value is submtted, instead $_FILES[ $property['name'] ] is used.
 			case '\Lagan\Property\Upload':
+				// Need to set $val
+				$val = false;
 				// Simulate file upload
 				$tmp = APP_PATH.'/files/tmp_file_'.uniqid().'.jpg';
 				copy( APP_PATH.'/files/hoverkraft-1.jpg', $tmp );
