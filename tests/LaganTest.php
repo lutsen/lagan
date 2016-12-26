@@ -16,13 +16,39 @@ require __DIR__.'/functions.php';
 use PHPUnit\Framework\TestCase;
 
 // TO DO:
-// - Chack how many are in the DB after test
 // - Check validation automatic: check what validation rule is and go against it
 // - Check required automatic: try empty fields and check what response should be
 
 class LaganTest extends TestCase {
 
+	// Setup
+	public function testSetup() {
+		echo PHP_EOL;
+
+		// Loop through all Lagan models,
+		// use right order to allow all required relationships.
+		$beantypes = [
+			'Hoverkraft',
+			'Feature',
+			'Crew'
+		];
+
+		foreach ( $beantypes as $beantype ) {
+			$beancount = R::count( strtolower( $beantype ) );
+			$beans[ $beantype ] = createBean( $beantype );
+			$this->assertEquals(
+				$beancount + 1,
+				R::count( strtolower( $beantype ) )
+			);
+		}
+
+	}
+
 	// Create
+
+	/**
+     * @depends testSetup
+     */
 	public function testCreate() {
 		echo PHP_EOL;
 
@@ -30,17 +56,14 @@ class LaganTest extends TestCase {
 		$beantypes = getBeantypes();
 
 		foreach ( $beantypes as $beantype ) {
-
-			$c = setupBeanModel( $beantype );
-			// Create 2 beans so we can see somehing in the DB
-			$data = createContent( $c );
-			$bean = $c->create( $data );
-			$data = createContent( $c );
-			$anotherbean = $c->create( $data );
-
-			$beans[ $beantype ] = $bean;
-			echo 'Bean ' . $bean->id . ' of ' . $beantype . ' created.' . PHP_EOL;
-
+			$beancount = R::count( strtolower( $beantype ) );
+			$beans[ $beantype ] = createBean( $beantype );
+			// Create another bean so we can see something in the DB
+			createBean( $beantype );
+			$this->assertEquals(
+				$beancount + 2,
+				R::count( strtolower( $beantype ) )
+			);
 		}
 
 		return $beans;
@@ -93,7 +116,10 @@ class LaganTest extends TestCase {
 		foreach ( $beans as $beantype => $bean ) {
 
 			$c = setupBeanModel( $beantype );
-			$beans[ $beantype ] = $c->update( createContent( $c ), $bean->id );
+			$data = createContent( $c );
+			$beans[ $beantype ] = $c->update( $data, $bean->id );
+
+			$this->assertFalse( $bean->title == $beans[ $beantype ]->title ); // Title is random string
 			echo 'Bean ' . $bean->id . ' of ' . $beantype . ' updated.' . PHP_EOL;
 
 		}
@@ -112,8 +138,13 @@ class LaganTest extends TestCase {
 		// Loop through all Lagan models
 		foreach ( $beans as $beantype => $bean ) {
 
+			$beancount = R::count( strtolower( $beantype ) );
 			$c = setupBeanModel( $beantype );
-			$beans[ $beantype ] = $c->delete( $bean->id );
+			$c->delete( $bean->id );
+			$this->assertEquals(
+				$beancount - 1,
+				R::count( strtolower( $beantype ) )
+			);
 			echo 'Bean ' . $bean->id . ' of ' . $beantype . ' deleted.' . PHP_EOL;
 
 		}

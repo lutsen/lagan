@@ -4,14 +4,25 @@
  * Test helper functions
  */
 
+// Generate (predictable) random string
+function generateRandomString($length) {
+	$characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$charactersLength = strlen($characters);
+	$randomString = '';
+	for ($i = 0; $i < $length; $i++) {
+		$randomString .= $characters[rand(0, $charactersLength - 1)];
+	}
+	return $randomString;
+}
+
 function setStr( $str, $length ) {
 	$length = (int)$length;
 	if ( isset( $val ) && count( $val ) <= $length ) {
-		return str_pad($val, $length, 'x'); 
+		return str_pad( $val, $length, generateRandomString(1) ); 
 	} else if ( isset( $val ) && count( $val ) > $length ) {
-		return substr($val, 0, $length);
+		return substr( $val, 0, $length );
 	} else {
-		return str_pad('x', $length, 'x'); 
+		return generateRandomString( $length );
 	}
 }
 
@@ -23,7 +34,6 @@ function createContent( $object ) {
 	$data = [];
 
 	foreach ( $object->properties as $property ) {
-		unset($val); // Reset each loop
 
 		// Loop through all properties
 		switch ( $property['type'] ) {
@@ -81,35 +91,37 @@ function createContent( $object ) {
 					foreach ($rules as $rule) {
 						switch (true) {
 							case $rule == 'alpha':
-								$val = 'alpha rule';
+								$val = generateRandomString(8);
 								break;
 
 							case $rule == 'alphanumeric':
-								$val = '123 alpha number rule';
+								$val = '123 '.generateRandomString(8);
 								break;
 
 							case $rule == 'alphanumhyphen':
-								$val = '1-2_3 alpha num hyphen rule';
+								$val = '1-2_3 '.generateRandomString(8);
 								break;
 
 							case substr($rule, 0, 6) == 'length':
 								$optioms = betweenBrackets( $rule );
 								$optioms = array_map( 'trim', explode( ',', $optioms ) );
-								$val = setStr( !isset($test) ? 'lorum' : $val , $optioms[0] );
+								$val = setStr( !isset($val) ? 'lorum' : $val , $optioms[0] );
 								break;
 
 							case substr($rule, 0, 9) == 'minlength':
 								$min = betweenBrackets( $rule );
-								$val = setStr( !isset($test) ? 'lorum' : $val, $min );
+								$val = setStr( !isset($val) ? 'lorum' : $val, $min );
 								break;
 
 							case substr($rule, 0, 9) == 'maxlength':
 								$max = betweenBrackets( $rule );
-								$val = setStr( !isset($test) ? 'lorum' : $val, $max );
+								$val = setStr( !isset($val) ? 'lorum' : $val, $max );
 								break;
 
 							case $rule == 'fullname':
-								$val = 'Full Name';
+								$val = generateRandomString(6);
+								$val .= ' ';
+								$val .= generateRandomString(8);
 								break;
 
 							case $rule == 'number':
@@ -139,19 +151,27 @@ function createContent( $object ) {
 								break;
 
 							case $rule == 'email':
-								$val = 'somebody@dsfflhfduifyd.com';
+								$val = generateRandomString(6);
+								$val .= '@';
+								$val .= generateRandomString(8);
+								$val .= '.com';
 								break;
 
 							case $rule == 'emaildomain':
-								$val = 'somebody@gmail.com';
+								$val = generateRandomString(6);
+								$val .= '@gmail.com';
 								break;
 
 							case $rule == 'url':
-								$val = 'ftp://www.hoverkraft.nl';
+								$val = 'ftp://www.';
+								$val .= generateRandomString(6);
+								$val .= '.com';
 								break;
 
 							case $rule == 'website':
-								$val = 'www://www.hoverkraft.nl';
+								$val = 'http://www.';
+								$val .= generateRandomString(6);
+								$val .= '.com';
 								break;
 
 							case substr($rule, 0, 4) == 'date':
@@ -173,7 +193,7 @@ function createContent( $object ) {
 						}
 					}
 				} else {
-					$val = 'Some string input.';
+					$val = generateRandomString( rand(12, 24) );
 				}
 				break;
 
@@ -202,12 +222,21 @@ function createContent( $object ) {
 
 		if ( isset($val) ) {
 			$data[ $property['name'] ] = $val;
+			unset($val); // Reset for new loop
 		}
 
 	}
 
 	return $data;
 
+}
+
+function createBean( $beantype ) {
+	$c = setupBeanModel( $beantype );
+	$data = createContent( $c );
+	$bean = $c->create( $data );
+	echo 'Bean ' . $bean->id . ' of ' . $beantype . ' created.' . PHP_EOL;
+	return $bean;
 }
 
 ?>
