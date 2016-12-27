@@ -2,7 +2,7 @@
   <img src="https://cdn.rawgit.com/lutsen/lagan/master/lagan-logo.svg" width="100" alt="Lagan">
 </p>
 <p align="center"><b>Any content, with a backend</b></p>
-<p align="center">Lagan lets you create flexible content objects with a simple class,<br />and manage them with a web interface.</p>
+<p align="center">Lagan lets you create flexible content objects with a simple class,<br />and manage them with a web interface that is 'automagically' created.</p>
 
 Why Lagan?
 ----------
@@ -89,6 +89,31 @@ Structure of a Lagan model
 All Lagan content models extend the *Lagan* main model. They contain a type, a description and an aray with different content properties.  
 The *Lagan* main model is part of the [Lagan Core](https://packagist.org/packages/lagan/core) repository.
 
+A simple Lagan model looks like this:
+
+```php
+namespace Lagan\Model;
+
+class Book extends \Lagan\Lagan {
+
+  function __construct() {
+    $this->type = 'book';
+    
+    $this->description = 'These objects contain information about a book.';
+
+    $this->properties = [
+      [
+        'name' => 'title',
+        'description' => 'The book title',
+        'type' => '\Lagan\Property\Str',
+        'input' => 'text'
+      ]
+    ];
+  }
+
+}
+```
+
 ### Type ###
 
 `$this->type` is the type of the model. It is the same as the modelname in lowercase, and defines the name of the RedBean beans and the name of the table in the database.
@@ -101,17 +126,34 @@ The *Lagan* main model is part of the [Lagan Core](https://packagist.org/package
 
 ### Properties ###
 
-`$this->properties` are the properties of the model. They are an array defining the different content data-fields of the model. Each property is an array with at least the following keys:
+`$this->properties` are the properties of the model. They are an array defining the different content data-fields of the model. Each content model should always have a string type property named title.
 
-- *name*: The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
-- *description*: The form-field label of the property in the admin interface.
+Each property is an array with the following keys:
+
+- *name*: Required. The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
+- *description*: Required. The form-field label of the property in the admin interface.
 - *required*: Optional. Set to true if the property is required.
 - *searchable*: Optional. Set to true if the property has to be searchable with the Search controller.
-- *type*: The type of data of the property. This defines which property type controller to use. More information under "Property types".
-- *input*: The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
+- *type*: Required. The type of data of the property. This defines which property type controller to use. More information under ["Property types"](#property-type-controllers).
+- *input*: Required. The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
 
 There can be other optional keys, for example the *directory* key for the *image_select* property input type.
 
+A properties array with more keys might look like this:
+
+```php
+$this->properties = [
+  [
+    'name' => 'title',
+    'description' => 'The book title',
+    'required' => true,
+    'searchable' => true,
+    'type' => '\Lagan\Property\Str',
+    'input' => 'text',
+    'validate' => 'minlength(3)'
+  ]
+];
+```
 
 
 Methods of a Lagan model
@@ -127,20 +169,44 @@ Lagan uses [RedBean](http://redbeanphp.com/) to manipulate data in the database.
 
 `create($data)` creates a RedBean bean in the database, based on the corresponding Lagan content model, and returns it. The *$data* variable is an array with at least the required properties. The array can be your HTML form POST data.
 
+```php
+$book = new \Lagan\Model\Book;
+$bean = $book->create($data);
+```
+
 
 ### Read ###
 
 `read($id)` reads a bean based on the corresponding Lagan model from the database and returns it. The *$id* variable is the id of the Lagan model bean.
 
+Read a Book model bean with id 1:
+```php
+$bean = $book->read(1);
+```
+
+Read all Book model beans:
+```php
+$beans = $book->read();
+```
 
 ### Update ###
 
 `update($data, $id)` updates a bean based on the corresponding Lagan model from the database and returns it. The *$data* variable is an array with at least the required properties. The array can be your HTML form POST data. The *$id* variable is the id of the Lagan model bean.
 
+Update the Book model bean with id 1:
+```php
+$bean = $book->update($data, 1);
+```
+
 
 ### Delete ###
 
 `delete($id)` deletes a bean based on the corresponding Lagan model from the database. The *$id* variable is the id of the Lagan model bean.
+
+Delete the Book model bean with id 1:
+```php
+$bean = $book->delete(1);
+```
 
 
 
@@ -148,9 +214,14 @@ Searching entries of a Lagan model
 ----------------------------------
 
 Each Lagan content model can be searched using the Search controller. The search controller is part of the [Lagan Core](https://packagist.org/packages/lagan/core) repository.  
-Start by setting up the search controller in a route like this: `$search = new \Lagan\Search('hoverkraft');`  
+Start by setting up the search controller in a route like this: `$search = new \Lagan\Search('book');`  
 The search model now can use the GET request parameters to perform a search: `$search->find( $request->getParams() )`  
 It can only search properties that are set to be [searchable](#properties).
+
+```php
+$search = new \Lagan\Search('book');
+$result = $search->find( $request->getParams() );
+```
 
 Search has the following options:
 
