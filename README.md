@@ -395,15 +395,10 @@ Where does the name Lagan come from, and how do you pronounce it?
 Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" and /=/ as in the schwah or neutral "e" sound in English. (Eg "letter" = /'let=(r)/.)
 
 
-To do
------
-
-- Unit testing
-
-
 Nice to have
 ------------
 
+- More unit tests
 - Finetune search in admin
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Adding extended user login and rights management stuff
