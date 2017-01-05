@@ -4,7 +4,13 @@
  * Test helper functions
  */
 
-// Generate (predictable) random string
+/**
+ * Generate (predictable) random string.
+ *
+ * @var integer $length The length of the string.
+ *
+ * @return string The random string.
+ */
 function generateRandomString($length) {
 	$characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$charactersLength = strlen($characters);
@@ -15,6 +21,14 @@ function generateRandomString($length) {
 	return $randomString;
 }
 
+/**
+ * Add or remove characters from string to make it the desired length.
+ *
+ * @var string $str The input string.
+ * @var integer $length The length of the string.
+ *
+ * @return string
+ */
 function setStr( $str, $length ) {
 	$length = (int)$length;
 	if ( isset( $val ) && count( $val ) <= $length ) {
@@ -26,10 +40,24 @@ function setStr( $str, $length ) {
 	}
 }
 
+/**
+ * Get part of string that is between brackets.
+ *
+ * @var string $str The input string.
+ *
+ * @return string The part of the input string between brackets.
+ */
 function betweenBrackets( $str ) {
 	return trim( substr( $str, strpos( $str, '(' ) + 1, strpos( $str, ')' ) - 1 ) );
 }
 
+/**
+ * Create test content for a Lagan content object.
+ *
+ * @var object $object A Lagan content object.
+ *
+ * @return array An array with test content data similar to a $_POST array.
+ */
 function createContent( $object ) {
 	$data = [];
 
@@ -231,6 +259,13 @@ function createContent( $object ) {
 
 }
 
+/**
+ * Create a redbean bean with test data.
+ *
+ * @var string $beantype The type of bean to create.
+ *
+ * @return bean The created bean.
+ */
 function createBean( $beantype ) {
 	$c = setupBeanModel( $beantype );
 	$data = createContent( $c );
