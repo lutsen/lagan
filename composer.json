@@ -20,27 +20,27 @@
 		"gabordemooij/redbean": "^4.0",
 		"slim/slim": "^3.0",
 		"slim/twig-view": "^2.0",
-		"slim/flash": "^0.1",
+		"slim/flash": "^0.2",
 		"twig/twig": "^1.0",
 		"tuupola/slim-basic-auth": "^2.0",
 
-		"lagan/core":					"dev-master",
+		"lagan/core":					"^1.0",
 
-		"lagan/property-fileselect":	"dev-master",
-		"lagan/property-manytomany":	"dev-master",
-		"lagan/property-manytoone":		"dev-master",
-		"lagan/property-onetomany":		"dev-master",
-		"lagan/property-position":		"dev-master",
-		"lagan/property-slug":			"dev-master",
-		"lagan/property-string":		"dev-master",
-		"lagan/property-upload":		"dev-master",
+		"lagan/property-fileselect":	"^1.0",
+		"lagan/property-manytomany":	"^1.0",
+		"lagan/property-manytoone":		"^1.0",
+		"lagan/property-onetomany":		"^1.0",
+		"lagan/property-position":		"^1.0",
+		"lagan/property-slug":			"^1.0",
+		"lagan/property-string":		"^1.0",
+		"lagan/property-upload":		"^1.0",
 
-		"lagan/template-fileselect":	"dev-master",
-		"lagan/template-manytoone":		"dev-master",
-		"lagan/template-text":			"dev-master",
-		"lagan/template-textarea":		"dev-master",
-		"lagan/template-tomany":		"dev-master",
-		"lagan/template-upload":		"dev-master"
+		"lagan/template-fileselect":	"^1.0",
+		"lagan/template-manytoone":		"^1.0",
+		"lagan/template-text":			"^1.0",
+		"lagan/template-textarea":		"^1.0",
+		"lagan/template-tomany":		"^1.0",
+		"lagan/template-upload":		"^1.0"
 	},
 	"scripts": {
 		"post-update-cmd": [
