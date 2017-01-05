@@ -66,6 +66,12 @@ You can add your own content models by just adding class files like this to the 
 
 
 
+Web interface
+-------------
+You can enter the Lagan web interface by going to the */admin* directory on the webserver where you installed Lagan. Here you can log in with the username and password you added in the *config.php* file. Now you can add or edit content objects based on the Lagan models.
+
+
+
 Routes
 ------
 
