@@ -7,7 +7,7 @@
  * the error configuration serttings and the route files.
  */
 
-// Create your config.php file based on config_example.php
+// Make sure to add the missing details to the config.php file.
 require '../config.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Include the configuration for RedBean and autoloaders.
