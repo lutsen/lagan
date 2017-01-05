@@ -1,10 +1,7 @@
 <?php
 
-// Create your config.php file based on config_example.php
-require __DIR__.'/../config.php'; // Note: change this path if your Lagan project is in a subdirectory
-
-// Include the configuration for RedBean and autoloaders.
-require __DIR__.'/../setup.php'; // Note: change this path if your Lagan project is in a subdirectory
+require __DIR__.'/../config.php';
+require __DIR__.'/../setup.php';
 
 // Route helper functions;
 // Contains setupBeanModel and getBeanTypes functions
@@ -16,12 +13,13 @@ require __DIR__.'/functions.php';
 use PHPUnit\Framework\TestCase;
 
 // TO DO:
-// - Check validation automatic: check what validation rule is and go against it
-// - Check required automatic: try empty fields and check what response should be
+// - Check validation: check what validation rule is and go against it
+// - Check required: try empty fields and check what response should be
 
 class LaganTest extends TestCase {
 
 	// Setup
+	// Make sure there is at leat one bean of each type.
 	public function testSetup() {
 		echo PHP_EOL;
 
