@@ -37,7 +37,7 @@ class Crew extends \Lagan\Lagan {
 				'description' => 'Email address',
 				'searchable' => true,
 				'type' => '\Lagan\Property\Str',
-				'input' => 'textarea',
+				'input' => 'text',
 				'validate' => 'emaildomain'
 			],
 			[
