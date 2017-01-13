@@ -18,6 +18,18 @@ R::setup(
 // Composer autoloader
 require ROOT_PATH.'/vendor/autoload.php';
 
+
+
+
+// DEVELOPMENT START
+
+require ROOT_PATH.'/../properties/property-boolean/src/Boolean.php';
+
+// DEVELOPMENT END
+
+
+
+
 /**
  * Lagan autoloader
  *

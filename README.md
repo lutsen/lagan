@@ -380,7 +380,7 @@ Bonus feature: the subdirectory *static* contains the template files for static 
 
 #### vendor (directory) ####
 
-Created by [Composer](https://getcomposer.org/) when installing the project dependencies. Remember to manually add the RedBean rb.php file to it.
+Created by [Composer](https://getcomposer.org/) when installing the project dependencies.
 
 
 #### config.php (file) ####
@@ -395,11 +395,25 @@ Where does the name Lagan come from, and how do you pronounce it?
 Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" and /=/ as in the schwah or neutral "e" sound in English. (Eg "letter" = /'let=(r)/.)
 
 
+Bugs
+----
+
+- Position property is -1 if first item has a position > 0
+
+
+To do
+-----
+
+- Throw error if model does not have a title property
+- Create auto generate option for properties. This forces a value for a property, also if it is not submitted on creation. Like a slug or a UID for example.
+
+
 Nice to have
 ------------
 
 - More unit tests
 - Finetune search in admin
+- Sort items in admin list of position property exists
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Adding extended user login and rights management stuff
 - Full featured install script to create working config file
