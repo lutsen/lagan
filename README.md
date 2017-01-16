@@ -139,6 +139,7 @@ Each property is an array with the following keys:
 - *name*: Required. The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: Required. The form-field label of the property in the admin interface.
 - *required*: Optional. Set to true if the property is required.
+- *autovalue*: Optional. Set to true if the property needs to set it's own value. This forces a value for a property, also if it is not submitted on creation. Like a slug or a UID for example.
 - *searchable*: Optional. Set to true if the property has to be searchable with the Search controller.
 - *type*: Required. The type of data of the property. This defines which property type controller to use. More information under ["Property types"](#property-type-controllers).
 - *input*: Required. The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
@@ -265,8 +266,17 @@ Property type controllers
 
 Each property type controller is a dependency, added with Composer. This way new property types can be developed seperate from the Lagan project code. These are the property types now installed by Composer when installing Lagan:
 
+- **Boolean**: [\Lagan\Property\Boolean](https://packagist.org/packages/lagan/property-boolean)  
+  Lets the user set a boolean vanlue (true or false), for example with a checkbox
+
 - **File select**: [\Lagan\Property\Fileselect](https://packagist.org/packages/lagan/property-fileselect)  
   Lets the user select a file from a directory
+
+- **Hashid**: [\Lagan\Property\Hashid](https://packagist.org/packages/lagan/property-hashid)  
+  Generates YouTube-like ids based on the conten object id's
+
+- **Instaembed**: [\Lagan\Property\Instaembed](https://packagist.org/packages/lagan/property-instaembed)  
+  Stores the Instagram embed code of the corresponding Instagram post id
 
 - **Many to many**: [\Lagan\Property\Manytomany](https://packagist.org/packages/lagan/property-manytomany)  
   Define a many-to-many relation between two content entries
@@ -308,14 +318,23 @@ To edit a property in the backend web interface it needs a template. Each proper
 
 Currently these templates are available:
 
+- **[checkbox](https://packagist.org/packages/lagan/template-checkbox)**  
+  Template for a checkbox input, can be used with the boolean property.
+
 - **[fileselect](https://packagist.org/packages/lagan/template-fileselect)**  
   Template to edit Lagan fileselect properties.
+
+- **[instaembed](https://packagist.org/packages/lagan/template-instaembed)**  
+  Template to edit Lagan instaembed property.
 
 - **[manytoone](https://packagist.org/packages/lagan/template-manytoone)**  
   Template to edit Lagan many-to-one properties.
 
 - **[tomany](https://packagist.org/packages/lagan/template-tomany)**  
   Template to edit Lagan one-to-many and many-to-many properties.
+
+- **[readonly](https://packagist.org/packages/lagan/template-readonly)**  
+Template for properties that can not be edited by the content editor.
 
 - **[text](https://packagist.org/packages/lagan/template-text)**  
   Template for Lagan properties that require text input
@@ -395,25 +414,19 @@ Where does the name Lagan come from, and how do you pronounce it?
 Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" and /=/ as in the schwah or neutral "e" sound in English. (Eg "letter" = /'let=(r)/.)
 
 
-Bugs
-----
-
-- Position property is -1 if first item has a position > 0
-
-
 To do
 -----
 
 - Throw error if model does not have a title property
-- Create auto generate option for properties. This forces a value for a property, also if it is not submitted on creation. Like a slug or a UID for example.
 
 
 Nice to have
 ------------
 
-- More unit tests
+- Add unit tests to seperate properties, and call them from main Lagan test
 - Finetune search in admin
-- Sort items in admin list of position property exists
+- Sort items in admin list if position property exists
+- Change position of items in admin list
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Adding extended user login and rights management stuff
 - Full featured install script to create working config file
