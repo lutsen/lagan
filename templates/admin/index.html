@@ -13,7 +13,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="panel-title">
-						<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?sort=title*asc&limit=50">{{ beantype.name }}</a>
+						<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?limit=50">{{ beantype.name }}</a>
 					</h2>
 				</div>
 
@@ -38,7 +38,7 @@
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-sm-6">
-							<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?sort=title*asc&limit=50" class="btn btn-default btn-block btn-sm">View all</a>
+							<a href="{{ path_for('listbeans', { 'beantype': beantype.name }) }}?limit=50" class="btn btn-default btn-block btn-sm">View all</a>
 						</div>
 						<div class="col-sm-6">
 							<a href="{{ path_for('addbean', { 'beantype': beantype.name }) }}" class="btn btn-primary btn-block btn-sm">Add new</a>

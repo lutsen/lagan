@@ -13,6 +13,9 @@
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<link href="https://maxcdn.bootstrapcdn.com/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+	<!-- Include jQuery in head to be able to use it in property templates -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 {% endblock head %}
 
 	<!-- Custom styles for this template -->
@@ -165,7 +168,7 @@
 				<ul class="nav nav-sidebar">
 {% for beantype in beantypes %}
 					<li>
-						<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}?sort=title*asc&limit=50">{{ beantype }}</a>
+						<a href="{{ path_for('listbeans', { 'beantype': beantype }) }}?limit=50">{{ beantype }}</a>
 						<a href="{{ path_for('addbean', { 'beantype': beantype }) }}" class="addbean">+</a>
 					</li>
 {% endfor %}
@@ -191,7 +194,6 @@
 
 {% block javascript %}
 	<!-- Bootstrap core JavaScript -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
