@@ -8,7 +8,7 @@
 
 {% block content %}
 
-	<h1 class="page-header">{% if bean %}{{ bean.title }}{% else %}New {{ beantype }}{% endif %}</h1>
+	<h1 class="page-header">{% if bean %}{{ bean.title }} <small>({{ beantype }})</small>{% else %}New {{ beantype }}{% endif %}</h1>
 
 {% if bean %}
 	<div class="row">
