@@ -417,6 +417,9 @@ Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" an
 To do
 -----
 
+- Add new properties and property templates to readme.
+- Release 1.0 version of new properties and property templates.
+
 
 Nice to have
 ------------
