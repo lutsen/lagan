@@ -417,18 +417,15 @@ Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" an
 To do
 -----
 
-- Throw error if model does not have a title property
-
 
 Nice to have
 ------------
 
 - Add unit tests to seperate properties, and call them from main Lagan test
 - Finetune search in admin
-- Sort items in admin list if position property exists
-- Change position of items in admin list
 - A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
 - Adding extended user login and rights management stuff
+- Let the Composer template installer check for the right directory in config file
 - Full featured install script to create working config file
 
 
