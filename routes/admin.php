@@ -65,10 +65,34 @@ $app->group('/admin', function () {
 				$data['beantype'] = $args['beantype'];
 				$data['description'] = $c->description;
 				$data['beantypes'] = getBeantypes();
+				$data['properties'] = $c->properties;
+
+				$query = $request->getParams();
+
+				foreach($c->properties as $property) {
+					// Sort "absolute" positions, not related to manytoone parent.
+					if ( $property['type'] === '\\Lagan\\Property\\Position' && !isset( $property['manytoone'] ) ) {
+
+						// Set default sorting
+						if ( !$query['sort'] ) {
+							$query['sort'] = $property['name'].'*asc';
+						}
+
+						// Set sorting in web interface
+						$data['position'] = $property;
+
+						break;
+					}
+				}
+
+				// Set default sorting if not set yet
+				if ( !$query['sort'] ) {
+					$query['sort'] = 'title*asc';
+				}
 
 				// Search
 				$search = new \Lagan\Search( $args['beantype'] );
-				$data['search'] = $search->find( $request->getParams() );
+				$data['search'] = $search->find( $query );
 
 				if ( $request->getParam('*has') ) {
 					$data['query'] = $request->getParam('*has'); // Output in title, needs work to work with all kinds of search queries
