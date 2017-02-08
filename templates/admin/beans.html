@@ -36,22 +36,43 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Remove</th>
-					<th>Edit</th>
+					<th>{{ properties[0].description }}</th>
+					<th>{{ properties[1].description }}</th>
+					<th>{{ properties[2].description }}</th>
+{% if position %}
+					<th>{{ position.description }}</th>
+{% endif %}
+					<th width="50">Remove</th>
+					<th width="50">Edit</th>
 				</tr>
 			</thead>
 			<tbody>
 {% 	for bean in search.result %}
 				<tr>
-					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}">{{ bean.title }}</a></td>
+					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}">{{ bean[properties[0].name]|striptags[:75] }}</a></td>
+					<td>{{ bean[properties[1].name]|striptags[:75] }}</td>
+					<td>{{ bean[properties[2].name]|striptags[:75] }}</td>
+{%		if position %}
 					<td>
+						<div class="btn-group">
+							<!-- top -->
+							<span class="btn btn-default btn-xs move" data-action="{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}" data-{{ position.name }}="0">&uarr;&uarr;</span>
+							<!-- up 1 -->
+							<span class="btn btn-default btn-xs move" data-action="{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}" data-{{ position.name }}="{{ bean[position.name] - 1 }}">&uarr;</span>
+							<!-- down 1 -->
+							<span class="btn btn-default btn-xs move" data-action="{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}" data-{{ position.name }}="{{ bean[position.name] + 1 }}">&darr;</span>
+							<!-- bottom-->
+							<span class="btn btn-default btn-xs move" data-action="{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}" data-{{ position.name }}="{{ search.total }}">&darr;&darr;</span>
+						</div>
+					</td>
+{%		endif %}
+					<td width="50">
 						<form method="post" role="form" enctype="multipart/form-data" action="{{ path_for('deletebean', { 'beantype': beantype, 'id': bean.id }) }}">
 							<input type="hidden" name="_METHOD" value="delete"/>
-							<button type="submit" class="btn btn-default delete" data-title="{{ bean.title }}">Delete</button>
+							<button type="submit" class="btn btn-default btn-xs delete" data-title="{{ bean.title }}">Delete</button>
 						</form>
 					</td>
-					<td><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}" class="btn btn-default">Edit</a></td>
+					<td width="50"><a href="{{ path_for('getbean', { 'beantype': beantype, 'id': bean.id }) }}" class="btn btn-default btn-xs">Edit</a></td>
 				</tr>
 {% 	endfor %}
 			</tbody>
@@ -82,6 +103,31 @@
 	{{ parent() }}
 
 	<script type="text/javascript">
+
+		// Create a HTML form and submit it.
+		// This keeps the code more readbale
+		$( '.move' ).on( 'click', function(e) {
+			e.preventDefault();
+			var newForm = $( '<form>', {
+				'action': $(this).data('action'),
+				'method': 'post',
+				'enctype': 'multipart/form-data'
+			}).append( $('<input>', {
+				'name': '_METHOD',
+				'value': 'put'
+			})).append( $('<input>', {
+				'name': '{{ position.name }}',
+				'value': $(this).data('{{ position.name }}')
+			})).append( $('<input>', {
+				'name': 'submit',
+				'value': 'saveandclose',
+				'type': 'submit',
+				'id': 'submit'
+			}));
+			newForm.hide().appendTo('body');
+			$('#submit').click(); // Do it this way because submit button also has value.
+		});
+
 		$( '.delete' ).on( 'click', function(e) {
 			e.preventDefault();
 			if( confirm( 'Are you sure you want to delete "' + $(this).data('title') + '"?' ) ) {
