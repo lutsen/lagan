@@ -47,7 +47,7 @@ $app->group('/admin', function () {
 
 		return $this->view->render( $response, 'admin/index.html', [
 			'dashboard' => $dashboard,
-			'beantypes' => getBeantypes()
+			'beantypes' => $beantypes
 		] );
 	})->setName('admin');
 
