@@ -287,8 +287,11 @@ Each property type controller is a dependency, added with Composer. This way new
 - **One to many**: [\Lagan\Property\Onetomany](https://packagist.org/packages/lagan/property-onetomany)  
   Define a one-to-many relation between two content objects
 
+- **Objectlink**: [\Lagan\Property\Objectlink](https://packagist.org/packages/lagan/property-objectlink)  
+  Can link an object to any object of any type in the database
+
 - **Position**: [\Lagan\Property\Position](https://packagist.org/packages/lagan/property-position)  
-  Define the order of content objects of the same type.
+  Define the order of content objects of the same type
 
 - **Slug**: [\Lagan\Property\Slug](https://packagist.org/packages/lagan/property-slug)  
   Creates a slug from a string, and checks if it's unique
@@ -333,14 +336,20 @@ Currently these templates are available:
 - **[tomany](https://packagist.org/packages/lagan/template-tomany)**  
   Template to edit Lagan one-to-many and many-to-many properties.
 
+- **[objectlink](https://packagist.org/packages/lagan/template-objectlink)**  
+  Template to edit Lagan objectlink properties.
+
 - **[readonly](https://packagist.org/packages/lagan/template-readonly)**  
 Template for properties that can not be edited by the content editor.
 
 - **[text](https://packagist.org/packages/lagan/template-text)**  
-  Template for Lagan properties that require text input
+  Template for Lagan properties that require text input.
 
 - **[textarea](https://packagist.org/packages/lagan/template-textarea)**  
   Textarea template for Lagan properties that require multiple lines of text input.
+
+- **[trumbowyg](https://packagist.org/packages/lagan/template-trumbowyg)**  
+  Template that turns a textarea into a WYSIWYG editor field with the [Trumbowyg WYSIWYG editor](https://alex-d.github.io/Trumbowyg/).
 
 - **[upload](https://packagist.org/packages/lagan/template-upload)**  
   Template for Lagan upload properties.
@@ -417,19 +426,7 @@ Lagan is pronounced /'laeg=n/ with stress on first syllable, /ae/ as in "cat" an
 To do
 -----
 
-- Add new properties and property templates to readme.
-- Release 1.0 version of new properties and property templates.
-
-
-Nice to have
-------------
-
-- Add unit tests to seperate properties, and call them from main Lagan test
-- Finetune search in admin
-- A [tree](http://www.redbeanphp.com/index.php?p=/trees) structutre relationship between objects
-- Adding extended user login and rights management stuff
-- Let the Composer template installer check for the right directory in config file
-- Full featured install script to create working config file
+There is a [Lagan wishlist on Trello](https://trello.com/b/szpUocBL).
 
 
 
