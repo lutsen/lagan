@@ -364,6 +364,8 @@ JSON API
 The [Lagan JSON API route repository](https://github.com/lutsen/Lagan-JSON-API-route) contains a route file to add a JSON API to your Lagan project. To install, add the *api.php* file to the *routes* directory. To protect the */api/write* route, add it to the Slim HTTP Basic Authentication middleware setup in the index.php file:
 `'path' => ['/admin', '/api/write']`.
 
+I also created a [Todo Backend](http://todobackend.com/) implementation with Lagan ([Run the specs](http://todobackend.com/specs/index.html?https://www.laganphp.com/todobackend/todo), [view the code](https://github.com/lutsen/lagan-todobackend)).
+
 
 
 Lagan project structure
