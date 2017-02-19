@@ -43,12 +43,14 @@ class Hoverkraft extends \Lagan\Lagan {
 			[
 				'name' => 'position',
 				'description' => 'Order',
+				'autovalue' => true,
 				'type' => '\Lagan\Property\Position',
 				'input' => 'text'
 			],
 			[
 				'name' => 'slug',
 				'description' => 'Slug',
+				'autovalue' => true,
 				'type' => '\Lagan\Property\Slug',
 				'input' => 'text'
 			],
