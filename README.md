@@ -7,6 +7,8 @@
 Why Lagan?
 ----------
 
+Lagan is a different take on a CMS, with a focus on flexibility.
+
 - Content models are easily created and modified
 - Content models consist of a simple combination of arrays
 - Content models can be any combination of properties

@@ -27,10 +27,9 @@
 		"lagan/core":					"^1.0",
 
 		"lagan/property-fileselect":	"^1.0",
+		"lagan/property-hashid":		"^1.0",
 		"lagan/property-manytomany":	"^1.0",
 		"lagan/property-manytoone":		"^1.0",
-		"lagan/property-onetomany":		"^1.0",
-		"lagan/property-position":		"^1.0",
 		"lagan/property-slug":			"^1.0",
 		"lagan/property-string":		"^1.0",
 		"lagan/property-upload":		"^1.0",
