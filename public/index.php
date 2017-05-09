@@ -8,10 +8,10 @@
  */
 
 // Make sure to add the missing details to the config.php file.
-require '../config.php'; // Note: change this path if your Lagan project is in a subdirectory
+require __DIR__.'/../config.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Include the configuration for RedBean and autoloaders.
-require '../setup.php'; // Note: change this path if your Lagan project is in a subdirectory
+require __DIR__.'/../setup.php'; // Note: change this path if your Lagan project is in a subdirectory
 
 // Error reporting
 if (ERROR_REPORTING) {
@@ -61,7 +61,7 @@ $container['flash'] = function () {
 
 // Add HTTP Basic Authentication middleware
 $app->add(new \Slim\Middleware\HttpBasicAuthentication([
-	'path' => ['/admin'],
+	'path' => $protected, // Defined in config.php
 	'secure' => true,
 	'relaxed' => ['localhost'],
 	'users' => $users // Defined in config.php
