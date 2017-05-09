@@ -24,6 +24,13 @@ $users = array(
 );
 
 /**
+ * @var string[] An array of the paths protected by the user password combination.
+ */
+$protected = array(
+	'/admin'
+);
+
+/**
  * @const ERROR_REPORTING Enable or disable error reporting.
  */
 define('ERROR_REPORTING', true);
