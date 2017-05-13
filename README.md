@@ -140,13 +140,14 @@ Each property is an array with the following keys:
 
 - *name*: Required. The name of the property. Also the name of the corresponding RedBean property. Contains only alphanumeric characters, should not contain spaces.
 - *description*: Required. The form-field label of the property in the admin interface.
+- *input*: Required. The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
+- *type*: Required. The type of data of the property. This defines which property type controller to use. More information under ["Property types"](#property-type-controllers).
 - *required*: Optional. Set to true if the property is required.
 - *autovalue*: Optional. Set to true if the property needs to set it's own value. This forces a value for a property, also if it is not submitted on creation. Like a slug or a UID for example.
 - *searchable*: Optional. Set to true if the property has to be searchable with the Search controller.
-- *type*: Required. The type of data of the property. This defines which property type controller to use. More information under ["Property types"](#property-type-controllers).
-- *input*: Required. The template to use in the admin interface. Templates are located in the *public/property-templates* directory.
+- *unique*: Optional. Set to true if the value of this property has to be unique for this model.
 
-There can be other optional keys, for example the *directory* key for the *image_select* property input type.
+There can be other optional keys for specific input types, for example the *directory* key for the *image_select* property input type.
 
 A properties array with more keys might look like this:
 
@@ -291,6 +292,9 @@ Each property type controller is a dependency, added with Composer. This way new
 
 - **Objectlink**: [\Lagan\Property\Objectlink](https://packagist.org/packages/lagan/property-objectlink)  
   Can link an object to any object of any type in the database
+
+- **Password hash**: [\Lagan\Property\Passwordhash](https://packagist.org/packages/lagan/property-passwordhash)  
+  Generate password hashes using the PHP password_hash function
 
 - **Position**: [\Lagan\Property\Position](https://packagist.org/packages/lagan/property-position)  
   Define the order of content objects of the same type
