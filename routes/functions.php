@@ -9,11 +9,16 @@
  *
  * @var string $beantype The type of bean.
  *
- * @return string The name of the controller.
+ * @return object The controller.
  */
 function setupBeanModel($beantype) {
+	$beantype = ucfirst( strtolower( $beantype ) );
+	if ( !file_exists( ROOT_PATH. '/models/lagan/'.$beantype.'.php' ) ) {
+		throw new \Exception('The '.$beantype.' model does not exist.');
+	}
+
 	// Return model
-	$model_name = '\Lagan\Model\\' . ucfirst($beantype);
+	$model_name = '\Lagan\Model\\' . $beantype;
 	return new $model_name();
 }
 
