@@ -49,7 +49,7 @@ $container['view'] = function ($c) {
 
 	// General variables to render views
 	$view->offsetSet('app_url', APP_URL);
-	$view->offsetSet('page_url', APP_URL . '/' . $c['request']->getUri()->getPath());
+	$view->offsetSet('page_url', APP_URL . $c['request']->getUri()->getPath());
 
 	return $view;
 };
