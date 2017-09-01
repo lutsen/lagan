@@ -12,6 +12,12 @@ RewriteEngine On
 # - Exclude urls starting with loaclhost
 # - Check whether the Host value is not empty (in case of HTTP/1.0)
 # - Check for 2 dots or not (instead of checking for www, because that would break subdomains)
+#   For the subdomain to work, in your subdomain folder should also be an .htaccess file.
+#   In its simplest form, this could look something like:
+#
+#   RewriteEngine on
+#   RewriteBase /
+#
 # - Checks for HTTPS (%{HTTPS} is either on or off, so %{HTTPS}s is either ons or offs and in case of ons the s is matched)
 # - The substitution part of RewriteRule then just merges the information parts to a full URL
 RewriteCond %{HTTP_HOST} !^localhost
