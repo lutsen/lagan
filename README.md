@@ -438,4 +438,4 @@ There is a [Lagan wishlist on Trello](https://trello.com/b/szpUocBL).
 
 
 
-Lagan is a project of [Lútsen Stellingwerff](http://lutsen.land/) from [HoverKraft](http://www.hoverkraft.nl/), and started as the backend for [Cloud 9](https://www.cloud9.world/).
+Lagan is a project of [Lútsen Stellingwerff](http://lutsen.net/).
