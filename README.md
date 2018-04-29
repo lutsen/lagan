@@ -392,7 +392,7 @@ Contains all the different Lagan content models. They are in a seperate *lagan* 
 
 #### public (directory) ####
 
-Contains the *index.php* and *.htaccess* file. The *index.php* file contains the autoloader, includes the route files, and includes some other files and settings.
+Contains the *index.php* and *.htaccess* file. The *index.php* file includes the setup.php and route files, and includes some other files and settings.
 
 *The "public" directory is the directory holding your public web pages on your webserver. It's name can vary on different hosting providers and -environments. Other common names are "html", "private-html", "www" or "web". Put the files of the "public" directory in this public directory on your webserver.*
 
@@ -422,6 +422,11 @@ Created by [Composer](https://getcomposer.org/) when installing the project depe
 #### config.php (file) ####
 
 The Composer script renames the *config_example.php* file to *config.php*. The *config.php* file is needed for a Lagan project to work. Remember to add the necessary details.
+
+
+#### setup.php (file) ####
+
+This is the setup file for your Lagan app and the unit tests. The setup.php file contains the configuration for RedBean, the Composer autoloader and the autoloader for Lagan models.
 
 
 Where does the name Lagan come from, and how do you pronounce it?
