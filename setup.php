@@ -31,7 +31,8 @@ function laganAutoload($class_name) {
 	$paths = array(
 		'/models/',
 		'/models/lagan/',
-		'/controllers/'
+		'/controllers/',
+		'/twigextensions/'
 	);
 
 	foreach ($paths as $path) {
