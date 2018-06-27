@@ -408,6 +408,11 @@ Contains the different route files. Each route file is automatically loaded, and
 This directory also contains *functions.php* which contains some route helper functions used in multiple route files.
 
 
+#### twigextensions (directory) ###
+
+Contains the [Twig extensions](https://twig.symfony.com/doc/2.x/advanced.html). The CsrfExtewnsion is included with Lagan.
+
+
 #### templates (directory) ####
 
 This directory contains the template files (except the property templates). The subdirectory *admin* contains all the template files for the admin environment.  

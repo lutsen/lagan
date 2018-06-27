@@ -20,6 +20,9 @@
 
 	<form class="form-horizontal" method="post" role="form" enctype="multipart/form-data" action="{% if bean %}{{ path_for('putbean', { 'beantype': beantype, 'id': bean.id }) }}{% else %}{{ path_for('postbean', { 'beantype': beantype }) }}{% endif %}">
 		<input type="hidden" name="_METHOD" value="{{ method }}"/>
+		<!-- CSRF Protection -->
+		<input type="hidden" name="{{ csrf.keys.name }}" value="{{ csrf.name }}">
+		<input type="hidden" name="{{ csrf.keys.value }}" value="{{ csrf.value }}">
 {% for property in beanproperties %}
 		{% include property.input ~ '/' ~ property.input ~ '.html' %}
 {% endfor %}
@@ -43,10 +46,16 @@
 			e.preventDefault();
 			if( confirm( 'Are you sure you want to delete "{{ bean.title }}"?' ) ) {
 				var f = document.createElement('form');
-				$(this).after($(f).attr({
-					method: 'post',
-					action: $(this).attr('href')
-				}).append('<input type="hidden" name="_METHOD" value="delete"/>'));
+				$(this).after(
+					$(f).attr({
+						method: 'post',
+						action: $(this).attr('href')
+					})
+					.append('<input type="hidden" name="_METHOD" value="delete"/>')
+					// CSRF Protection
+					.append('<input type="hidden" name="{{ csrf.keys.name }}" value="{{ csrf.name }}">')
+					.append('<input type="hidden" name="{{ csrf.keys.value }}" value="{{ csrf.value }}">')
+				);
 				$(f).submit();
 			}
 		});

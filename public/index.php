@@ -33,6 +33,36 @@ $app = new \Slim\App(["settings" => [
 
 $container = $app->getContainer();
 
+// Register Slim flash messages
+$container['flash'] = function () {
+	return new \Slim\Flash\Messages();
+};
+
+// Register Slim Framework CSRF protection middleware
+$container['csrf'] = function ($c) {
+	// Changed $persistentTokenMode to true for easier Ajax calls
+	// For default settings return new \Slim\Csrf\Guard; will do...
+	return new \Slim\Csrf\Guard(
+		'csrf', // $prefix
+		$storage, // &$storage
+		null, // $failureCallable
+		200, // $storageLimit
+		16, // $strength
+		true //$persistentTokenMode
+	);
+};
+
+// Register CSRF protection middleware for all routes
+$app->add($container->get('csrf'));
+
+// Add HTTP Basic Authentication middleware
+$app->add(new \Slim\Middleware\HttpBasicAuthentication([
+	'path' => $protected, // Defined in config.php
+	'secure' => true,
+	'relaxed' => ['localhost'],
+	'users' => $users // Defined in config.php
+]));
+
 // Register Twig View helper
 $container['view'] = function ($c) {
 	$view = new \Slim\Views\Twig([
@@ -46,6 +76,7 @@ $container['view'] = function ($c) {
 	// Instantiate and add Slim specific extension
 	$basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
 	$view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
+	$view->addExtension( new CsrfExtension( $c->get('csrf') ) ); // CSRF protection
 
 	// General variables to render views
 	$view->offsetSet('app_url', APP_URL);
@@ -53,19 +84,6 @@ $container['view'] = function ($c) {
 
 	return $view;
 };
-
-// Register Slim flash messages
-$container['flash'] = function () {
-	return new \Slim\Flash\Messages();
-};
-
-// Add HTTP Basic Authentication middleware
-$app->add(new \Slim\Middleware\HttpBasicAuthentication([
-	'path' => $protected, // Defined in config.php
-	'secure' => true,
-	'relaxed' => ['localhost'],
-	'users' => $users // Defined in config.php
-]));
 
 
 
