@@ -373,6 +373,12 @@ The [Lagan JSON API route repository](https://github.com/lutsen/Lagan-JSON-API-r
 I also created a [Todo Backend](http://todobackend.com/) implementation with Lagan ([Run the specs](http://todobackend.com/specs/index.html?https://www.laganphp.com/todobackend/todo), [view the code](https://github.com/lutsen/lagan-todobackend)).
 
 
+Different admin template
+------------------------
+If you're tired of the default admin temlate, try this one:
+https://github.com/Skayo/Lagan-Bulma-Theme
+
+
 
 Lagan project structure
 =======================
