@@ -108,7 +108,7 @@
 	<script type="text/javascript">
 
 		// Create a HTML form and submit it.
-		// This keeps the code more readbale
+		// This keeps the code more readable
 		$( '.move' ).on( 'click', function(e) {
 			e.preventDefault();
 			var newForm = $( '<form>', {
@@ -126,6 +126,14 @@
 				'value': 'saveandclose',
 				'type': 'submit',
 				'id': 'submit'
+			})).append( $('<input>', {
+				'type': 'hidden',
+				'name': '{{ csrf.keys.name }}',
+				'value': '{{ csrf.name }}'
+			})).append( $('<input>', {
+				'type': 'hidden',
+				'name': '{{ csrf.keys.value }}',
+				'value': '{{ csrf.value }}'
 			}));
 			newForm.hide().appendTo('body');
 			$('#submit').click(); // Do it this way because submit button also has value.
