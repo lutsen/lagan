@@ -15,7 +15,7 @@ class Hoverkraft extends \Lagan\Lagan {
 		$this->description = 'A hoverkraft is a very special vessel (and a great design angency).';
 
 		$this->properties = [
-			// Allways have a title
+			// Always have a title
 			[
 				'name' => 'title',
 				'description' => 'Title',
